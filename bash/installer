@@ -1,0 +1,386 @@
+#!/bin/bash -
+
+#------------------------------------------------------------------------------
+#------------------------------------------------------------------------------
+# Copyright (c) <2008-2009> Intel Corporation
+#
+# DISTRIBUTABLE AS SAMPLE SOURCE SOFTWARE
+#
+# This Distributable As Sample Source Software is subject to the terms and
+# conditions of the Intel Software License Agreement provided with the Intel(R)
+# Media Processor Software Development Kit.
+#------------------------------------------------------------------------------
+#    fileName: installer
+#------------------------------------------------------------------------------
+#------------------------------------------------------------------------------
+
+
+# Display a debug message in color
+#------------------------------------------------------------------------------
+function debug () {
+
+    declare -r local color="\e[00;33m"  # brown
+    printf "\n${color}DEBUG: %s \e[00m\n\n" "$@"
+
+}  # end function debug
+
+
+# Check the conditon passed as $1 and if true exit after printing
+# message contained in $2.
+#------------------------------------------------------------------------------
+function failure () {
+
+    declare -r local color="\e[00;35m"
+    printf "\n${color}$1\n\n\e[00m"
+    exit 1  # exit the script with a '1' to show an error occured
+
+}  # end function failure
+
+
+# Write information to the installation log and display to the console
+#------------------------------------------------------------------------------
+function log () {
+
+    declare -r local log_file="${install_directory}/installation.log"
+
+    [ -e $log_file ] || touch $log_file
+    echo "$1" | tee -a $log_file
+
+}  # end function log
+
+
+# Called to set the variable 'install_directory' and create the
+# physical directory where the SDK will be installed.
+#------------------------------------------------------------------------------
+function set_install_directory () {
+
+    debug "set_install_directory"
+
+    declare parameter=$1
+    declare -r local message="Error! Can not find version information."
+
+    if [ ! -f ./version ]; then failure $message; fi
+    install_directory="${parameter:=$HOME}/$( cat ./version )"
+
+    mkdir --parents $install_directory
+    if [ ! -d $install_directory ]; then
+        failure "ERROR: Could not create installation directory"
+    fi
+
+    # We may have received a relative path; make sure it is absolute
+    pushd $install_directory
+    install_directory=`pwd`
+    popd
+
+    log "Setting install_directory to $install_directory"
+
+    log "SDK will be installed to '$install_directory'."
+
+}  # end function set_install_directory
+
+
+# Check that the SKU being installed is 'in-order' with the other SKUs
+#------------------------------------------------------------------------------
+function check_installation_order () {
+    debug "check_installation_order"
+
+    # Determine what SKU is being installed using the SKU ID file
+    SKU_ID_FILE=`find . -maxdepth 1 -type f -name sku_id.\*`
+    if [ -z "$SKU_ID_FILE" ]; then
+        log "No SKU ID file found on this sku"
+        log "   Installation order checking disabled"
+        return 0
+    fi
+    SKU_ID=`cat $SKU_ID_FILE`
+    if [ -z "$SKU_ID_FILE" ]; then
+        log "No SKU ID found in SKU ID file"
+        log "   Installation order checking disabled"
+        return 0
+    fi
+
+    # If this is BASE, skip other checks
+    if [ "$SKU_ID" != "BASE" ]; then
+        # If this is GPL, make sure BASE is installed
+        if [ "$SKU_ID" == "GPL" ]; then
+            if [ ! -f $install_directory/sku_id.BASE ]; then
+                log " "
+                log "ERROR: Please install the BASE ISO before installing GPL."
+                log " "
+                failure "ERROR: Attempting to install GPL ISO without having BASE installed"
+            fi
+        # If this is something else, make sure GPL is installed
+        else
+            if [ ! -f $install_directory/sku_id.GPL ]; then
+                log " "
+                log "ERROR: Please install the BASE & GPL ISOs before installing others"
+                log " "
+                failure "ERROR: Attempting to install a supplementary ISO without BASE and GPL installed"
+            fi
+        fi
+    fi
+}
+
+
+# Display a help message explaining how what is required of the user
+#------------------------------------------------------------------------------
+function display_help () {
+
+    echo
+    echo You must ether accept each license agreement by pressing 'y',
+    echo or decline each license agreement by pressing 'n'.
+    echo
+
+}  # end function display_help
+
+
+# Parse command line arguments.  Valid arguments include '-h' and '--help'
+#------------------------------------------------------------------------------
+function command_options () {
+
+    debug "command_options '$@'"
+
+    while getopts :h OPTION; do
+        case $OPTION in
+            h)  display_help  # display help message on '-h' or '--help'
+                exit 2  # Do nothing more if help is requested
+                ;;
+#            *)  user_supplied_directory=$OPTION
+#                debug $user_supplied_directory
+#                ;;
+        esac  # end case statement
+    done  # end while
+
+}  # end function command_options
+
+
+# Determine whether we are using RPMs or TGZs
+#------------------------------------------------------------------------------
+function determine_packaging () {
+    # Check if packages are tarballs
+    log "Determining package type"
+    if [ ! -z "`find . -type f -name *.tgz`" ]; then
+        package_ext="tgz"
+    elif [ ! -z "`find . -type f -name *.rpm`" ]; then
+        package_ext="rpm"
+        # Init the RPM DB
+        log "Setting up RPM database"
+        mkdir -p $install_directory/var/lib/rpm
+        rpm --dbpath $install_directory/var/lib/rpm --initdb
+        if [ $? -ne 0 ]; then failure "Failure to init RPM database"; fi
+    else
+        failure "Could not find any suitable package extensions"
+    fi
+    log "Packages are $package_ext"
+}
+
+
+# Read a value from the user, either Yes or No.  Return code 0 in $? if yes
+# otherwise return code 1 in $? if no.
+#------------------------------------------------------------------------------
+function yes_no () {
+
+    #debug "yes_no"
+
+    # lambda function to return single charater input from user
+    function read_answer () {
+
+        read -n 1 answer  # Read only a single character
+        printf "\n"  # print a blank line
+        [ $answer ] || answer="?"  # prevent error message on space
+        answer=$( echo $answer | tr [:lower:] [:upper:] )  # capitalize
+        [ $answer == "H" ] && display_help
+
+    }  # end function read_answer
+
+    local answer="?"  # holds user answer
+
+    while [[ $answer != [YN] ]]; do  # loop until valid answer
+
+        printf "\n%s (y/n/h) " "$1"  # print the question
+        read_answer
+
+    done  # end while answer != Y or N
+
+    return $( [ $answer == "Y" ] && true )  # returm 1 if answer is 'N'
+
+}  # end function yes_no
+
+
+# Treat $1 as a file name of a license agreement and dump it to the screen
+# using both 'cat' and 'more'.  Loop until the user enters either a 'y' or
+# an 'n'.  If 'n' exit gracefully otherwise continue.
+#------------------------------------------------------------------------------
+function license_agreement () {
+
+    #debug "license_agreement"
+
+    declare -r local DECLINE=1  # value if user does not accepting this license
+    declare -r local question="Do you accept this agreement, yes or no?"
+    declare -r local message="You have declined the terms of this license."
+
+    cat $1 | more  # dump the text of the license
+
+    yes_no "$question"
+    if [ $? -eq $DECLINE ]; then failure "$message"; fi
+
+}  # end function license_agreement
+
+
+# Perform tgz installation
+#------------------------------------------------------------------------------
+function install_tarballs () {
+
+    #debug "install_tarballs"
+
+    # Lambda functions - visible scope is only inside 'perform_install'
+
+    function uncompress () {
+        log "Uncompressing $archive into $directory"
+        tar -z -x -f $archive -C $directory
+    }  # end function uncompress
+
+    function make_dir () {
+        [[ $archive =~ "-SRC-" ]] && ( [ $( tar -z -t -f $archive | grep -c $component ) -eq 0 ] && ( return ) )
+        directory=${install_directory}/${component}
+        mkdir --parents $directory
+    }  # end function make_dir
+
+    declare -r local archive_files=$( find . -name "*.tgz" )
+    local directory=""
+    local component=""
+    local archive=""
+
+    for archive in $archive_files; do
+
+        directory=${install_directory}
+        component=$( echo $( basename $archive ) | cut -d'-' -f1-3 )
+        [[ $archive =~ "-DEV-" ]] || make_dir
+        uncompress  # do the actual untarring of the tarball
+
+    done  # end for loop
+
+}  # end function install_tarballs
+
+# Perform RPM installation
+#------------------------------------------------------------------------------
+function install_rpms () {
+    log "Finding RPM packages"
+    declare -r local archive_files=$( find . -type f -iname \*.rpm )
+    if [ -z "$archive_files" ]; then failure "Could not find any RPMs"; fi
+
+    log "Installing RPMs"
+    for this_package in $archive_files; do
+        # DEV packages do not need the component name prefix
+        if [[ $this_package =~ "-DEV-" ]]; then
+            RPM_INSTALL_ARGS="--prefix $install_directory"
+        # SRC packages may need the component name added to the prefix
+        # Target packages will need the component added
+        else
+            component=`basename $this_package | cut -d'-' -f1-3`
+            mkdir -p $install_directory/$component
+            # Search for the component name in the file list
+            rpm -qlp $this_package | grep -q ^/$component/
+            if [ $? -eq 0 ]; then
+                RPM_INSTALL_ARGS="--prefix $install_directory"
+            else
+                RPM_INSTALL_ARGS="--prefix $install_directory/$component"
+            fi
+        fi
+
+        RPM_INSTALL_ARGS="$RPM_INSTALL_ARGS --nodeps --nocontexts"
+        log "Installing $this_package into $install_directory"
+        rpm --dbpath $install_directory/var/lib/rpm -i $RPM_INSTALL_ARGS $this_package
+    done
+}  # end function install_rpms
+
+# Copy all other non-tarball files into the root directory of the SDK
+#------------------------------------------------------------------------------
+function install_other_files () {
+
+    #debug "install_other_files"
+
+    declare -r other_files=$( find . -not -name "*.$package_ext" -and -type f )
+    local file=""  # iterator
+
+    for file in $other_files; do
+        log "Copy '$file' to '$install_directory'"
+        cp --update $file $install_directory/
+    done  # end for each file
+
+}  # end function install_other_files
+
+
+# Apply patches
+#------------------------------------------------------------------------------
+function apply_patches () {
+
+    #debug "apply_patches"
+
+    # Find the patches and then apply them
+    declare -r local patch_files=$( find . -name "*.patch" )
+    local options=" -t -b --fuzz=3 "
+    local file=""  # iterator
+
+    # code the loop outside of the find command for clarity and ease of logging
+    for file in $patch_files; do
+        patch $options $install_directory/Makefile < $file
+    done  # end for loop
+
+}  # end function apply_patches
+
+
+# Handle logging SKU ID files
+#------------------------------------------------------------------------------
+function sku_id_log () {
+    # Setup function locals
+    declare -r sku_install_log="$install_directory/skus_installed"
+
+    # Find the sku_id.<key> file at the ISO base, and
+    SKU_ID_PATH=`find . -maxdepth 1 -type f -name sku_id.\*`
+    if [ -z $SKU_ID_PATH ]; then
+        echo "WARNING: Could not find SKU ID file, so the installation of this"
+        echo "         SKU is not being logged"
+    else
+        echo "`cat $SKU_ID_PATH` - `date`" >>$sku_install_log
+    fi
+}
+
+
+# Start of the script - calls subfunctions
+#------------------------------------------------------------------------------
+function main () {
+
+    #debug "main"
+
+    local install_directory=""  # directory used for installation
+    local license_option=${LC_OPTION:="display"}
+
+    if [ "$license_option" == "display" ]; then
+        license_agreement LICENSE.INTEL  # display to user
+        license_agreement NOTICE.GPL  # display to user
+    fi  # if license_option = true
+
+    command_options $@  # parse possible command-line options from user
+    set_install_directory $@  # set up the install directory
+    check_installation_order    # Check that SKUs are installed in order
+    determine_packaging
+
+    log "Beginning SDK installation: $( date )"
+
+    if [ "$package_ext" == "tgz" ]; then
+        install_tarballs  # install all tarballs
+    elif [ "$package_ext" == "rpm" ]; then
+        install_rpms
+    else
+        failure "Invalid package type"
+    fi
+    install_other_files  # copy all other non-tarball files to root of SDK
+    apply_patches  # search for all patches in the SDK and then install them
+    sku_id_log # Log SKU installation information
+
+}  # end function main
+
+
+# Entry into the script
+#------------------------------------------------------------------------------
+main $@  # start the application

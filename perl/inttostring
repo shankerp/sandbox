@@ -1,0 +1,4 @@
+#!/usr/bin/perl
+
+my $tmp = 10;
+print "this is an integer converted to a string:" . $tmp . "\n";

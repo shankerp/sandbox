@@ -1,0 +1,523 @@
+第2章 preeditの表示
+
+§preedit_changedとpreedit_start、preedit_end
+ im0102.cでは入力はできるようになりました。しかし入力途中の文字(preedit)がわか
+りません。キー入力と文字が完全に1対1で対応している場合には、入力途中の文字はあ
+りません。しかし多くのimmoduleでは複数のキー入力で1つ以上の文字を入力します。例
+えば、カタカナを入力する場合には、kを入力した段階では文字は確定しません(commit
+シグナルは発生しない)。もしここでaを入力したならばカタカナの「カ」が確定しま
+す。yを入力したならば、まだ文字は確定しません。その後aを入力したならばカタカナ
+の「キャ」が確定します。ここでの入力途中の文字であるkやyを表示する必要がありま
+す。
+ アプリケーションにその機会を与えるためのシグナルがあります。それが
+preedit_changedとpreedit_start、preedit_endです。im0102.cはpreedit_changedと
+preedit_start、preedit_endの各シグナルの内容を表示します。
+im0201.c-----------------------------------------------------------------------
+/******************************************************************************
+*                                                                             *
+* GtkIMContext                                                                *
+*                                                                             *
+******************************************************************************/
+static void
+signal_commit (GtkIMContext *im_context, gchar *arg1, gpointer user_data)
+{
+    g_print ("commit:%d,%s\n", strlen (arg1), arg1);
+}
+
+
+static void
+signal_preedit_start (GtkIMContext *im_context, gpointer user_data)
+{
+    g_print ("preedit_start\n");
+}
+
+
+static void
+signal_preedit_end (GtkIMContext *im_context, gpointer user_data)
+{
+    g_print ("preedit_end\n");
+}
+
+
+static void
+signal_preedit_changed (GtkIMContext *im_context, gpointer user_data)
+{
+    gchar *str;
+    gint cursor_pos;
+
+    gtk_im_context_get_preedit_string (im_context, &str, NULL, &cursor_pos);
+    g_print ("preedit_change:%d,%d,%s\n", cursor_pos, strlen (str), str);
+    g_free (str);
+}
+
+
+/******************************************************************************
+*                                                                             *
+*                                                                             *
+*                                                                             *
+******************************************************************************/
+int
+main (int argc, char *argv[])
+{
+    GtkIMContext *im_context;
+    GtkWidget *window;
+
+    /* 初期化 */
+    setlocale (LC_ALL, "");
+    gtk_set_locale ();
+    gtk_init (&argc, &argv);
+
+    /* InputMethod */
+    im_context = gtk_im_multicontext_new ();
+    g_signal_connect (im_context, "commit", G_CALLBACK (signal_commit), NULL);
+    g_signal_connect (im_context, "preedit_start",
+                                    G_CALLBACK (signal_preedit_start), NULL);
+    g_signal_connect (im_context, "preedit_end",
+                                    G_CALLBACK (signal_preedit_end), NULL);
+    g_signal_connect (im_context, "preedit_changed",
+                                    G_CALLBACK (signal_preedit_changed), NULL);
+
+    /* ウインドウ */
+    window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+    g_signal_connect (G_OBJECT (window), "destroy",
+                                G_CALLBACK (gtk_main_quit), NULL);
+    g_signal_connect (G_OBJECT (window), "key-press-event",
+                                G_CALLBACK (signal_key_press), im_context);
+    g_signal_connect (G_OBJECT (window), "key-release-event",
+                                G_CALLBACK (signal_key_release), im_context);
+    g_signal_connect (G_OBJECT (window), "realize",
+                                G_CALLBACK (signal_realize), im_context);
+    g_signal_connect (G_OBJECT (window), "unrealize",
+                                G_CALLBACK (signal_unrealize), im_context);
+    g_signal_connect (G_OBJECT (window), "focus-in-event",
+                                G_CALLBACK (signal_focus_in), im_context);
+    g_signal_connect (G_OBJECT (window), "focus-out-event",
+                                G_CALLBACK (signal_focus_out), im_context);
+
+    /* 表示 */
+    gtk_widget_show_all (window);
+    gtk_window_set_policy (GTK_WINDOW (window), TRUE, TRUE, TRUE);
+
+    gtk_main();
+
+    g_object_unref (im_context);
+
+    return 0;
+}
+-------------------------------------------------------------------------------
+ preeditに変化があったときにはpreedit_changedシグナルが発生します。preeditが確
+定したときやpreeditが無効になって、preeditが無くなったときにもpreedit_changedシ
+グナルが発生します。preedit_changedシグナルの引数にはpreeditの文字列はないので
+必要ならばgtk_im_context_get_preedit_stringを呼び出して文字列などを取得します
+(不要な情報に対しては、このAPIの引数をNULLにできる)。
+ このAPIのcursor_posの説明について、現在のGTK+ 2.2 API Referenceには
+location to store position of cursor (in bytes) within the preedit string.
+と書いてあります。しかしcursor_posはバイト単位ではなく、文字単位です。バイト単
+位ではUTF-8で「岩本一樹」の「本」と「一」の間は6になりますが、文字単位では2にな
+ります。
+ preedit_startとpreedit_endは入力が開始されるときと、終了するときに発生します。
+imximならばXIMが有効になったときと無効になったときに各々のシグナルが発生しま
+す。しかしすべてのimmoduleがXIMのような構造をしているとは限りません。preeditの
+文字が無い状態から文字がある状態になったときにpreedit_startが発生し、preeditに
+文字がなくなったときにpreedit_endが発生するかもしれません。これは各々のimmodule
+の仕様に依存します(GTK+ 2.2 API Referenceには明確な記述はない)。
+
+
+
+§preeditを表示する
+ 上記のシグナルに基づいてpreeditを表示するのはアプリケーション側の責任になりま
+す。GTK+-2.0のウィジェット(GtkEntry、GtkText)ではpreeditの変化に応じてカーソル
+位置にpreeditを挿入しています。これはとても良い方法ですが、preeditの変化に応じ
+て全体を変化させる必要があり、手間のかかる作業になります。簡単な方法では
+GtkLabelなどのウィジェットを設け、そこに表示することが考えられます。しかしこれ
+は実装は簡単ですがユーザーにとって使いにくいものになります。
+ 妥協案として、カーソル位置にpreeditを表示するためのウインドウを置き、そこで
+preeditを表示することを考えたいと思います。この方法は、前者ほど良いものではあり
+ませんが、実装は比較的簡単です。GTK+以外のアプリケーションでも多く見られる手法
+です。
+im0202.c-----------------------------------------------------------------------
+/******************************************************************************
+*                                                                             *
+* GtkIMContext                                                                *
+*                                                                             *
+******************************************************************************/
+static void
+signal_commit (GtkIMContext *im_context, gchar *arg1, gpointer user_data)
+{
+    g_print ("commit:%d,%s\n", strlen (arg1), arg1);
+}
+
+
+static void
+signal_preedit_changed (GtkIMContext *im_context, GtkWidget *drawing)
+{
+    int width, height;
+    gchar *str;
+    gint x, y;
+    PangoAttrList *attrs;
+    PangoLayout *layout;
+    GtkWidget *preedit,*window;
+    GdkRectangle rc;
+
+    preedit = gtk_widget_get_parent (drawing);
+    window = g_object_get_data (G_OBJECT (preedit), "user_data");
+    gtk_im_context_get_preedit_string (im_context, &str, &attrs, NULL);
+    if (strlen (str) > 0)
+      {
+        layout = gtk_widget_create_pango_layout (window, str);
+        pango_layout_set_attributes (layout, attrs);
+        pango_layout_get_pixel_size (layout, &width, &height);
+        g_object_unref (layout);
+        gdk_window_get_origin (window->window, &x, &y);
+        gtk_window_move (GTK_WINDOW (preedit), x, y);
+        gtk_window_resize (GTK_WINDOW (preedit), width, height);
+        gtk_widget_show (preedit);
+        gtk_widget_queue_draw_area (preedit, 0, 0, width, height);
+      }
+    else
+      {
+        gtk_widget_hide (preedit);
+      }
+    g_free (str);
+    pango_attr_list_unref (attrs);
+}
+
+
+gboolean signal_expose (GtkWidget *widget,
+                            GdkEventExpose *event, GtkIMContext *im_context)
+{
+    gchar *str;
+    gint cursor_pos;
+    GdkGC *gc;
+    PangoAttrList *attrs;
+    PangoLayout *layout;
+    GdkColor color[2] = {   {0, 0x0000, 0x0000, 0x0000},
+                            {0, 0xffff, 0xffff, 0xffff}};
+
+    gtk_im_context_get_preedit_string (im_context, &str, &attrs, &cursor_pos);
+    layout = gtk_widget_create_pango_layout (g_object_get_data
+                (G_OBJECT (gtk_widget_get_parent (widget)), "user_data"), str);
+    pango_layout_set_attributes (layout, attrs);
+
+    gc = gdk_gc_new (widget->window);
+    gdk_color_alloc (gdk_colormap_get_system (), color);
+    gdk_color_alloc (gdk_colormap_get_system (), color + 1);
+
+    /* 背景 */
+    gdk_gc_set_foreground (gc, color + 1);
+    gdk_draw_rectangle(widget->window, gc, TRUE, event->area.x, event->area.y,
+                                        event->area.width, event->area.height);
+
+    /* 前景 */
+    gdk_gc_set_foreground (gc, color);
+    gdk_gc_set_background (gc, color + 1);
+    gdk_draw_layout (widget->window, gc, 0, 0, layout);
+
+    gdk_gc_unref (gc);
+    g_free (str);
+    pango_attr_list_unref (attrs);
+    g_object_unref (layout);
+    return TRUE;
+}
+
+
+/******************************************************************************
+*                                                                             *
+*                                                                             *
+*                                                                             *
+******************************************************************************/
+int
+main (int argc, char *argv[])
+{
+    GtkIMContext *im_context;
+    GtkWidget *preedit, *drawing, *window;
+
+    /* 初期化 */
+    setlocale (LC_ALL, "");
+    gtk_set_locale ();
+    gtk_init (&argc, &argv);
+
+    im_context = gtk_im_multicontext_new ();
+    preedit = gtk_window_new (GTK_WINDOW_POPUP);
+    drawing = gtk_drawing_area_new ();
+    window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+
+    /* preeditウインドウ */
+    gtk_window_move (GTK_WINDOW (preedit), 0, 0);
+    gtk_container_add (GTK_CONTAINER (preedit), drawing);
+    g_object_set_data (G_OBJECT (preedit), "user_data", window);
+
+    /* DrawingArea */
+    g_signal_connect (G_OBJECT (drawing), "expose-event",
+                                G_CALLBACK (signal_expose), im_context);
+    gtk_widget_show (drawing);
+
+    /* InputMethod */
+    g_signal_connect (im_context, "commit", G_CALLBACK (signal_commit), NULL);
+    g_signal_connect (im_context, "preedit_changed",
+                                G_CALLBACK (signal_preedit_changed), drawing);
+
+    /* ウインドウ */
+    g_signal_connect (G_OBJECT (window), "destroy",
+                                G_CALLBACK (gtk_main_quit), NULL);
+    g_signal_connect (G_OBJECT (window), "key-press-event",
+                                G_CALLBACK (signal_key_press), im_context);
+    g_signal_connect (G_OBJECT (window), "key-release-event",
+                                G_CALLBACK (signal_key_release), im_context);
+    g_signal_connect (G_OBJECT (window), "realize",
+                                G_CALLBACK (signal_realize), im_context);
+    g_signal_connect (G_OBJECT (window), "unrealize",
+                                G_CALLBACK (signal_unrealize), im_context);
+    g_signal_connect (G_OBJECT (window), "focus-in-event",
+                                G_CALLBACK (signal_focus_in), im_context);
+    g_signal_connect (G_OBJECT (window), "focus-out-event",
+                                G_CALLBACK (signal_focus_out), im_context);
+
+    /* 表示 */
+    gtk_widget_show_all (window);
+    gtk_window_set_policy (GTK_WINDOW (window), TRUE, TRUE, TRUE);
+
+    gtk_main();
+
+    g_object_unref (im_context);
+
+    return 0;
+}
+-------------------------------------------------------------------------------
+ preeditに文字列があるならばポップアップウインドウを開いて、そこにpreeditを表示
+します。文字列がなくなったときにはpreeditを非表示にします。preedit_startと
+preedit_endでgtk_widget_showまたはgtk_widget_hideを呼ぶ方が良いように思えるかも
+しれませんが、preedit_startとpreedit_endはpreeditの文字列の有無によって発生する
+わけではありません(immoduleによっては文字列の有無で発生することもある)。imximの
+場合にはShitf+Spaceで変換が有効/無効になったときにpreedit_start/preedit_endが発
+生します。
+ ポップアップウインドウはpreeditの文字列に応じて必要最小の大きさにします。
+gtk_im_context_get_preedit_stringでPangoの文字の属性も取得できるので、これも利
+用します。
+
+
+
+§gtk_im_context_set_cursor_location
+ immoduleによっては変換候補や入力モードを表示する場合があります。例えば日本語入
+力ならば、英数字(キーに対応する文字をそのまま入力)と漢字変換というような入力
+モードが考えられます。これらの入力モードはキーやメニューなどで切り替えます(その
+方法はimmoduleに依ります)。その現在の入力モードをユーザーが知るために表示する必
+要があります。
+ また日本語の入力では、例えばローマ字で「iwamoto」と入力した場合、preeditは「イ
+ワモト」になり、これの変換を試みると変換候補として「iwamoto」、「いわもと」、
+「イワモト」、「岩本」、「岩元」などが考えられます。その中からユーザーは選択し
+ます(選択するとpreeditの文字列はなくなりcommitが発生します。)。immoduleはユー
+ザーに選択させるために変換候補を表示する必要があります。
+ それらを表示する位置を決めるためにimmoduleはカーソルの位置を必要とします。カー
+ソルとはマウスカーソルのことではなく、文字を入力しようとしている位置です。
+immoduleは上記の変換候補や入力モードを表示するためにカーソルの座標が必要です。
+この座標を渡せば、immoduleは変換候補や入力モードを表示するポップアップウインド
+ウをカーソルの近くに表示することができます。変換候補や状態がカーソルの近くあれ
+ば、ユーザーは視点の移動をせずに済みます。(特に変換候補がカーソルから遠い位置に
+表示されるのは不便です。)
+ 逆にimmoduleがポップアップウインドウをカーソル位置が隠れてしまうような位置に表
+示するとユーザーは大変困ります。ポップアップウインドウでカーソルが隠れることが
+ないよにするためにも、カーソル位置をimmoduleに教えることが必要です。
+ 上記の変換候補や入力モードというのは一例にすぎません。immoduleによっては変換候
+補や入力モード以外の何かを表示するかもしれません。まったく表示しないかもしれま
+せん。変換候補や入力モードをカーソルとは関係ない位置に表示するかもしれません。
+ カーソル位置はimmoduleのクライアントウインドウ
+(gtk_im_context_set_client_windowで指定したウインドウ)の左上からの相対座標にな
+ります。x、y座標はカーソル位置の左上の座標、幅(width)は0、heightは高さになりま
+す。
+ 一般にクライアントウインドウの左端から右端、yからy+heightの範囲の矩形と重なら
+ないようにポップアップウインドウが表示されるでしょう。変換候補のポップアップウ
+インドウの左上座標は(x,y+height)になることが期待できます。カーソルの下に十分な
+領域がなければ変換候補のポップアップウインドウの左下座標が(x,y-1)になることが期
+待できます。(GTK+-2.2のimximは期待を裏切ります。またほとんどのimmoduleはポップ
+アップウインドウを表示しません。しかし将来と未知のimmoduleのためにもアプリケー
+ションはgtk_im_context_set_cursor_locationを実装すべきです。)
+ im0203.cではカーソルキーによってカーソル(表示されません)を移動し、同時に
+gtk_im_context_set_cursor_locationを呼びます。またPageUp/PageDownで高さを変えま
+す。同時にShiftを押したときには10ピクセル単位で変化します。
+im0203.c-----------------------------------------------------------------------
+/******************************************************************************
+*                                                                             *
+* キー入力イベント                                                            *
+*                                                                             *
+******************************************************************************/
+static gboolean
+signal_key_press (GtkWidget *widget, GdkEventKey *event,
+                                                    GtkIMContext *im_context)
+{
+    gint n;
+    GdkRectangle *area;
+
+    if (gtk_im_context_filter_keypress (im_context, event))
+        return TRUE;
+    area = g_object_get_data (G_OBJECT (widget), "user_data");
+    n = (event->state & GDK_SHIFT_MASK) == 0 ? 1 : 10;
+    switch (event->keyval)
+      {
+        case GDK_Home:      area->x = area->y = 0; area->height = 10; break;
+        case GDK_Left:      area->x -= n; break;
+        case GDK_Right:     area->x += n; break;
+        case GDK_Up:        area->y -= n; break;
+        case GDK_Down:      area->y += n; break;
+        case GDK_Page_Up:   area->height += n; break;
+        case GDK_Page_Down: area->height = MAX (area->height - n, 1); break;
+        default:
+            g_print ("key_press:keyval=%02X\n", event->keyval);
+            return TRUE;
+      }
+    gtk_im_context_set_cursor_location (im_context, area);
+    g_print ("key_press:keyval=%02X,cursor=%d,%d,%d\n",
+                                event->keyval, area->x ,area->y, area->height);
+    return TRUE;
+}
+
+
+static gboolean
+signal_key_release (GtkWidget *widget, GdkEventKey *event,
+                                                    GtkIMContext *im_context)
+{
+    if (gtk_im_context_filter_keypress (im_context, event))
+        return TRUE;
+    g_print ("key_release:keyval=%02X\n", event->keyval);
+    return TRUE;
+}
+
+
+/******************************************************************************
+*                                                                             *
+* GtkIMContext                                                                *
+*                                                                             *
+******************************************************************************/
+static void
+signal_commit (GtkIMContext *im_context, gchar *arg1, gpointer user_data)
+{
+    g_print ("commit:%d,%s\n", strlen (arg1), arg1);
+}
+
+
+static void
+signal_preedit_changed (GtkIMContext *im_context, GtkWidget *drawing)
+{
+    int width, height;
+    gchar *str;
+    gint x, y;
+    PangoAttrList *attrs;
+    PangoLayout *layout;
+    GtkWidget *preedit,*window;
+    GdkRectangle rc, *area;
+
+    preedit = gtk_widget_get_parent (drawing);
+    window = g_object_get_data (G_OBJECT (preedit), "user_data");
+    area = g_object_get_data (G_OBJECT (window), "user_data");
+    gtk_im_context_get_preedit_string (im_context, &str, &attrs, NULL);
+    if (strlen (str) > 0)
+      {
+        layout = gtk_widget_create_pango_layout (window, str);
+        pango_layout_set_attributes (layout, attrs);
+        pango_layout_get_pixel_size (layout, &width, &height);
+        g_object_unref (layout);
+        gdk_window_get_origin (window->window, &x, &y);
+        gtk_window_move (GTK_WINDOW (preedit), x + area->x, y + area->y);
+        gtk_window_resize (GTK_WINDOW (preedit), width, height);
+        gtk_widget_show (preedit);
+        gtk_widget_queue_draw_area (preedit, 0, 0, width, height);
+      }
+    else
+      {
+        gtk_widget_hide (preedit);
+      }
+    g_free (str);
+    pango_attr_list_unref (attrs);
+}
+
+
+/******************************************************************************
+*                                                                             *
+*                                                                             *
+*                                                                             *
+******************************************************************************/
+int
+main (int argc, char *argv[])
+{
+    GdkRectangle area;
+    GtkIMContext *im_context;
+    GtkWidget *preedit, *drawing, *window;
+
+    /* 初期化 */
+    setlocale (LC_ALL, "");
+    gtk_set_locale ();
+    gtk_init (&argc, &argv);
+
+    /* カーソル位置 */
+    area.x = area.y = area.width = 0;
+    area.height = 10;
+
+    im_context = gtk_im_multicontext_new ();
+    preedit = gtk_window_new (GTK_WINDOW_POPUP);
+    drawing = gtk_drawing_area_new ();
+    window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+
+    /* preeditウインドウ */
+    gtk_window_move (GTK_WINDOW (preedit), 0, 0);
+    gtk_container_add (GTK_CONTAINER (preedit), drawing);
+    g_object_set_data (G_OBJECT (preedit), "user_data", window);
+
+    /* DrawingArea */
+    g_signal_connect (G_OBJECT (drawing), "expose-event",
+                                G_CALLBACK (signal_expose), im_context);
+    gtk_widget_show (drawing);
+
+    /* InputMethod */
+    gtk_im_context_set_cursor_location (im_context, &area);
+    g_signal_connect (im_context, "commit", G_CALLBACK (signal_commit), NULL);
+    g_signal_connect (im_context, "preedit_changed",
+                                G_CALLBACK (signal_preedit_changed), drawing);
+
+    /* ウインドウ */
+    g_object_set_data (G_OBJECT (window), "user_data", &area);
+    g_signal_connect (G_OBJECT (window), "destroy",
+                                G_CALLBACK (gtk_main_quit), NULL);
+    g_signal_connect (G_OBJECT (window), "key-press-event",
+                                G_CALLBACK (signal_key_press), im_context);
+    g_signal_connect (G_OBJECT (window), "key-release-event",
+                                G_CALLBACK (signal_key_release), im_context);
+    g_signal_connect (G_OBJECT (window), "realize",
+                                G_CALLBACK (signal_realize), im_context);
+    g_signal_connect (G_OBJECT (window), "unrealize",
+                                G_CALLBACK (signal_unrealize), im_context);
+    g_signal_connect (G_OBJECT (window), "focus-in-event",
+                                G_CALLBACK (signal_focus_in), im_context);
+    g_signal_connect (G_OBJECT (window), "focus-out-event",
+                                G_CALLBACK (signal_focus_out), im_context);
+
+    /* 表示 */
+    gtk_widget_show_all (window);
+    gtk_window_set_policy (GTK_WINDOW (window), TRUE, TRUE, TRUE);
+
+    gtk_main();
+
+    g_object_unref (im_context);
+
+    return 0;
+}
+-------------------------------------------------------------------------------
+
+
+
+§gtk_im_context_set_use_preedit
+ 結論から書きますと、現在、gtk_im_context_set_use_preeditは使えません。
+ このAPIでuse_preeditをFALSEにした場合、「preeditを表示する」で説明したpreedit
+の表示をimmodule側がおこなってくれます。preeditの表示はuse_preeditがTRUEならば
+アプリケーション側の責任、FALSEならばimmodule側の責任となります。デフォルトでは
+use_preeditはTRUEです。use_preeditをFALSEにした場合、immoduleがカーソル位置に必
+要に応じてポップアップウインドウを作り、preeditの文字列を表示してくれることが期
+待できます。これを利用すればアプリケーションの作成が容易になります。
+ しかしこの機能はGTK+-2.2では使うことができません。use_preeditがFALSEの状態を実
+装しているimmoduleは僅かです。ほとんどのimmoduleは実装していません。use_preedit
+がFALSEでpreeditに文字列があってもpreeditは表示されず、use_preeditがTRUEのとき
+と同じ動作をします。仮に実装していたとしても、immodule側のpreeditの表示に期待す
+ることはできません。例えばimximの用意する機能は「preeditを表示する」のサンプル
+以下の品質です。imximを普段は利用せず、稀にimximで入力するならば耐えられるかも
+しれませんが、とても常用できる品質ではありません。
+ immodule側の対応も進むと思われますが、それはまだ先のことなので、アプリケーショ
+ン側でpreeditを表示するのが妥当です。

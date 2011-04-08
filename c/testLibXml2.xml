@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE AppConfigData [
+   <!ELEMENT AppConfigData (DisplayX+)>
+
+   <!ELEMENT DisplayX (AlternateName*,FieldLength,TextFont?)>
+      <!ATTLIST DisplayX name CDATA #REQUIRED>
+      <!ATTLIST DisplayX type CDATA #REQUIRED>
+
+   <!ELEMENT AlternateName (#PCDATA)>
+      <!ATTLIST AlternateName type CDATA #REQUIRED>
+   <!ELEMENT FieldLength (#PCDATA)>
+   <!ELEMENT TextFont (#PCDATA)>
+]>
+<AppConfigData>
+  <DisplayX name="DisplayText_A" type="Type1">
+    <AlternateName type="Type1">DisplayText_a</AlternateName>
+    <FieldLength>30</FieldLength>
+    <TextFont type="Courier"/>
+  </DisplayX>
+  <DisplayX name="DisplayText_B" type="Type2">
+    <FieldLength>30</FieldLength>
+    <TextFont type="Arial"/>
+  </DisplayX>
+  <DisplayX name="DisplayText_C" type="Type1">
+    <AlternateName type="Type1">DisplayText_c</AlternateName>
+    <FieldLength>30</FieldLength>
+    <TextFont type="Courier"/>
+  </DisplayX>
+  <DisplayX name="DisplayText_D" type="Type2">
+    <FieldLength>30</FieldLength>
+    <TextFont type="Courier"/>
+  </DisplayX>
+</AppConfigData>

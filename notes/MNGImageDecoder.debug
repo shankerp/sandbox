@@ -1,0 +1,872 @@
+/*
+ * Copyright (C) 2006 Apple Computer, Inc.
+ * Copyright (C) 2007-2009 Torch Mobile, Inc.
+ * Copyright (C) Research In Motion Limited 2009-2010. All rights reserved.
+ *
+ * Portions are Copyright (C) 2001 mozilla.org
+ *
+ * Other contributors:
+ *   Stuart Parmenter <stuart@mozilla.com>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+ *
+ * Alternatively, the contents of this file may be used under the terms
+ * of either the Mozilla Public License Version 1.1, found at
+ * http://www.mozilla.org/MPL/ (the "MPL") or the GNU General Public
+ * License Version 2.0, found at http://www.fsf.org/copyleft/gpl.html
+ * (the "GPL"), in which case the provisions of the MPL or the GPL are
+ * applicable instead of those above.  If you wish to allow use of your
+ * version of this file only under the terms of one of those two
+ * licenses (the MPL or the GPL) and not to allow others to use your
+ * version of this file under the LGPL, indicate your decision by
+ * deletingthe provisions above and replace them with the notice and
+ * other provisions required by the MPL or the GPL, as the case may be.
+ * If you do not delete the provisions above, a recipient may use your
+ * version of this file under any of the LGPL, the MPL or the GPL.
+ */
+
+#include "config.h"
+#include "MNGImageDecoder.h"
+#define MNG_ACCESS_CHUNKS
+#include "libmng.h"
+#include "ThreadGlobalData.h"
+
+/* This size supports maximum of 512 CLUT size, 512*4+57=2105 */
+#define WEBKIT_MNG_PLTE_DATA_SIZE           2110
+#define WEBKIT_MNG_HEADER_SIZE              33
+#define WEBKIT_MNG_PLTE_STRING_SIZE         4
+#define WEBKIT_MNG_TRNS_STRING_SIZE         4
+#define WEBKIT_MNG_PLTE_DATA_LENTH          4
+#define WEBKIT_MNG_TRNS_DATA_LENTH          4
+#define WEBKIT_MNG_PLTE_CRC_SIZE            4
+#define WEBKIT_MNG_TRNS_CRC_SIZE            4
+extern bool g_isBmlDoc;
+FILE *fp = NULL;
+
+namespace WebCore {
+
+const double cDefaultGamma = 2.2;
+const double cInverseGamma = 0.45455;
+
+static mng_bool mngOpenStreamCb(mng_handle mng)
+{
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+	return MNG_TRUE;
+}
+
+static mng_bool mngCloseStreamCb(mng_handle mng)
+{
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+	return MNG_TRUE;
+}
+
+static mng_bool mngReadDataCb(mng_handle mng, mng_ptr buffer,
+							  mng_uint32 bytes_requested,
+							  mng_uint32 * bytes_read)
+{
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+	*bytes_read = 0;
+	return MNG_FALSE;
+}
+
+static mng_uint32 mngGetTickCountCb(mng_handle mng)
+{
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+	return 0;
+}
+
+static mng_bool mngRefreshCb(mng_handle mng,
+	      mng_uint32 x,
+	      mng_uint32 y,
+	      mng_uint32 width,
+	      mng_uint32 height)
+{
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+	return MNG_TRUE;
+}
+
+static mng_bool mngSetTimerCb(mng_handle mng, mng_uint32 delay)
+{
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+	return MNG_TRUE;
+}
+
+static mng_bool mngProcessHeaderCb(mng_handle mng,
+	     mng_uint32 width,
+	     mng_uint32 height)
+{
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+    static_cast<MNGImageDecoder*>(mng_get_userdata(mng))->headerAvailable(width, height);
+	return MNG_TRUE;
+}
+
+static mng_ptr mngGetCanvasLineCb(mng_handle mng, mng_uint32 line)
+{
+    return static_cast<MNGImageDecoder*>(mng_get_userdata(mng))->getCanvasLine(line);
+}
+
+static mng_ptr mngGetAlphaLineCb(mng_handle mng, mng_uint32 line)
+{
+    return static_cast<MNGImageDecoder*>(mng_get_userdata(mng))->getAlphaLine(line);
+}
+
+static mng_bool mngProcessTermCb(mng_handle mng, mng_uint8 termAction, mng_uint8 iteraction, mng_uint32 delay, mng_uint32 maxIterations)
+{
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+	if(termAction == MNG_TERMACTION_REPEAT)
+		static_cast<MNGImageDecoder*>(mng_get_userdata(mng))->setRepetitionCount(maxIterations);
+
+    return MNG_TRUE;
+}
+
+static void dump_chunk_type(mng_chunkid iChunktype)
+{
+    switch(iChunktype)
+    {
+        case MNG_UINT_HUH :
+            printf("Type is MNG_UINT_HUH \n");
+            break;
+        case MNG_UINT_BACK:
+            printf("Type is MNG_UINT_BACK\n");
+            break;
+        case MNG_UINT_BASI:
+            printf("Type is MNG_UINT_BASI\n");
+            break;
+        case MNG_UINT_CLIP:
+            printf("Type is MNG_UINT_CLIP\n");
+            break;
+        case MNG_UINT_CLON:
+            printf("Type is MNG_UINT_CLON\n");
+            break;
+        case MNG_UINT_DBYK:
+            printf("Type is MNG_UINT_DBYK\n");
+            break;
+        case MNG_UINT_DEFI:
+            printf("Type is MNG_UINT_DEFI\n");
+            break;
+        case MNG_UINT_DHDR:
+            printf("Type is MNG_UINT_DHDR\n");
+            break;
+        case MNG_UINT_DISC:
+            printf("Type is MNG_UINT_DISC\n");
+            break;
+        case MNG_UINT_DROP:
+            printf("Type is MNG_UINT_DROP\n");
+            break;
+        case MNG_UINT_ENDL:
+            printf("Type is MNG_UINT_ENDL\n");
+            break;
+        case MNG_UINT_FRAM:
+            printf("Type is MNG_UINT_FRAM\n");
+            break;
+        case MNG_UINT_IDAT:
+            printf("Type is MNG_UINT_IDAT\n");
+            break;
+        case MNG_UINT_IEND:
+            printf("Type is MNG_UINT_IEND\n");
+            break;
+        case MNG_UINT_IHDR:
+            printf("Type is MNG_UINT_IHDR\n");
+            break;
+        case MNG_UINT_IJNG:
+            printf("Type is MNG_UINT_IJNG\n");
+            break;
+        case MNG_UINT_IPNG:
+            printf("Type is MNG_UINT_IPNG\n");
+            break;
+        case MNG_UINT_JDAA:
+            printf("Type is MNG_UINT_JDAA\n");
+            break;
+        case MNG_UINT_JDAT:
+            printf("Type is MNG_UINT_JDAT\n");
+            break;
+        case MNG_UINT_JHDR:
+            printf("Type is MNG_UINT_JHDR\n");
+            break;
+        case MNG_UINT_JSEP:
+            printf("Type is MNG_UINT_JSEP\n");
+            break;
+        case MNG_UINT_JdAA:
+            printf("Type is MNG_UINT_JdAA\n");
+            break;
+        case MNG_UINT_LOOP:
+            printf("Type is MNG_UINT_LOOP\n");
+            break;
+        case MNG_UINT_MAGN:
+            printf("Type is MNG_UINT_MAGN\n");
+            break;
+        case MNG_UINT_MEND:
+            printf("Type is MNG_UINT_MEND\n");
+            break;
+        case MNG_UINT_MHDR:
+            printf("Type is MNG_UINT_MHDR\n");
+            break;
+        case MNG_UINT_MOVE:
+            printf("Type is MNG_UINT_MOVE\n");
+            break;
+        case MNG_UINT_ORDR:
+            printf("Type is MNG_UINT_ORDR\n");
+            break;
+        case MNG_UINT_PAST:
+            printf("Type is MNG_UINT_PAST\n");
+            break;
+        case MNG_UINT_PLTE:
+            printf("Type is MNG_UINT_PLTE\n");
+            break;
+        case MNG_UINT_PPLT:
+            printf("Type is MNG_UINT_PPLT\n");
+            break;
+        case MNG_UINT_PROM:
+            printf("Type is MNG_UINT_PROM\n");
+            break;
+        case MNG_UINT_SAVE:
+            printf("Type is MNG_UINT_SAVE\n");
+            break;
+        case MNG_UINT_SEEK:
+            printf("Type is MNG_UINT_SEEK\n");
+            break;
+        case MNG_UINT_SHOW:
+            printf("Type is MNG_UINT_SHOW\n");
+            break;
+        case MNG_UINT_TERM:
+            printf("Type is MNG_UINT_TERM\n");
+            break;
+        case MNG_UINT_adAT:
+            printf("Type is MNG_UINT_adAT\n");
+            break;
+        case MNG_UINT_ahDR:
+            printf("Type is MNG_UINT_ahDR\n");
+            break;
+        case MNG_UINT_bKGD:
+            printf("Type is MNG_UINT_bKGD\n");
+            break;
+        case MNG_UINT_cHRM:
+            printf("Type is MNG_UINT_cHRM\n");
+            break;
+        case MNG_UINT_eXPI:
+            printf("Type is MNG_UINT_eXPI\n");
+            break;
+        case MNG_UINT_evNT:
+            printf("Type is MNG_UINT_evNT\n");
+            break;
+        case MNG_UINT_fPRI:
+            printf("Type is MNG_UINT_fPRI\n");
+            break;
+        case MNG_UINT_gAMA:
+            printf("Type is MNG_UINT_gAMA\n");
+            break;
+        case MNG_UINT_hIST:
+            printf("Type is MNG_UINT_hIST\n");
+            break;
+        case MNG_UINT_iCCP:
+            printf("Type is MNG_UINT_iCCP\n");
+            break;
+        case MNG_UINT_iTXt:
+            printf("Type is MNG_UINT_iTXt\n");
+            break;
+        case MNG_UINT_mpNG:
+            printf("Type is MNG_UINT_mpNG\n");
+            break;
+        case MNG_UINT_nEED:
+            printf("Type is MNG_UINT_nEED\n");
+            break;
+        case MNG_UINT_oFFs:
+            printf("Type is MNG_UINT_oFFs\n");
+            break;
+        case MNG_UINT_pCAL:
+            printf("Type is MNG_UINT_pCAL\n");
+            break;
+        case MNG_UINT_pHYg:
+            printf("Type is MNG_UINT_pHYg\n");
+            break;
+        case MNG_UINT_pHYs:
+            printf("Type is MNG_UINT_pHYs\n");
+            break;
+        case MNG_UINT_sBIT:
+            printf("Type is MNG_UINT_sBIT\n");
+            break;
+        case MNG_UINT_sCAL:
+            printf("Type is MNG_UINT_sCAL\n");
+            break;
+        case MNG_UINT_sPLT:
+            printf("Type is MNG_UINT_sPLT\n");
+            break;
+        case MNG_UINT_sRGB:
+            printf("Type is MNG_UINT_sRGB\n");
+            break;
+        case MNG_UINT_tEXt:
+            printf("Type is MNG_UINT_tEXt\n");
+            break;
+        case MNG_UINT_tIME:
+            printf("Type is MNG_UINT_tIME\n");
+            break;
+        case MNG_UINT_tRNS:
+            printf("Type is MNG_UINT_tRNS\n");
+            break;
+        case MNG_UINT_zTXt:
+            printf("Type is MNG_UINT_zTXt\n");
+            break;
+        default:
+            printf("WHOA!! DEFAULT! %d\n", iChunktype);
+            sleep(3);
+            break;
+    }
+}
+
+static mng_bool mngIterateChunk (mng_handle  mng,
+                      mng_handle  hChunk,
+                      mng_chunkid iChunktype,
+                      mng_uint32  iChunkseq)
+{
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+    dump_chunk_type(iChunktype);
+	static size_t frameCount = 0;
+	switch(iChunktype)
+	{
+	case MNG_UINT_IHDR:
+	case MNG_UINT_JHDR:
+	case MNG_UINT_BASI:
+		frameCount++;
+		break;
+	case MNG_UINT_MEND:
+		static_cast<MNGImageDecoder*>(mng_get_userdata(mng))->setFrameCount(frameCount);
+	    static_cast<MNGImageDecoder*>(mng_get_userdata(mng))->setInterFrameDelay(mng_get_totalplaytime(mng) / (frameCount - 1));
+		break;
+	default:
+		break;
+	}
+	return MNG_TRUE;
+}
+
+class MNGImageReader
+{
+public:
+    MNGImageReader(MNGImageDecoder* decoder)
+    : m_hasAlpha(false)
+    , m_canvasBuffer(0)
+    , m_alphaBuffer(0)
+    , m_width(0)
+    , m_height(0)
+    {
+        printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+    	m_mng = mng_initialize(decoder, NULL, NULL, MNG_NULL);
+
+    	if(m_mng == MNG_NULL)
+    	{
+    	    // Do Something
+    	}
+
+    	mng_set_dfltimggamma(m_mng, cInverseGamma);
+    	mng_set_displaygamma(m_mng, cDefaultGamma);
+
+    	if (mng_setcb_openstream (m_mng, mngOpenStreamCb) != MNG_NOERROR ||
+    	    mng_setcb_closestream (m_mng, mngCloseStreamCb) != MNG_NOERROR ||
+    	    mng_setcb_readdata (m_mng, mngReadDataCb) != MNG_NOERROR ||
+    	    mng_setcb_gettickcount (m_mng, mngGetTickCountCb) != MNG_NOERROR ||
+    	    mng_setcb_refresh (m_mng, mngRefreshCb) != MNG_NOERROR ||
+    	    mng_setcb_settimer (m_mng, mngSetTimerCb) != MNG_NOERROR ||
+    	    mng_setcb_getcanvasline (m_mng, mngGetCanvasLineCb) != MNG_NOERROR ||
+    		mng_setcb_getalphaline (m_mng, mngGetAlphaLineCb) != MNG_NOERROR ||
+    	    mng_setcb_processheader (m_mng, mngProcessHeaderCb) != MNG_NOERROR ||
+    		mng_setcb_processterm (m_mng, mngProcessTermCb) != MNG_NOERROR)
+    	{
+    	   mng_cleanup (&m_mng);
+    	   return;
+    	}
+    }
+
+    ~MNGImageReader()
+    {
+        printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+        close();
+        printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+    }
+
+    void close()
+    {
+        printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+    }
+
+    /* Make the table for a fast CRC. */
+    void make_crc_table(void)
+    {
+        unsigned long c;
+        int n, k;
+
+        for (n = 0; n < 256; n++) {
+            c = (unsigned long) n;
+            for (k = 0; k < 8; k++) {
+                if (c & 1)
+                    c = 0xedb88320L ^ (c >> 1);
+                else
+                    c = c >> 1;
+            }
+            m_crcTable[n] = c;
+        }
+        m_crcTableComputed = 1;
+    }
+
+    /* Update a running CRC with the bytes buf[0..len-1]--the CRC
+       should be initialized to all 1's, and the transmitted value
+       is the 1's complement of the final running CRC (see the
+       crc() routine below)). */
+
+    unsigned long update_crc(unsigned long crc, unsigned char *buf, int len)
+    {
+        unsigned long c = crc;
+        int n;
+
+        if (!m_crcTableComputed)
+            make_crc_table();
+        for (n = 0; n < len; n++) {
+            c = m_crcTable[(c ^ buf[n]) & 0xff] ^ (c >> 8);
+        }
+        return c;
+    }
+
+    /* Return the CRC of the bytes buf[0..len-1]. */
+    unsigned long generateCrc(unsigned char *buf, int len)
+    {
+        return update_crc(0xffffffffL, buf, len) ^ 0xffffffffL;
+    }
+
+    void push_clut_palette()
+    {
+        union
+        {
+            unsigned long bToLValue;
+            unsigned char          ch_bToLVal[4];
+        }uBigToLittle;
+        unsigned char tmpVal[4];
+        /* Get the CLUT data */
+        ARIBColor* clutData = NULL;
+        int clutLength;
+        clutData = threadGlobalData().m_clutData;
+        clutLength = threadGlobalData().m_clutsize;
+        int rgbPosition;
+        int aPosition;
+        unsigned char PLTEString[] = {0x50, 0x4C, 0x54, 0x45}; // ASCII = PLTE
+        unsigned char tRNSString[] = {0x74, 0x52, 0x4E, 0x53}; // ASCII = tRNS
+        unsigned char plte_data[WEBKIT_MNG_PLTE_DATA_SIZE];
+
+        memset (plte_data, 0, WEBKIT_MNG_PLTE_DATA_SIZE);
+
+        /* Copy PLTE length */
+        uBigToLittle.bToLValue = clutLength * 3; //Because of three colors RBG.
+        tmpVal[3] = uBigToLittle.ch_bToLVal[0];
+        tmpVal[2] = uBigToLittle.ch_bToLVal[1];
+        tmpVal[1] = uBigToLittle.ch_bToLVal[2];
+        tmpVal[0] = uBigToLittle.ch_bToLVal[3];
+
+        /* Copy the PLTE Data lenth */
+        memcpy(plte_data, tmpVal, WEBKIT_MNG_PLTE_DATA_LENTH);
+
+        /* Copy PLTE string */
+        memcpy(&plte_data[WEBKIT_MNG_PLTE_DATA_LENTH], PLTEString, WEBKIT_MNG_PLTE_STRING_SIZE);
+
+        /* Copy PLTE length */
+        uBigToLittle.bToLValue = clutLength; //Only Alpha Value.
+        tmpVal[3] = uBigToLittle.ch_bToLVal[0];
+        tmpVal[2] = uBigToLittle.ch_bToLVal[1];
+        tmpVal[1] = uBigToLittle.ch_bToLVal[2];
+        tmpVal[0] = uBigToLittle.ch_bToLVal[3];
+
+        /* Copy the TRNS Data lenth */
+        memcpy(&plte_data[WEBKIT_MNG_PLTE_DATA_LENTH + WEBKIT_MNG_PLTE_STRING_SIZE + (clutLength * 3) + WEBKIT_MNG_PLTE_CRC_SIZE], tmpVal, WEBKIT_MNG_TRNS_DATA_LENTH);
+
+        /* Copy TRNS string */
+        memcpy(&plte_data[WEBKIT_MNG_PLTE_DATA_LENTH + WEBKIT_MNG_PLTE_STRING_SIZE + (clutLength * 3) + WEBKIT_MNG_PLTE_CRC_SIZE + WEBKIT_MNG_TRNS_DATA_LENTH], tRNSString, WEBKIT_MNG_TRNS_STRING_SIZE);
+
+        /* Copy the Palette data from CLUT table, This contain only RGB value */
+        /* Update "RGB" and "A" Value */
+        rgbPosition = WEBKIT_MNG_PLTE_DATA_LENTH + WEBKIT_MNG_PLTE_STRING_SIZE;
+        aPosition = WEBKIT_MNG_PLTE_DATA_LENTH + WEBKIT_MNG_PLTE_STRING_SIZE + (clutLength * 3) + WEBKIT_MNG_PLTE_CRC_SIZE + WEBKIT_MNG_TRNS_DATA_LENTH + WEBKIT_MNG_TRNS_STRING_SIZE;
+        for (int i = 0; i < clutLength; i++)
+        {
+            plte_data[rgbPosition++] = clutData[i].R;
+            plte_data[rgbPosition++] = clutData[i].G;
+            plte_data[rgbPosition++] = clutData[i].B;
+
+            plte_data[aPosition++]   = clutData[i].A;
+        }
+
+        /* Generate the CRC of PLTE array. CRC is calculated by using "Chunk Type" and "Chunk Data" */
+        uBigToLittle.bToLValue = generateCrc(reinterpret_cast<unsigned char*>(&plte_data[WEBKIT_MNG_PLTE_DATA_LENTH]), WEBKIT_MNG_PLTE_STRING_SIZE + (clutLength * 3));
+
+        tmpVal[3] = uBigToLittle.ch_bToLVal[0];
+        tmpVal[2] = uBigToLittle.ch_bToLVal[1];
+        tmpVal[1] = uBigToLittle.ch_bToLVal[2];
+        tmpVal[0] = uBigToLittle.ch_bToLVal[3];
+
+        /* Copy the CRC of PLTE array to plte data */
+        memcpy(&plte_data[WEBKIT_MNG_PLTE_DATA_LENTH + WEBKIT_MNG_PLTE_STRING_SIZE + (clutLength * 3)], tmpVal, WEBKIT_MNG_PLTE_CRC_SIZE);
+
+        /* Generate the CRC of tRNS array */
+        uBigToLittle.bToLValue = generateCrc(reinterpret_cast<unsigned char*>(&plte_data[WEBKIT_MNG_PLTE_DATA_LENTH + WEBKIT_MNG_PLTE_STRING_SIZE + (clutLength * 3) + WEBKIT_MNG_PLTE_CRC_SIZE + WEBKIT_MNG_TRNS_DATA_LENTH]), WEBKIT_MNG_TRNS_STRING_SIZE + clutLength);
+
+        tmpVal[3] = uBigToLittle.ch_bToLVal[0];
+        tmpVal[2] = uBigToLittle.ch_bToLVal[1];
+        tmpVal[1] = uBigToLittle.ch_bToLVal[2];
+        tmpVal[0] = uBigToLittle.ch_bToLVal[3];
+
+        /* Copy the CRC of tRNS array to plte data */
+        memcpy(&plte_data[WEBKIT_MNG_PLTE_DATA_LENTH + WEBKIT_MNG_PLTE_STRING_SIZE + (clutLength * 3) + WEBKIT_MNG_PLTE_CRC_SIZE + WEBKIT_MNG_TRNS_DATA_LENTH + WEBKIT_MNG_TRNS_STRING_SIZE + clutLength], tmpVal, WEBKIT_MNG_TRNS_STRING_SIZE);
+        fwrite(plte_data, 1, WEBKIT_MNG_PLTE_DATA_LENTH + WEBKIT_MNG_PLTE_STRING_SIZE + (clutLength * 3) + WEBKIT_MNG_PLTE_CRC_SIZE + WEBKIT_MNG_TRNS_DATA_LENTH + WEBKIT_MNG_TRNS_STRING_SIZE + clutLength + WEBKIT_MNG_TRNS_CRC_SIZE, fp);
+		mng_read_pushdata(m_mng, plte_data, WEBKIT_MNG_PLTE_DATA_LENTH + WEBKIT_MNG_PLTE_STRING_SIZE + (clutLength * 3) + WEBKIT_MNG_PLTE_CRC_SIZE + WEBKIT_MNG_TRNS_DATA_LENTH + WEBKIT_MNG_TRNS_STRING_SIZE + clutLength + WEBKIT_MNG_TRNS_CRC_SIZE, MNG_FALSE);
+    }
+
+    void arib_compliance(const SharedBuffer& bufferData)
+    {
+    	fp = fopen("/tmp/dump.mng", "wb");
+//        threadGlobalData().initializeClutdata();
+    	const unsigned char *ptr =  (const unsigned char *)bufferData.data();
+    	const unsigned char *end = (const unsigned char *)(ptr + bufferData.size());
+    	const unsigned char *iend = NULL;
+    	const unsigned char *mend = NULL;
+    	const char *findStr = "IHDR";
+    	const unsigned char *ihdr = (const unsigned char *)memmem(ptr, (size_t)(end - ptr), findStr, strlen(findStr));
+    	unsigned chunkLength = 0;
+
+    	if (!ihdr)
+    		return;
+
+    	unsigned char colourType = ihdr[13];
+    	if (colourType != 3)
+    		return;
+
+    	findStr = "PLTE";
+    	const unsigned char *plte = (const unsigned char *)memmem(ptr, (size_t)(end - ptr), findStr, strlen(findStr));
+
+    	if (plte) {
+    		if(plte < ihdr) {
+    			fwrite(ptr, 1, (plte - ptr - 4), fp);
+    			mng_read_pushdata(m_mng, (void *)ptr, (plte - ptr - 4), MNG_FALSE);
+    			plte -= 4;
+    	    	chunkLength = ((*plte) << 24) | (*(plte + 1) << 16) | (*(plte + 2) << 8) | (*(plte + 3));
+    	    	plte += 4;
+    	    	ptr = plte + 4 + chunkLength + 4;
+    	    	push_clut_palette();
+    	    	findStr = "IHDR";
+    	    	ihdr = (const unsigned char *)memmem(ptr, (size_t)(end - ptr), findStr, strlen(findStr));
+//    			mng_read_pushdata(m_mng, ptr, (ihdr - ptr - 4), MNG_FALSE);
+
+    		} else {
+    			fwrite(ptr, 1, (ihdr - ptr - 4), fp);
+    			mng_read_pushdata(m_mng, (void *)ptr, (ihdr - ptr - 4), MNG_FALSE);
+    	    	push_clut_palette();
+    		}
+    	} else {
+    		fwrite(ptr, 1, (ihdr - ptr - 4), fp);
+    		mng_read_pushdata(m_mng, (void *)ptr, (ihdr - ptr - 4), MNG_FALSE);
+	    	push_clut_palette();
+    	}
+
+		while(1) {
+	    	ptr = ihdr - 4;
+			ihdr -= 4;
+	    	chunkLength = ((*ihdr) << 24) | (*(ihdr + 1) << 16) | (*(ihdr + 2) << 8) | (*(ihdr + 3));
+	    	fwrite(ptr, 1, 4 + 4 + chunkLength + 4, fp);
+			mng_read_pushdata(m_mng, (void *)ptr, 4 + 4 + chunkLength + 4, MNG_FALSE);
+			ptr += 4 + 4 + chunkLength + 4;
+			findStr = "PLTE";
+			plte = (const unsigned char *)memmem(ptr, (size_t)(end - ptr), findStr, strlen(findStr));
+			if (plte) {
+    			plte -= 4;
+    	    	chunkLength = ((*plte) << 24) | (*(plte + 1) << 16) | (*(plte + 2) << 8) | (*(plte + 3));
+				ptr += (4 + 4 + chunkLength + 4);
+			}
+			findStr = "tRNS";
+			plte = (const unsigned char *)memmem(ptr, (size_t)(end - ptr), findStr, strlen(findStr));
+			if (plte) {
+    			plte -= 4;
+    	    	chunkLength = ((*plte) << 24) | (*(plte + 1) << 16) | (*(plte + 2) << 8) | (*(plte + 3));
+				ptr += (4 + 4 + chunkLength + 4);
+			}
+	    	push_clut_palette();
+			findStr = "IHDR";
+	    	ihdr = (const unsigned char *)memmem(ptr, (size_t)(end - ptr), findStr, strlen(findStr));
+	    	if (ihdr) {
+	    		fwrite(ptr, 1, ihdr - 4 - ptr, fp);
+	    		mng_read_pushdata(m_mng, (void *)ptr, (ihdr - 4 - ptr), MNG_FALSE);
+	    	} else {
+	    		findStr = "IEND";
+		    	iend = (const unsigned char *)memmem(ptr, (size_t)(end - ptr), findStr, strlen(findStr));
+	    		iend -= 4;
+    	    	chunkLength = ((*iend) << 24) | (*(iend + 1) << 16) | (*(iend + 2) << 8) | (*(iend + 3));
+    	    	iend += 4 + 4 + chunkLength + 4;
+    	    	fwrite(ptr, 1, (iend - ptr), fp);
+	    		mng_read_pushdata(m_mng, (void *)ptr, (iend - ptr), MNG_FALSE);
+
+	    		findStr = "MEND";
+		    	mend = (const unsigned char *)memmem(ptr, (size_t)(end - ptr), findStr, strlen(findStr));
+		    	ptr = mend - 4;
+	    		fwrite(ptr, 1, end-ptr, fp);
+	    		mng_read_pushdata(m_mng, (void *)ptr, (end - ptr), MNG_FALSE);
+	    		fflush(fp);
+	    		fclose(fp);
+	    		break;
+	    	}
+		}
+    }
+
+    void decode(const SharedBuffer& data)
+    {
+        printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+    	MNGImageDecoder *decoder = static_cast<MNGImageDecoder*>(mng_get_userdata(m_mng));
+        unsigned i = 0;
+        if (g_isBmlDoc)
+        	arib_compliance(data);
+        else {
+        	mng_read_pushdata(m_mng, (void *)data.data(), data.size(), MNG_FALSE);
+//        	const char *ptr = data.data();
+//        	const char *end = ptr + data.size();
+//        	while(1) {
+//        		mng_read_pushdata(m_mng, (void *)ptr, 10, MNG_FALSE);
+//        		if (ptr + 10 > end)
+//        			break;
+//        		ptr += 10;
+//        	}
+//        	if (ptr != end)
+//        		mng_read_pushdata(m_mng, (void *)ptr, (end - ptr), MNG_FALSE);
+        }
+
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+		mng_read(m_mng);
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+		mng_iterate_chunks (m_mng, 0, mngIterateChunk);
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+		mng_display(m_mng);
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+		decoder->mngComplete();
+		for (i = 1; i < decoder->frameCount(); i++) {
+			mng_display_resume(m_mng);
+			decoder->mngComplete(i);
+		}
+	    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+ 	   mng_cleanup (&m_mng);
+ 	    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+    }
+
+    mng_handle mngPtr() const { return m_mng; }
+    bool hasAlpha() const { return m_hasAlpha; }
+
+    void setHasAlpha(bool b) { m_hasAlpha = b; }
+    void createBuffers(int width, int height)
+    {
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+    	m_width = width;
+    	m_height = height;
+    	m_canvasBuffer = new unsigned char[4 * width * height];
+    	if(m_hasAlpha)
+    		m_alphaBuffer = new unsigned char[width * height];
+    }
+    unsigned char * canvasBuffer() { return m_canvasBuffer; }
+    unsigned char * alphaBuffer() { return m_alphaBuffer; }
+    unsigned width() { return m_width; }
+    unsigned height() { return m_height; }
+
+private:
+    mng_handle m_mng;
+    bool m_hasAlpha;
+    unsigned char *m_canvasBuffer;
+    unsigned char *m_alphaBuffer;
+    unsigned m_width;
+    unsigned m_height;
+    int m_crcTableComputed;
+    /* Table of CRCs of all 8-bit messages. */
+    unsigned long m_crcTable[256];
+};
+
+MNGImageDecoder::MNGImageDecoder()
+: m_repetitionCount(cAnimationLoopOnce)
+, m_interFrameDelay(0)
+{
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+}
+
+MNGImageDecoder::~MNGImageDecoder()
+{
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+}
+
+bool MNGImageDecoder::isSizeAvailable()
+{
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+    if (!ImageDecoder::isSizeAvailable())
+         decode();
+
+    return ImageDecoder::isSizeAvailable();
+}
+
+void MNGImageDecoder::setFrameCount(unsigned frameCount)
+{
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+    m_frameBufferCache.resize(frameCount);
+}
+
+bool MNGImageDecoder::setSize(unsigned width, unsigned height)
+{
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+    if (!ImageDecoder::setSize(width, height))
+        return false;
+
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+    prepareScaleDataIfNecessary();
+    return true;
+}
+
+RGBA32Buffer* MNGImageDecoder::frameBufferAtIndex(size_t index)
+{
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+    return &m_frameBufferCache[index];
+}
+
+size_t MNGImageDecoder::frameCount()
+{
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+   	return m_frameBufferCache.size();
+}
+
+void MNGImageDecoder::headerAvailable(unsigned width, unsigned height)
+{
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+	mng_handle mng = m_reader->mngPtr();
+    if (!setSize(width, height)) {
+        return;
+    }
+
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+	if (mng_get_alphadepth(mng)) {
+	    m_reader->setHasAlpha(true);
+		mng_set_canvasstyle (mng, MNG_CANVAS_RGB8_A8);
+	} else {
+	    printf("NO ALPHA NO ALPHA NO ALPHA %d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+	    m_reader->setHasAlpha(false);
+		mng_set_canvasstyle (mng, MNG_CANVAS_RGB8);
+	}
+
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+	m_reader->createBuffers(width, height);
+}
+
+void* MNGImageDecoder::getCanvasLine(unsigned line)
+{
+	return m_reader->canvasBuffer() + 3 * line * m_reader->width();
+}
+
+void* MNGImageDecoder::getAlphaLine(unsigned line)
+{
+	return m_reader->alphaBuffer() + line * m_reader->width();
+}
+
+void MNGImageDecoder::mngComplete(unsigned frameIndex)
+{
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+	int x = 0, y = 0;
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+    int height = size().height();
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+    int width = size().width();
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+	unsigned char *ptr = m_reader->canvasBuffer();
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+	unsigned char *aptr = m_reader->alphaBuffer();
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+    RGBA32Buffer& buffer = m_frameBufferCache[frameIndex];
+    printf("%d %s %s Index %d buffer %p Cache Size %d\n", __LINE__, __FUNCTION__, __FILE__, frameIndex, &buffer, m_frameBufferCache.size());
+    printf("Status %d %d %s %s\n", buffer.status(), __LINE__, __FUNCTION__, __FILE__);
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+
+    if ((buffer.status() == RGBA32Buffer::FrameEmpty) && !initFrameBuffer(frameIndex))
+        return;
+
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+	for (y = 0 ; y < height; ++y) {
+		for (x = 0; x < width; ++x) {
+		    printf("x %d y %d Width %d Height %d %d %s %s\n", x, y, width, height, __LINE__, __FUNCTION__, __FILE__);
+			unsigned char* pixel = ptr + 3 * (y * width + x);
+		    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+		    if (m_reader->hasAlpha()) {
+		    	unsigned char* alpha = aptr + (y * width + x);
+		    	printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+		    	buffer.setRGBA(x, y, pixel[0], pixel[1], pixel[2], alpha[0]);
+		    } else {
+				buffer.setRGBA(x, y, pixel[0], pixel[1], pixel[2], 0xFF);
+		    }
+		    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+			buffer.setHasAlpha(m_reader->hasAlpha());
+		    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+		}
+	}
+
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+    buffer.setStatus(RGBA32Buffer::FrameComplete);
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+    buffer.setDuration(m_interFrameDelay);
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+}
+
+bool MNGImageDecoder::initFrameBuffer(unsigned frameIndex)
+{
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+    IntRect frameRect(0, 0, m_reader->width(), m_reader->height());
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+
+    if (frameRect.right() > size().width())
+        frameRect.setWidth(size().width() - 0);
+    if (frameRect.bottom() > size().height())
+        frameRect.setHeight(size().height() - 0);
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+
+    RGBA32Buffer* const buffer = &m_frameBufferCache[frameIndex];
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+    int left = upperBoundScaledX(frameRect.x());
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+    int right = lowerBoundScaledX(frameRect.right(), left);
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+    int top = upperBoundScaledY(frameRect.y());
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+    int bottom = lowerBoundScaledY(frameRect.bottom(), top);
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+    buffer->clear();
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+    buffer->setRect(IntRect(left, top, right - left, bottom - top));
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+    buffer->setSize(scaledSize().width(), scaledSize().height());
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+    buffer->setStatus(RGBA32Buffer::FramePartial);
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+    return true;
+}
+
+void MNGImageDecoder::decode()
+{
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+    if (failed())
+        return;
+
+    if (!m_reader)
+        m_reader.set(new MNGImageReader(this));
+
+    if (isAllDataReceived())
+    	m_reader->decode(*m_data);
+
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+//    if (failed() || isComplete())
+//        m_reader.clear();
+    printf("%d %s %s\n", __LINE__, __FUNCTION__, __FILE__);
+}
+
+} // namespace WebCore

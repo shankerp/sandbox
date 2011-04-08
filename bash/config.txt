@@ -1,0 +1,12 @@
+[set_1]
+path=c://dataset/set1
+v1= a.bin
+v2= b.bin
+
+[set_2]
+path=c://dataset/set2
+v1= xy.bin
+v2= abc.bin
+
+[set_3]
+v1 = value1

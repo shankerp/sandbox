@@ -1,0 +1,128 @@
+第3章 immoduleを切り替える
+
+§ポップアップメニューを作る
+ immoduleの切り替えはポップアップメニューによって行います。
+gtk_im_multicontext_append_menuitemsというAPIがあり、これを呼び出すと
+GtkMenuShellにGtkMenuItemを加えます。現在選択されているimmoduleには印が付きま
+す。このGtkMenuItemが選択されると、immoduleは切り替わります。
+gtk_im_multicontext_append_menuitemsを呼び出す位置には注意してください。早すぎ
+るとメニューの選択されている印が正しく設定されません。
+im0301.c-----------------------------------------------------------------------
+/******************************************************************************
+*                                                                             *
+* キー/マウス入力イベント                                                     *
+*                                                                             *
+******************************************************************************/
+static gboolean
+signal_key_press (GtkWidget *widget, GdkEventKey *event,
+                                                    GtkIMContext *im_context)
+{
+    if (gtk_im_context_filter_keypress (im_context, event))
+        return TRUE;
+    g_print ("key_press:keyval=%02X\n", event->keyval);
+    return TRUE;
+}
+
+
+static gboolean
+signal_key_release (GtkWidget *widget, GdkEventKey *event,
+                                                    GtkIMContext *im_context)
+{
+    if (gtk_im_context_filter_keypress (im_context, event))
+        return TRUE;
+    g_print ("key_release:keyval=%02X\n", event->keyval);
+    return TRUE;
+}
+
+
+static gboolean
+signal_button_press (GtkWidget *widget,
+                                GdkEventButton *event, GtkWidget *menu_popup)
+{
+    if (event->type == GDK_BUTTON_PRESS && event->button == 3)
+      {
+        /* 右クリック */
+        gtk_menu_popup (GTK_MENU (menu_popup),
+                        NULL, NULL, NULL, NULL, event->button, event->time);
+        return TRUE;
+      }
+    return FALSE;
+}
+
+
+/******************************************************************************
+*                                                                             *
+*                                                                             *
+*                                                                             *
+******************************************************************************/
+int
+main (int argc, char *argv[])
+{
+    GtkIMContext *im_context;
+    GtkWidget *preedit, *drawing, *window, *menu_popup;
+
+    /* 初期化 */
+    setlocale (LC_ALL, "");
+    gtk_set_locale ();
+    gtk_init (&argc, &argv);
+
+    im_context = gtk_im_multicontext_new ();
+    preedit = gtk_window_new (GTK_WINDOW_POPUP);
+    drawing = gtk_drawing_area_new ();
+    window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+    menu_popup = gtk_menu_new ();
+
+    /* preeditウインドウ */
+    gtk_window_move (GTK_WINDOW (preedit), 0, 0);
+    gtk_container_add (GTK_CONTAINER (preedit), drawing);
+    g_object_set_data (G_OBJECT (preedit), "user_data", window);
+
+    /* DrawingArea */
+    g_signal_connect (G_OBJECT (drawing), "expose-event",
+                                G_CALLBACK (signal_expose), im_context);
+    gtk_widget_show (drawing);
+
+    /* InputMethod */
+    g_signal_connect (im_context, "commit", G_CALLBACK (signal_commit), NULL);
+    g_signal_connect (im_context, "preedit_changed",
+                                G_CALLBACK (signal_preedit_changed), drawing);
+
+    /* ウインドウ */
+    g_signal_connect (G_OBJECT (window), "destroy",
+                                G_CALLBACK (gtk_main_quit), NULL);
+    g_signal_connect (G_OBJECT (window), "key-press-event",
+                                G_CALLBACK (signal_key_press), im_context);
+    g_signal_connect (G_OBJECT (window), "key-release-event",
+                                G_CALLBACK (signal_key_release), im_context);
+    g_signal_connect (G_OBJECT (window), "realize",
+                                G_CALLBACK (signal_realize), im_context);
+    g_signal_connect (G_OBJECT (window), "unrealize",
+                                G_CALLBACK (signal_unrealize), im_context);
+    g_signal_connect (G_OBJECT (window), "focus-in-event",
+                                G_CALLBACK (signal_focus_in), im_context);
+    g_signal_connect (G_OBJECT (window), "focus-out-event",
+                                G_CALLBACK (signal_focus_out), im_context);
+    g_signal_connect (G_OBJECT (window), "button-press-event",
+                                G_CALLBACK (signal_button_press), menu_popup);
+    gtk_widget_add_events (window, GDK_BUTTON_PRESS_MASK);
+
+    /* 表示 */
+    gtk_widget_show_all (window);
+    gtk_window_set_policy (GTK_WINDOW (window), TRUE, TRUE, TRUE);
+
+    /* メニュー */
+    gtk_im_multicontext_append_menuitems (GTK_IM_MULTICONTEXT (im_context),
+                                                GTK_MENU_SHELL (menu_popup));
+    gtk_main();
+
+    gtk_widget_destroy (menu_popup);
+    g_object_unref (im_context);
+
+    return 0;
+}
+-------------------------------------------------------------------------------
+ このimmoduleの切り替えは、そのプロセスだけで有効です。gtk_im_multicontext_new
+で複数のインスタンスを作った場合には、他のインスタンスも変更されますが、他のプ
+ロセスには影響しません。またそのプロセスの終了まで変更は有効です。
+ 今現在、どのimmoduleが選択されているのか知る方法は、このポップアップメニューだ
+けです。immoduleを切り替える方法もポップアップメニューだけです。

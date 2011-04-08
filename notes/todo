@@ -1,0 +1,131 @@
+Goals:
+------
+{
+- Should build webkit and its dependencies for the target
+- Should support single package building
+- Should support range (build packages from - to)
+- Should keep the shell in the original state after finish
+- Should support installing dependency packages for OS
+- Minimize redundant code
+- admin
+}
+
+Naming conventions:
+-------------------
+{
+- All camelCase
+- No underscore (I hate moving my fingers to that key)
+- Minimize special characters usage
+- {, } on its own line
+- no CAPITALS
+- names of variables should be logical and meaningful
+}
+
+Code conventions:
+-----------------
+{
+- export command should be avoided. Instead the function exportAndPrintOutput should be used. For global variables, export command can be used.
+- will extensively use functions.
+- should be relatively easy to modify when a package is updated.
+}
+
+Design:
+-------
+{
+stages:
+1. prepare build environment
+2. prepare packages and directories list
+3. prepare commands
+4. parse arguments
+6. start building the packages
+}
+
+Target modifications:
+---------------------
+{
+sdkHome
+installPath
+}
+
+Globals:
+--------
+{
+- exportedVariablesList
+- packageStartPoint
+- packageEndPoint
+}
+
+functions:
+----------
+{
+- parseArgs
+- exportAndPrintOutput
+- installBuildDeps
+- prepareEnvironment
+- preparePackagesList
+- prepareCommands
+ `decideQuirks
+- build 
+- dumpPackagesNumber
+XXXXXXXXXXXXXX- packageDir XXXXXXXXXXXXXXX
+XXXXXXXXXXXXXX- packageName XXXXXXXXXXXXXXX
+}
+
+parseArgs:
+-----------
+{
+- parse arguments for range, deps, quickBuild, quicklyBuildWebKit, queryPackageNumbers, help, reset
+
+- deps parsing:
+    + argument parse format --> --deps|-deps|deps
+    + call installBuildDeps
+
+- range parsing:
+    + argument parse format --> --range|-range|range
+    + dump the packages name and its sequence number
+    + get range from command line
+    + range format --> start [-] [end]
+    + start is mandatory
+    + if input is like --> start (Ex: 5), then build only the mentioned package. (ie build only the 5th one)
+    + if input is like --> start- (Ex: 5- ), then 'to' is till end. (ie build all the packages from the 5th one)
+    + if input is like --> start-end (Ex: 5-10), then build all the packages from 'start' to 'end' both inclusive. (ie build packages 5, 6, 7, 8, 9, 10)
+
+- quickBuild parsing:
+    + argument parse format --> packageNumber
+    + Quickly build only the package specified by the packageNumber
+
+- quicklyBuildWebKit parsing:
+    + argument parse format --> w
+    + Quickly build WebKit!
+
+- queryPackageNumbers parsing:
+    + argument parse format --> q
+    + Dump the packages name and its sequence number
+
+- help parsing:
+    + argument parse format --> --help|-help|help|--h|-h|h|?
+    + Give information.
+
+- reset parsing:
+    + argument parse format --> --reset|-reset|reset
+    + Should unexport all variables(if any) exported by previous script execution.
+
+- store relevant information for future use
+    + range needs to be stored. By default have a start (packageStartPoint) and end (packageEndPoint) number from 0 to max. modify this if range is specified.
+    + quickBuild needs to be stored. Assign start and end = packageNumer. 
+    + quickBuildWebKit needs to be stored. Assign start and end = webkit package number.
+}
+
+exportAndPrintOutput:
+---------------------
+{
+- takes two arguments.
+- export $1=$2
+- save $1 in exportedVariablesList
+}
+
+installBuildDeps:
+-----------------
+{
+- execute apt-get install to install dependencies for ubuntu.
+}

@@ -1,0 +1,95 @@
+第4章 その他
+
+§gtk_im_context_reset
+ このAPIを呼び出すとimmoduleを初期化することができます。具体的に、どのような動
+作になるのかはimmoduleに依ります。一般的にはpreeditにある文字列がすべて削除され
+ます。現在の入力モードは変化しないと考えられます。例えばpreeditが「イワモト」で
+入力モードがローマ字カナならば、gtk_im_context_resetによってpreeditの「イワモ
+ト」は無くなりますが入力モードはローマ字カナのままです。
+ 一般的にはこのAPIはカーソルが移動したときや状況が変化したときになどに呼び出し
+ます。それはそのアプリケーションが何をするかに依ります。GtkEntryでは例えばマウ
+スの左ボタンを押したときに、このAPIを呼びます。アプリケーションは不要ならばこれ
+を呼ぶ必要はありません。
+
+
+
+§retrieve-surrounding
+ 現在、retrieve-surroundingシグナルを発生させるimmoduleはありません。具体的な
+ソースコードもなく、また仕様も不明瞭です。ここに書いたことはGTK+-2.2の少ない実
+装から私が推測したものです。
+ 現在のGTK+ 2.2 API Referenceにはタイ語が挙げられています。タイ語では入力のため
+にカーソルの周辺の文字列が必要なのかもしれません。(私はタイ語について知らないの
+でわかりません)
+ retrieve-surroundingシグナルはimmoduleがカーソルの周辺の文字が必要なときに発生
+します。このシグナルが発生したならばアプリケーションは
+gtk_im_context_set_surroundingを呼び出します。
+ immoduleによっては、入力文字を決めるために文字が挿入される位置の前後の文字が必
+要な場合があるかもしれません。また周囲の文字を知ることで、変換候補の選定をより
+適切にすることができるかもしれません。
+ 例えば、日本語では「tensai」と入力し、それを変換する場合、「テンサイ」、「てん
+さい」、「天才」、「天災」、「転載」などが考えられます。この時、カーソルの周囲
+に「岩本一樹」という文字列があったならば、「天才」を第一の変換の候補にすること
+ができます。もちろん、周囲の文字列が得られなくても変換候補の決定は可能です。そ
+の場合にはimmoduleは別の基準に基づいて変換候補を選択するでしょう(例えば過去の変
+換候補の選択回数とか)。
+ GtkEntryの実装は下記のようになっています。
+-------------------------------------------------------------------------------
+static gboolean
+gtk_entry_retrieve_surrounding_cb (GtkIMContext *context,
+                               GtkEntry     *entry)
+{
+  gtk_im_context_set_surrounding (context,
+                                  entry->text,
+                                  entry->n_bytes,
+                                  g_utf8_offset_to_pointer (entry->text, entry->current_pos) - entry->text);
+
+  return TRUE;
+}
+-------------------------------------------------------------------------------
+ gtk_im_context_set_surroundingの引数はバイト単位です。例えば「イワモトカスキ」
+という文字列があり、「ス」と「キ」の間にカーソルがあるならば
+gtk_im_context_set_surrounding (context, "イワモトカスキ", -1, 18);
+となります。
+
+
+
+§delete-surrounding
+ 現在、delete-surroundingシグナルを発生させるimmoduleはありません。具体的なソー
+スコードもなく、また仕様も不明瞭です。ここに書いたことはGTK+の少ない実装から私
+が推測したものです。
+ delete-surroundingシグナルはカーソルの周囲の文字を削除する必要があるときに発生
+します。
+ 現在のGTK+ 2.2 API Referenceにはこのシグナルは下記のように書かれています。
+gboolean    user_function                  (GtkIMContext *imcontext,
+                                            gint arg1,
+                                            gint arg2,
+                                            gpointer user_data);
+もっと適切に書くならば下記のようになります。
+gboolean    user_function                  (GtkIMContext *imcontext,
+                                            gint offset,
+                                            gint n_chars,
+                                            gpointer user_data);
+offsetとn_charsはバイト単位ではなく文字単位です。
+ これを強引に日本語に適応するならば、例えば既に「イワモトカスキ」という文字列が
+あり、カーソルが「ス」と「キ」の間にあり、「゛」が入力されたならば、offsetは
+-1、n_charsは1になります。そしてcommitシグナルで「ズ」が入力されます。(immodule
+は「イワモトカスキ」という文字列があることとカーソルの位置は
+retrieve-surroundingシグナルで知ります)
+ これを強引にアルファベットに適応するならば、既に「A」という文字があるときに
+「^」が入力されたならば、「A」が削除され代わりに「A」の上に「^」が付いた文字が
+commitされます。
+ GtkEntryの実装は下記のようになっています。
+-------------------------------------------------------------------------------
+static gboolean
+gtk_entry_delete_surrounding_cb (GtkIMContext *slave,
+                                 gint          offset,
+                                 gint          n_chars,
+                                 GtkEntry     *entry)
+{
+  gtk_editable_delete_text (GTK_EDITABLE (entry),
+                            entry->current_pos + offset,
+                            entry->current_pos + offset + n_chars);
+
+  return TRUE;
+}
+-------------------------------------------------------------------------------

@@ -1,0 +1,536 @@
+第1章 キー入力の基礎
+
+§キー入力イベント
+ im0101.cはキー入力のイベントをフックして、その内容を表示するプログラムです。
+im0101.c-----------------------------------------------------------------------
+#include <locale.h>
+#include <gtk/gtk.h>
+
+
+/******************************************************************************
+*                                                                             *
+* キー入力イベント                                                            *
+*                                                                             *
+******************************************************************************/
+static gboolean
+signal_key_press (GtkWidget *widget, GdkEventKey *event, gpointer user_data)
+{
+    gint i;
+
+    g_print ("key_press:keyval=%02X", event->keyval);
+    if (event->state & GDK_SHIFT_MASK)
+        g_print (" Shift");
+    if (event->state & GDK_CONTROL_MASK)
+        g_print (" Ctrl");
+    if (event->state & GDK_MOD1_MASK)
+        g_print (" Alt");
+    g_print (" length=%d", event->length);
+    if (event->length > 0)
+      {
+        for (i = 0; event->string[i] != '\0'; i++)
+            g_print (" %02X", event->string[i]);
+        g_print (" string=%s", event->string);
+      }
+    g_print ("\n");
+
+    return TRUE;
+}
+
+
+/******************************************************************************
+*                                                                             *
+*                                                                             *
+*                                                                             *
+******************************************************************************/
+int
+main (int argc, char *argv[])
+{
+    GtkWidget *window;
+
+    /* 初期化 */
+    setlocale (LC_ALL, "");
+    gtk_set_locale ();
+    gtk_init (&argc, &argv);
+
+    /* ウインドウ */
+    window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+    g_signal_connect (G_OBJECT (window), "destroy",
+                                            G_CALLBACK (gtk_main_quit), NULL);
+    g_signal_connect (G_OBJECT (window), "key-press-event",
+                                        G_CALLBACK (signal_key_press), NULL);
+
+    /* 表示 */
+    gtk_widget_show_all (window);
+    gtk_window_set_policy (GTK_WINDOW (window), TRUE, TRUE, TRUE);
+
+    gtk_main();
+
+    return 0;
+}
+-------------------------------------------------------------------------------
+ もしもキー入力を必要としているならば、これで十分です。GdkEventKey構造体の
+keyvalメンバの値を参照すれば、どのキーが押されたのかわかります。同様に
+key-press-eventイベントではどのキーが離されたのかわかります。
+ しかし文字または文字列が必要ならば、この方法はGTK+-2.0では不適切です。また
+GdkEventKey構造体のstringメンバは信頼できません。stringメンバはUTF-8であるとは
+限りません。その環境で使われている文字符号化方式です。
+ GTK+-2.0ではGtkIMContextという仕組みがあります。文字の入力にはこれを利用する必
+要があります。これは環境に依存する文字入力をUFT-8に変換するだけではありません。
+GtkIMContextを利用すれば、入力する文字や入力方法(immodule)を変えることができま
+す。
+
+
+
+§GtkIMContextを使う
+ im0102.cはim0101.cを改良してGtkIMContextを利用するようにしたものです。
+im0102.c-----------------------------------------------------------------------
+#include <locale.h>
+#include <gtk/gtk.h>
+
+
+/******************************************************************************
+*                                                                             *
+*                                                                             *
+*                                                                             *
+******************************************************************************/
+static void
+signal_realize (GtkWidget *widget, GtkIMContext *im_context)
+{
+    gtk_im_context_set_client_window (im_context, widget->window);
+}
+
+
+static void
+signal_unrealize (GtkWidget *widget, GtkIMContext *im_context)
+{
+    gtk_im_context_set_client_window (im_context, NULL);
+}
+
+
+static gboolean
+signal_focus_in (GtkWidget *widget, GdkEventFocus *event,
+                                                    GtkIMContext *im_context)
+{
+    GTK_WIDGET_SET_FLAGS (widget, GTK_HAS_FOCUS);
+    gtk_im_context_focus_in (im_context);
+    return FALSE;
+}
+
+
+static gboolean
+signal_focus_out (GtkWidget *widget, GdkEventFocus *event,
+                                                    GtkIMContext *im_context)
+{
+    GTK_WIDGET_UNSET_FLAGS (widget, GTK_HAS_FOCUS);
+    gtk_im_context_focus_out (im_context);
+    return FALSE;
+}
+
+
+/******************************************************************************
+*                                                                             *
+* キー入力イベント                                                            *
+*                                                                             *
+******************************************************************************/
+static gboolean
+signal_key_press (GtkWidget *widget, GdkEventKey *event,
+                                                    GtkIMContext *im_context)
+{
+    if (gtk_im_context_filter_keypress (im_context, event))
+        return TRUE;
+    g_print ("key_press:keyval=%02X\n", event->keyval);
+    return TRUE;
+}
+
+
+static gboolean
+signal_key_release (GtkWidget *widget, GdkEventKey *event,
+                                                    GtkIMContext *im_context)
+{
+    if (gtk_im_context_filter_keypress (im_context, event))
+        return TRUE;
+    g_print ("key_release:keyval=%02X\n", event->keyval);
+    return TRUE;
+}
+
+
+/******************************************************************************
+*                                                                             *
+* GtkIMContext                                                                *
+*                                                                             *
+******************************************************************************/
+static void
+signal_commit (GtkIMContext *im_context, gchar *arg1, gpointer user_data)
+{
+    g_print ("commit:%d,%s\n", strlen (arg1), arg1);
+}
+
+
+/******************************************************************************
+*                                                                             *
+*                                                                             *
+*                                                                             *
+******************************************************************************/
+int
+main (int argc, char *argv[])
+{
+    GtkIMContext *im_context;
+    GtkWidget *window;
+
+    /* 初期化 */
+    setlocale (LC_ALL, "");
+    gtk_set_locale ();
+    gtk_init (&argc, &argv);
+
+    /* InputMethod */
+    im_context = gtk_im_multicontext_new ();
+    g_signal_connect (im_context, "commit", G_CALLBACK (signal_commit), NULL);
+
+    /* ウインドウ */
+    window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+    g_signal_connect (G_OBJECT (window), "destroy",
+                                G_CALLBACK (gtk_main_quit), NULL);
+    g_signal_connect (G_OBJECT (window), "key-press-event",
+                                G_CALLBACK (signal_key_press), im_context);
+    g_signal_connect (G_OBJECT (window), "key-release-event",
+                                G_CALLBACK (signal_key_release), im_context);
+    g_signal_connect (G_OBJECT (window), "realize",
+                                G_CALLBACK (signal_realize), im_context);
+    g_signal_connect (G_OBJECT (window), "unrealize",
+                                G_CALLBACK (signal_unrealize), im_context);
+    g_signal_connect (G_OBJECT (window), "focus-in-event",
+                                G_CALLBACK (signal_focus_in), im_context);
+    g_signal_connect (G_OBJECT (window), "focus-out-event",
+                                G_CALLBACK (signal_focus_out), im_context);
+
+    /* 表示 */
+    gtk_widget_show_all (window);
+    gtk_window_set_policy (GTK_WINDOW (window), TRUE, TRUE, TRUE);
+
+    gtk_main();
+
+    g_object_unref (im_context);
+
+    return 0;
+}
+-------------------------------------------------------------------------------
+ まず、realize/realize/focus-in-event/focus-out-eventへの対応が加わります。これ
+はGtkIMContextを利用する上で必要です。またほとんどの場合、このようになると思い
+ます。
+ key-press-eventとkey-release-eventにはgtk_im_context_filter_keypressが加わりま
+した。キーイベントをこのAPIがTRUEを返したならば、そのキーイベントがGtkIMContext
+で処理されました。そうでない場合には処理されませんでした。ここでTRUEを返したな
+らばこのイベントをTRUEで終了する必要があります。そのキー入力はGtkIMContextで使
+われているので、アプリケーションがそのキー入力を使ってはいけません。
+gtk_im_context_filter_keypressの結果、commitシグナルが発生する場合があります。
+commitシグナルでは入力が確定した文字列が引数として渡されてきます。単純な文字の
+入力、例えばキーボードの「A」を押したときに文字「a」が入力されるという場合でも
+commitシグナル(引数は「a」)が発生します。
+ 文字の入力はcommitシグナルに限ります。GdkEventKey構造体のstringメンバに文字が
+あるにもかかわらず、commitシグナルが発生せずにgtk_im_context_filter_keypressは
+TRUEを返すかもしれません。だからといってstringメンバの値を文字入力として扱って
+はいけません。stringメンバに文字がありgtk_im_context_filter_keypressがFALSEを返
+したとしても、stringメンバの値を文字入力として扱ってはいけません。FALSEが返って
+きたときには、その値をカーソルの移動などの文字入力以外の処理に使うことはできま
+す。またstringメンバに文字がないときにgtk_im_context_filter_keypressを呼び出し
+てもcommitシグナルが発生することがあります。
+ 例えばキーボードのAを押したとき、gtk_im_context_filter_keypressを呼ぶことで
+
+・TRUEが帰りcommitシグナルが発生し文字列が入力される
+・TRUEが帰るがcommitシグナルは発生しない
+・FALSEが帰りcommitシグナルは発生しない
+
+が考えられます。
+ リターンやタブなどはcommitシグナルの対象となる文字には含まれません。したがって
+リターンやタブなどを入力する場合には、gtk_im_context_filter_keypressの後に独自
+に処理する必要があります。immoduleによってはリターンやタブを使う場合、即ちリ
+ターンやタブキーに対してgtk_im_context_filter_keypressがTRUEを返す場合がありま
+す。やはりgtk_im_context_filter_keypressの返り値がTRUEのときには、処理をしては
+いけません。
+ gtk_im_context_filter_keypressよりも先にキー入力を処理することは、相当慎重に行
+なう必要があります。アプリケーション固有のショートカットキーなどをキー入力より
+も先に処理してしまうとimmoduleがそのキー入力を必要としているにも関わらず、
+immoduleがそのキー入力を得ることができずに、文字を入力できなくなってしまうかも
+しれません。
+-------------------------------------------------------------------------------
+static gboolean
+signal_key_press (GtkWidget *widget, GdkEventKey *event,
+                                                    GtkIMContext *im_context)
+{
+    static gboolean ctrl_x = FALSE;
+
+    if ((event->keyval == GDK_X || event->keyval == GDK_x)
+                                        && (event->state & GDK_CONTROL_MASK))
+      {
+        ctrl_x = TRUE;
+        return TRUE;
+      }
+    if (ctrl_x)
+      {
+        ctrl_x = FALSE;
+        if (event->keyval == GDK_2)
+          {
+            /* ウインドウを分割するなどの処理 */
+            return TRUE;
+          }
+      }
+    if (gtk_im_context_filter_keypress (im_context, event))
+        return TRUE;
+    /* 他のキー入力処理 */
+    return TRUE;
+}
+-------------------------------------------------------------------------------
+ Ctrl+Xに続けて2を押したとき、ウインドウを分割するとします。その処理を上記のよ
+うに行なうのは問題があります。これではCtrl+Xがimmoduleに渡ることがありません。
+-------------------------------------------------------------------------------
+static gboolean
+signal_key_press (GtkWidget *widget, GdkEventKey *event,
+                                                    GtkIMContext *im_context)
+{
+    static gboolean ctrl_x = FALSE;
+
+    if (!ctrl_x && (event->keyval == GDK_X || event->keyval == GDK_x)
+                                        && (event->state & GDK_CONTROL_MASK))
+      {
+        ctrl_x = TRUE;
+        return TRUE;
+      }
+    if (ctrl_x)
+      {
+        ctrl_x = FALSE;
+        if (event->keyval == GDK_2)
+          {
+            /* ウインドウを分割するなどの処理 */
+            return TRUE;
+          }
+      }
+    if (gtk_im_context_filter_keypress (im_context, event))
+        return TRUE;
+    /* 他のキー入力処理 */
+    return TRUE;
+}
+-------------------------------------------------------------------------------
+ 最初のif文にctrl_xを入れ、Ctrl+Xに続けてCtrl+Xがもう一度押されたときには、
+Ctrl+Xをimmoduleに渡すことにしました。これならばCtrl+Xをimmoduleに渡すことはで
+きます。しかしこれでは同じ操作をするのに他のアプリケーションではCtrl+Xを1回押す
+だけで済むのに対して、このアプリケーションではCtrl+Xを2回押すことになります。
+ immoduleが提供する入力方法は、その入力対象の文字の入力方法の歴史と伝統に由来し
+ます(言うまでもなくGTK+の歴史よりもずっと長い、そしてより一般に浸透している)。
+ユーザーは現在の入力方法に慣れています。そのアプリケーションだけである入力が異
+なるというのは、たいへん不便なことです。
+-------------------------------------------------------------------------------
+static gboolean
+signal_key_press (GtkWidget *widget, GdkEventKey *event,
+                                                    GtkIMContext *im_context)
+{
+    static gboolean ctrl_x = FALSE;
+
+    if (ctrl_x)
+      {
+        ctrl_x = FALSE;
+        if (event->keyval == GDK_2)
+          {
+            /* ウィンドウを分割するなどの処理 */
+            return TRUE;
+          }
+      }
+    if (gtk_im_context_filter_keypress (im_context, event))
+        return TRUE;
+    if ((event->keyval == GDK_X || event->keyval == GDK_x)
+                                        && (event->state & GDK_CONTROL_MASK))
+      {
+        ctrl_x = TRUE;
+        return TRUE;
+      }
+    /* 他のキー入力処理 */
+    return TRUE;
+}
+-------------------------------------------------------------------------------
+ Ctrl+Xの処理をgtk_im_context_filter_keypressよりも後にしました。これならば
+Ctrl+Xはimmoduleに渡されます。immoduleがCtrl+Xを処理しなかったときだけ、アプリ
+ケーションがCtrl+Xを処理できます。
+ immoduleが常にCtrl+Xを処理してしまう(gtk_im_context_filter_keypressが常にTRUE
+を返す)かもしれません。しかしimmoduleは切り替えることができるのを思い出して下さ
+い。あるimmoduleではCtrl+Xを入力できなくても、immoduleを切り替えれば済みます。
+(アプリケーションが常にキーを処理してしまうのはimmoduleにとってどうしようもない
+けど、immoduleが常にキーを処理してしまうのはimmoduleを切り替えることで対処可能)
+-------------------------------------------------------------------------------
+static gboolean
+signal_key_press (GtkWidget *widget, GdkEventKey *event,
+                                                    GtkIMContext *im_context)
+{
+    static gboolean edit = FALSE;
+
+    if (!edit)
+      {
+        switch (event->keyval)
+          {
+            case GDK_a:
+            case GDK_i:
+                edit = TRUE;
+                break;
+            case GDK_h:
+            case GDK_j:
+            case GDK_k:
+            case GDK_l:
+            /* カーソルの移動などの処理 */
+                return TRUE;
+          }
+        return TRUE;
+      }
+    if (gtk_im_context_filter_keypress (im_context, event))
+        return TRUE;
+    if (event->keyval == GDK_Escape
+            || (event->keyval == GDK_c && (event->state & GDK_CONTROL_MASK)))
+      {
+        edit = FALSE;
+        return TRUE;
+      }
+    /* 他のキー入力処理 */
+    return TRUE;
+}
+-------------------------------------------------------------------------------
+ もしもviのキー操作を実装するならば、上記のようになると思います。実際にはこの例
+よりも複雑になるでしょう。構造が複雑になった場合、その設計には十分な注意が必要
+です。設計を間違うと、ユーザーはあるimmoduleのある入力が全くできなくなったり、
+標準的ではない入力方法を強いられることになります。
+ gtk_im_context_filter_keypressとimmoduleの関係がよくわからないならば、
+gtk_im_context_filter_keypressの前にキー入力を処理するような、設計は避けるべき
+です。キーイベントは直ちにgtk_im_context_filter_keypressに渡し、FALSEが返ってき
+た場合だけ、アプリケーション独自のキー入力の処理を行なうという単純な構造なら
+ば、間違いはありません。
+ まとめると下記のようになります。
+
+・文字の入力はすべてcommitシグナルで処理する
+・gtk_im_context_filter_keypressがTRUEならば直ちにTRUEで終了
+・gtk_im_context_filter_keypressがFALSEならば文字の入力以外の処理が可能
+・gtk_im_context_filter_keypressよりも先に処理する場合は慎重に行なう必要がある
+
+
+
+§キーボードアクセラレータの罠
+ im0103.cはメニューとキーボードアクセラレータの例です。GTK+のアプリケーションで
+は、こういう構造は多いと思われます。Ctrl+Qを押したとき、キーボードアクセラレー
+タによってメニューのExitを選択したときと同じ動作になります。
+im0103.c-----------------------------------------------------------------------
+#include <locale.h>
+#include <gtk/gtk.h>
+
+
+/******************************************************************************
+*                                                                             *
+* メニュー                                                                    *
+*                                                                             *
+******************************************************************************/
+void
+menu_activate (GtkMenuItem *menuitem, gpointer user_data)
+{
+	g_print ("menu exit\n");
+}
+
+
+/******************************************************************************
+*                                                                             *
+* キー入力イベント                                                            *
+*                                                                             *
+******************************************************************************/
+static gboolean
+signal_key_press (GtkWidget *widget, GdkEventKey *event, gpointer user_data)
+{
+	gint i;
+
+	g_print ("key_press:keyval=%02X", event->keyval);
+	if (event->state & GDK_SHIFT_MASK)
+		g_print (" Shift");
+	if (event->state & GDK_CONTROL_MASK)
+		g_print (" Ctrl");
+	if (event->state & GDK_MOD1_MASK)
+		g_print (" Alt");
+	g_print (" length=%d", event->length);
+	if (event->length > 0)
+	  {
+		for (i = 0; event->string[i] != '\0'; i++)
+			g_print (" %02X", event->string[i]);
+		g_print (" string=%s", event->string);
+	  }
+	g_print ("\n");
+
+	return TRUE;
+}
+
+
+/******************************************************************************
+*                                                                             *
+*                                                                             *
+*                                                                             *
+******************************************************************************/
+int
+main (int argc, char *argv[])
+{
+	guint key;
+	GdkModifierType mods;
+	GtkAccelGroup *accel_group;
+	GtkWidget *window, *drawing_area, *vbox;
+	GtkWidget *menu_bar, *menu_shell, *menu_item;
+
+	/* 初期化 */
+	setlocale (LC_ALL, "");
+	gtk_set_locale ();
+	gtk_init (&argc, &argv);
+
+	/* ウインドウ */
+	window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+	g_signal_connect (G_OBJECT (window), "destroy",
+											G_CALLBACK (gtk_main_quit), NULL);
+
+	/* DrawingArea */
+	drawing_area = gtk_drawing_area_new ();
+	g_signal_connect (G_OBJECT (drawing_area), "key-press-event",
+										G_CALLBACK (signal_key_press), NULL);
+	gtk_widget_add_events (drawing_area,
+									GDK_KEY_PRESS_MASK | GDK_KEY_RELEASE_MASK);
+	GTK_WIDGET_SET_FLAGS (drawing_area, GTK_CAN_FOCUS);
+
+	/* メニュー */
+	accel_group = gtk_accel_group_new ();
+	menu_item = gtk_menu_item_new_with_mnemonic ("E_xit");
+	gtk_accelerator_parse ("<Control>q", &key, &mods);
+	gtk_widget_add_accelerator (menu_item, "activate", accel_group, key, mods,
+										GTK_ACCEL_VISIBLE | GTK_ACCEL_LOCKED);
+	g_signal_connect (G_OBJECT (menu_item), "activate",
+										G_CALLBACK (menu_activate), NULL);
+	menu_shell = gtk_menu_new ();
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu_shell), menu_item);
+	menu_item = gtk_menu_item_new_with_mnemonic ("_File");
+	gtk_menu_item_set_submenu (GTK_MENU_ITEM (menu_item), menu_shell);
+	menu_bar = gtk_menu_bar_new ();
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu_bar), menu_item);
+	gtk_window_add_accel_group (GTK_WINDOW (window), accel_group);
+
+	/* ボックス */
+	vbox = gtk_vbox_new (FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (vbox), menu_bar, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (vbox), drawing_area, TRUE, TRUE, 0);
+	gtk_container_add (GTK_CONTAINER (window), vbox);
+
+	/* 表示 */
+	gtk_widget_show_all (window);
+	gtk_window_set_policy (GTK_WINDOW (window), TRUE, TRUE, TRUE);
+
+	gtk_main();
+
+	return 0;
+}
+-------------------------------------------------------------------------------
+ これを実行するとわかると思うのですが、Ctrl+Qを押したときにはDrawingAreaのキー
+イベントが発生しません。gtk_im_context_filter_keypressをキーイベントで呼び出す
+ようにしても、キーボードアクセラレータで指定したキーは先に処理されてしまい、
+immoduleに渡ることは決してありません。即ち、上記の
+gtk_im_context_filter_keypressの前にキーを処理してしまう悪い例と同じことになっ
+てしまいます。
+ キーボードアクセラレータを普通に使っただけで、immoduleに関する問題を発生させて
+しまいます。自分でgtk_im_context_filter_keypressを扱うならば、その扱いに気を配
+ることは考えられますが、キーボードアクセラレータを使うだけでimmoduleのことまで
+気付くことができるか疑問です。
+ 現状ではimmoduleを使う場合にはキーボードアクセラレータを使わないのが方が良いで
+しょう。
