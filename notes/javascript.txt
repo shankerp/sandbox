@@ -1,0 +1,26 @@
+Overview:
+- object-based.
+- ECMAScript Object is a collection of properties each with zero or more
+  attributes that determine how each property can be used.
+- Properties are containers that hold other objects, primitive values or
+  functions.
+- Primitive Value --> Undefined, Null, Boolean, Number, String.
+- Object --> built-in object, function
+- method --> a function that is associated with an object via a property
+- Built-in objects --> Object object, Function object, Array object, String
+  object, Boolean object, Number object, Math object, Date object, RegExp
+  object, JSON object, Error, EvalError, RangeError, ReferenceError,
+  SyntaxError, TypeError, URIError
+- operators --> unary, multiplicative, additive, bitwise shift, relational,
+  equality, binary bitwise, binary logical, assignment, comma
+
+ Objects:
+ - created via constructors. (create and executes the initialization code)
+ - Each constructor has a property named "prototype" for prototype-based
+   inheritance and shared properties.
+ - Every object created by a constructor has a reference to its constructor's
+   prototype.
+ - A prototype may have a non-null implicit reference to its prototype and so
+   on; this is called prototype chain.
+ - A reference to a property of an object is to the property of that name in 
+   the first object in the prototype chain that contains a property of that name.

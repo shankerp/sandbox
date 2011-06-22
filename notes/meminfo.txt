@@ -1,0 +1,38 @@
+webkit_init() webkitprivate.cpp:248 --> JSC::initializeThreading() --> initializeThreadingOnce()
+    atomicallyInitializedStaticMutex initializeThreading() ThreadingPthreads.cpp
+    threadMapMutex initializeThreading() ThreadingPthreads.cpp
+    initializeMainThread --> mainThreadFunctionQueueMutex
+    initializeUString --> UStringImpl::empty()
+    initializeUString --> UStringImpl::s_nullRep
+    initializeUString --> UStringImpl::s_nullUString
+    JSGlobalData::storeVPtrs() --> JSArray::createStructure --> Structure::create
+    JSGlobalData::storeVPtrs() --> new JSArray::JSArray --> fastZeroedMalloc --> m_storage
+    JSGlobalData::storeVPtrs() --> new JSByteArray --> JSArray::createStructure --> Structure::create
+    JSGlobalData::storeVPtrs() --> new (storage)JSFunction --> JSArray::createStructure --> Structure::create
+    JSGlobalData::storeVPtrs() --> new (storage)JSFunction --> m_executable(adoptRef(new VPtrHackExecutable()))
+    atomicCanonicalTextEncodingName --> buildBaseTextCodecMaps --> new TextCodecMap
+    atomicCanonicalTextEncodingName --> buildBaseTextCodecMaps --> new TextEncodingMap
+    atomicCanonicalTextEncodingName --> buildBaseTextCodecMaps --> TextCodecLatin1::registerEncodingNames --> addToTextEncodingNameMap --> HashMap add
+    atomicCanonicalTextEncodingName --> buildBaseTextCodecMaps --> TextCodecLatin1::registerCodecs --> addToTextCodecMap --> HashMap add
+    atomicCanonicalTextEncodingName --> buildBaseTextCodecMaps --> TextCodecUTF16::registerEncodingNames --> addToTextEncodingNameMap --> HashMap add
+    atomicCanonicalTextEncodingName --> encodingRegistryMutex()
+    webkit_set_cache_model --> cache() --> new Cache
+    webkit_set_cache_model --> cache() --> new Cache --> new Loader (m_loader) --> Host::create
+    webkit_set_cache_model --> pageCache() --> new pageCache
+    webkit_set_web_database_directory_path --> String::fromUTF8 --> UTF8Encoding().decode --> TextEncoding::decode --> newTextCodec --> newTextCodecICU
+    webkit_set_web_database_directory_path --> String::fromUTF8 --> UTF8Encoding().decode --> TextEncoding::decode --> TextCodecICU::decode --> createICUConverter --> cachedConverterICU --> threadGlobalData().cachedConverterICU().converter --> new ThreadSpecific<ThreadGlobalData>
+    webkit_set_web_database_directory_path --> String::fromUTF8 --> UTF8Encoding().decode --> TextEncoding::decode --> TextCodecICU::decode --> createICUConverter --> cachedConverterICU --> threadGlobalData().cachedConverterICU().converter --> return **ThreadGlobalData::staticData
+    webkit_set_web_database_directory_path --> String::fromUTF8 --> UTF8Encoding().decode --> TextEncoding::decode --> TextCodecICU::decode --> createICUConverter --> cachedConverterICU --> threadGlobalData().cachedConverterICU().converter --> return **ThreadGlobalData::staticData
+    webkit_set_web_database_directory_path --> String::fromUTF8 --> UTF8Encoding().decode --> TextEncoding::decode --> TextCodecICU::decode --> createICUConverter --> cachedConverterICU --> threadGlobalData().cachedConverterICU().converter --> return **ThreadGlobalData::staticData --> ThreadGlobalData::ThreadGlobalData m_cachedConverterICU
+    webkit_set_web_database_directory_path --> String::fromUTF8 --> UTF8Encoding().decode --> TextEncoding::decode --> TextCodecICU::decode --> createICUConverter --> cachedConverterICU --> threadGlobalData().cachedConverterICU().converter --> return **ThreadGlobalData::staticData --> ThreadGlobalData::ThreadGlobalData m_cachedConverterICU
+    webkit_set_web_database_directory_path --> String::fromUTF8 --> UTF8Encoding().decode --> TextEncoding::decode --> TextCodecICU::decode --> createICUConverter --> cachedConverterICU --> threadGlobalData().cachedConverterICU().converter --> return **ThreadGlobalData::staticData --> ThreadGlobalData::ThreadGlobalData atomicString for EventNames (135 times)
+    webkit_set_web_database_directory_path --> String::fromUTF8 --> UTF8Encoding().decode --> TextEncoding::decode --> TextCodecICU::decode --> createICUConverter --> cachedConverterICU --> threadGlobalData().cachedConverterICU().converter --> return **ThreadGlobalData::staticData --> ThreadGlobalData::ThreadGlobalData
+    webkit_set_web_database_directory_path --> String::fromUTF8 --> UTF8Encoding().decode --> TextEncoding::decode --> TextCodecICU::decode --> createICUConverter --> cachedConverterICU --> threadGlobalData().cachedConverterICU().converter --> return **ThreadGlobalData::staticData --> ThreadGlobalData::ThreadGlobalData --> ThreadTimers --> mainThreadSharedTimer --> new MainThreadSharedTimer
+    webkit_set_web_database_directory_path --> String::fromUTF8 --> UTF8Encoding().decode --> TextEncoding::decode --> TextCodecICU::decode --> createICUConverter --> cachedConverterICU --> threadGlobalData().cachedConverterICU().converter --> return **ThreadGlobalData::staticData --> ThreadGlobalData::ThreadGlobalData
+    webkit_set_web_database_directory_path --> String::fromUTF8 --> UTF8Encoding().decode --> TextEncoding::decode --> TextCodecICU::decode --> createICUConverter --> cachedConverterICU --> threadGlobalData().cachedConverterICU().converter --> return **ThreadGlobalData::staticData --> ThreadGlobalData::ThreadGlobalData --> StringImpl::empty() --> DEFINE_STATIC_LOCAL
+    webkit_set_web_database_directory_path --> String::fromUTF8 --> UTF8Encoding().decode --> TextEncoding::decode --> TextCodecICU::decode --> createICUConverter --> cachedConverterICU --> threadGlobalData().cachedConverterICU().converter --> return **ThreadGlobalData::staticData --> ThreadGlobalData::ThreadGlobalData --> m_defaultClutData
+    webkit_set_web_database_directory_path --> String::fromUTF8 --> UTF8Encoding().decode --> TextEncoding::decode --> TextCodecICU::decode --> result.append(buffer, ucharsDecoded);
+    webkit_set_web_database_directory_path --> String::fromUTF8 --> UTF8Encoding().decode --> TextEncoding::decode --> TextCodecICU::decode --> String::adopt
+    webkit_set_web_database_directory_path --> DatabaseTracker::tracker()
+    webkit_set_web_database_directory_path --> utf8() --> TextEncoding::encode() --> newTextCodec() --> newTextCodecICU()
+    webkit_set_web_database_directory_path --> utf8() --> TextEncoding::encode() --> String::String() --> create() --> createUninitialized()

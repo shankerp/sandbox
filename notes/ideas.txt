@@ -1,0 +1,10 @@
++ 21bot - a bot that monitors you for finishing a task within 21 days/hours/mins
++ social news/discussion site - reddit + hacker news (debate on a topic for betterment of country)
++ wikihow app for android
++ HTML5 flipbook + good educational content for children = Targetting NGOs
++ a good appengine blog management system
++ a music based social networking site
++ status tracking system
++ browser based web conference system
++ a simple site grabber
++ web based email client with good ui

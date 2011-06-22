@@ -1,0 +1,56 @@
+General Purpose Registers: (used to assign any value) - 16 bits
+AX - accumulator register (used for doing arithmetic operations)
+BX - base register (used for array operations)
+CX - counter register (counter purposes, looping)
+DX - data register (reserving data value)
+
+Segment Registers:
+CS - code segment register (pointer to segment of running program)
+DS - data segment register (pointer to segment of data used by the running program)
+ES - extra segment register (used with DI and doing pointer things)
+DS:SI, ES:DI - commonly used to do string operations
+SS - stack segment register (points to stack segment)
+
+Index Registers: (process arrays of strings)
+SI -  source index (points to the source array)
+DI - destination index (points to destination array)
+- used to move a block of data such as records(or structures) and arrays. commonly coupled with DS and ES.
+
+Pointer Registers:
+BP - base pointer (used for preserving space to use local variables)
+SP - stack pointer (used to point the current stack)
+IP - instruction pointer (current pointer of the running program. cannot be modified. coupled with CS)
+CS:IP - pointer pointing to the current instruction of running program. (cannot access CS nor IP directly)
+
+flag register:
+- used to store the current status of the processor.
+High                            Low
+ _______________________________
+| |N| | |O|D|I|T|S|Z| |A| |P| |C|
+ -------------------------------
+    IOPL
+
+C - carry flag (bit 0). Turned to 1 when last arithmetical operation such as adding and subtracting has carry or borrow.
+P - denotes parity flag (bit 2). Rarely used. Will set to 1 if last opration (any operation) results even number of bit 1.
+A - auxiliary flag or adjust flag (bit 4). Set in Binary Coded Decimal (BCD) operations.
+Z - zero flag (bit 6). Used to detect whether last operation hold zero result.
+S - sign flag (bit 7). Used to detect whether the last operation holds -ve result.
+T - trap flag (bit 8). Used in debuggers to turn on step-by-step feature.
+I - interrupt flag (bit 9). Used to toggle the interrupt enable or not.
+D - direction flag (bit 10). Used for directions of string operations. If set, string operations done backword else forward.
+O - overflow flag (bit 11). Detect whether last arithmetic operation has overflowed or not. If set, overflow.
+IOPL - I/O Privilege level flag (bit 12 to 13). Denote the privilege level of running programs.
+N - Nested Task flag (bit 14). Used to detect whether it has been multiple task occur.
+
+O, D, I, S, Z and C - most commonly used flags
+
+AX:
+ + AH - high 8 bit of AX (0-7 bits)
+ + AL - low 8 bit of AX (8-15 bits)
+
+Extended Registers: - 32 bits
+EAX, EBX, ECX, EDX
+AX is the lower 16 bits of EAX.
+BX is the lower 16 bits of EBX.
+CX is the lower 16 bits of ECX.
+DX is the lower 16 bits of EDX.

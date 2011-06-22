@@ -1,0 +1,7 @@
+Create a copy of build/envsetup.sh to build/intelenvsetup.sh
+Modify the following in build/intelenvsetup.sh
+    + export ANDROID_EABI_TOOLCHAIN=$BUILD_ROOT/build_i686/staging_dir/bin
+    + export ANDROID_QTOOLS=$T/sdk/emulator/qtools
+
+build/core/envsetup.mk
+    + TARGET_ARCH := sodaville

@@ -1,0 +1,122 @@
+EVERY"THING" IS AN OBJECT!
+
+Functions:
+----------
+>> def function_name (args):
+- Set of procedures
+- """Documentation/Comments"""
+    + Can be got from function_name.__doc__ attribute or help(function_name)
+- __name__ == "__main__": used for testing modules quickly
+
+Lists: []
+------
+tAgS: ["item1", "item2"], alist[index], [:], [index1:index2], extend(), append()
+      index()
+
+>> alist = ['a', 'b', 'string', 2]
+- A box of ordered data
+- Access like alist[index]
+    alist[0] will return 'a'
+- Negative indices alist[-n] == alist[len(alist) - n]
+    alist[-2] will return 'string'
+- Slicing --> copies the range specified, where we want to where we don't want. 
+    alist[1:2], alist[1:-1], alist[:3], alist[3:], alist[:]
+- extend() --> will add to the list merging into a single list
+    alist.extend(['d', 'e', 'f']) will make alist as 
+    ['a', 'b', 'string', 2, 'd', 'e', 'f']. len(alist) will be 7
+- append() --> blindly adds to the end. alist.append(['d', 'e', 'f'])
+    alist.append(['d', 'e', 'f']) will make list as 
+    ['a', 'b', 'string', 2, ['d', 'e', 'f']]. len(alist) will be 5
+- index() --> returns the first index of the value present in list
+    alist.index('a') will be 0
+- remove() --> removes the first occurrence of a value
+    alist.remove('a') will make list as ['b', 'string', 2]
+- pop() --> removes and returns the last value in list
+    alist.pop() will return 2 and make list as ['a', 'b', 'string']
+- + operator --> same as alist.extend() except + operator returns new 
+  concatenated list. extend() is faster. 
+    alist = alist + otherlist
+- += operator --> equivalent to alist.extend(). 
+    alist += otherlist
+- List Comprehension: Lists can be mapped to another list by applying a function to each
+  elements in the list. use "for in" statement.
+  [elem*2 for elem in alist] will return a list of elements with all
+  elements in alist multiplied by 2.
+- Can be filtered by adding
+
+Dictionaries: {}
+-------------
+tAgS: {"key":"value"}, dict[key], del dict[key], .clear(), dict[key] = value 
+
+>> dict = {"server":"mpilgrim", "database":"master"}
+- Storing and quickly mapped data.
+- {} curly braces with a list of "key":"value" pairs separated by , (comma)
+- dict["server"] will return 'mpilgrim', "server" is the key and "mpilgrim" 
+  is the value
+- Only values can be got from keys
+- To add a new value to dictionary --> dict["key"] = "value"
+- NO DUPLICATE KEYS, CASE SENSITIVE, CAN MIX DATATYPES
+- Datatypes which cannot be modified should be used as keys. so NO LISTS AS KEYS
+- delete using del dict[key], remove all items using clear --> dict.clear()
+- keys() method returns a list of keys. 
+  dict.keys() will return ['database', 'server']
+- values() method returns a list of values.
+  dict.values() will return ['master', 'mpilgrim']
+- items() returns a list of tuples of the form (key, value)
+  dict.items() will return [('database', 'master'), ('server', 'mpilgrim')]
+
+Tuples: ()
+-------
+tAgS:
+
+>> atuple = ('a', 'b', 'string', 2)
+- List which cannot be altered. Have a defined order. Zero-based - starts with
+  atuple[0]. Negative indices from end. Allows Slicing.
+- No methods such as append, extend, remove, pop, index.
+- 'in' to find availability. 'a' in z --> return True
+
+Builtin functions like tuple() and list() convert any object into corresponding
+objects.
+
+Boolean Rule:
+-------------
+Anything empty is false. 0, "", [], (), {} --> false
+All others true!
+
+Variables:
+----------
+v = 1
+- No declaration. Can be split into several lines using '\'
+- Multiple assignment. (x, y, z) = ('a', 'b', 'c')
+- Return multiple variables by returning a tuple
+
+Built-ins:
+----------
+- range([start,] stop[, step])
+
+Formatting Strings:
+-------------------
+- %s
+- .join([]) --> Joins a list into a string
+- .split(delimiter[, number of times]) --> splits a string with the delimiter 
+  into a list
+
+Built-in functions:
+-------------------
+- type returns the data type of any arbitrary object
+- str converts data into a string
+- dir returns list of attributes and methods of any object: modules, functions,
+  strings, lists, dictionaries
+- callable function takes any object and returns True if the object can be
+  called. Callable objects include functions, methods, class methods and
+  classes themselves
+- getattr returns a reference to the method in an object specified by the string
+  argument. Works on all objects except tuples as tuple doesn't have any method.
+
+Filtering Lists:
+----------------
+- 
+
+Class:
+------
+__getitem__, __setitem__, __repr__, __cmp__, __len__, __delitem__
