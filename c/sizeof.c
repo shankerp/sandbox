@@ -14,5 +14,7 @@ int main()
     int intsize=(int)a-(int)s;
     printf("%d",intsize);
 #endif
+    printf("Sizeof double %d\n", sizeof(double));
+    printf("Sizeof unsigned short %d\n", sizeof(unsigned short));
     int a; printf("%u\n",(int)(&a+1)-(int)(&a));
 }
