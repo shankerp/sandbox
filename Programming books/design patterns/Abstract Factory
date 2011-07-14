@@ -1,0 +1,108 @@
+Abstract Factory
+================
+Intent:
+-------
+Provide an interface for creating families of related or dependent objects without specifying their concrete classes.
+
+Alter-ego:
+----------
+Kit
+
+Motivation:
+-----------
+- UI Toolkit that supports multiple look-and-feel standards should not hard-code its widgets for a particular look and feel.
+- Instantiating look-and-feel-specific classes of widgets throughout the application makes it hard to change the look and feel later.
+- [SOLUTION]
+    + Define an abstract WidgetFactory class that declares an interface for creating each basic kind of widget.
+    + Abstract class for each kind of widget, and concrete subclasses implement widgets for specific look-and-feel standards.
+    + WidgetFactory's interface has an operation that returns a new widget object for each abstract widget class.
+    + Clients call these operations to obtain widget instances, but clients aren't aware of the concrete classes they're using.
+    + Clients stay independent of the prevailing look and feel.
+
+
+
+                          ========================                            Directly Calls                                           ================
+                         |     WidgetFactory      |<----------------------------------------------------------------------------------|     Client     |
+                          ========================                                                                                     ================
+                         |    CreateScrollBar()   |                                         ================       Directly Calls              |
+                         |    CreateWindow()      |                                        |     Window     |<---------------------------------|
+                          ------------------------                                          ================                                   |
+                    __________________|________________                                _____________|_____________                             |
+                   |                                   |                              |                           |                            |
+         ========================         ========================            ================            ================                     |
+        |  MotifWidgetFactory    |--     |   PMWidgetFactory      |- --  -- >|   PMWindow     |          |  MotifWindow   |< -- -- -           |
+         ========================   |     ========================      |     ================            ================          |          |
+        |    CreateScrollBar()   |       |    CreateScrollBar()   |                                                                            |
+        |    CreateWindow()      |  |    |    CreateWindow()      |     |                                                           |          |
+         ------------------------         ------------------------                                                                             |
+                                    |                                   |                    ================   Directly Calls      |          |
+                                                                                            |   Scrollbar    |<--------------------------------
+                                    |                                   |                    ================                       |
+                                                                                        _____________|_____________
+                                    |                                   |              |                           |                |
+                                                                               ================            ================
+                                    |                                    - -->|   PMScrollbar  |          | MotifScrollbar |<-- -- -|
+                                                                               ================            ================
+                                    |                                                                                               |
+
+                                    |                                                                                               |
+                                     -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+    + A concrete subclass of WidgetFactory for each look-and-feel standard.
+    + Each subclass implements the operations to create the appropriate widget for the look and feel.
+    + For ex: CreateScrollBar in MotifWidgetFactory instantiates and returns Motif Scroll bar and PMWidgetFactory returns PMScrollbar.
+    + Clients create widgets solely through the WidgetFactory interface and have no knowledge of the classes that implement widgets
+    + Clients only have to commit to an interface defined by an abstract class, not a particular concrete class.
+    + WidgetFactory enforces dependencies between concrete widget classes.
+
+Applicability:
+--------------
+Use this when
+- A system should be independent of how its products are created, composed and represented.
+- A system should be configured with one of multiple family products.
+- A family of related product objects is designed to be used together and you need to enforce this constraint.
+- You want to provide a class library of products and you want to reveal just their interfaces and not their implementations.
+
+Structure:
+----------
+
+                          ========================                            Directly Calls                                           ================
+                         |   AbstractFactory      |<----------------------------------------------------------------------------------|     Client     |
+                          ========================                                                                                     ================
+                         |    CreateProductA()    |                                         ================       Directly Calls              |
+                         |    CreateProductB()    |                                        |AbstractProductA|<---------------------------------|
+                          ------------------------                                          ================                                   |
+                    __________________|________________                                _____________|_____________                             |
+                   |                                   |                              |                           |                            |
+         ========================         ========================            ================            ================                     |
+        |     ConcreteFactory1   |--     |   ConcreteFactory2     |- --  -- >|   ProductA2    |          |    ProductA1   |< -- -- -           |
+         ========================   |     ========================      |     ================            ================          |          |
+        |    CreateProductA()    |       |    CreateProductA()    |                                                                            |
+        |    CreateProductB()    |  |    |    CreateProductB()    |     |                                                           |          |
+         ------------------------         ------------------------                                                                             |
+                                    |                                   |                    ================   Directly Calls      |          |
+                                                                                            |AbstractProductB|<--------------------------------
+                                    |                                   |                    ================                       |
+                                                                                        _____________|_____________
+                                    |                                   |              |                           |                |
+                                                                               ================            ================
+                                    |                                    - -->| ProductB1      |          | ProductB1      |<-- -- -|
+                                                                               ================            ================
+                                    |                                                                                               |
+
+                                    |                                                                                               |
+                                     -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+Participants:
+-------------
+- AbstractFactory (WidgetFactory)
+    + declares an interface for operations that create abstract product objects.
+- ConcreteFactory (MotifWidgetFactory, PMWidgetFactory)
+    + implements the operations to create concrete product objects.
+- AbstractProduct (Window, Scrollbar)
+    + declares an interface for a type of product object.
+- ConcreteProduct (MotifWindow, MotifScrollbar)
+    + defines a product object to be created by the corresponding concrete factory.
+    + implements the abstract product interface.
+- Client
+    + Uses only interfaces declared by AbstractFactory and AbstractProduct.

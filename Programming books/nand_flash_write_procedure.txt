@@ -1,0 +1,97 @@
+0)
+NAND format
+	Command
+		nflash format show 0
+		nflash format 0
+		nflash format 0
+		nflash format show 0
+
+1)
+MONpronpt command
+	Need file
+		922-A2.bin
+		yamon-02.13-SIGMADESIGNS-01-R2.13-5_el.elf
+
+		There file cp to "C:\Program Files\EPITools\edtm24c\targets\8654"
+
+	Command
+		fr m 922-A2.bin 0xa0300000
+		ew 0xa006f008=0x80000000
+		dw 0xa006f008
+		l yamon-02.13-SIGMADESIGNS-01-R2.13-5_el.elf
+		g
+
+    Automatical boot up YAMON
+
+2-1)
+NAND format
+	Command
+		nflash format show 0
+		nflash format 0
+		nflash format 0
+		nflash format show 0
+
+2-2)
+write phyblock
+	Command
+		load uu -z 0xa7000000
+			[use Teraterm    File tabÅ®Send file. should check 'binaly' option.]
+			[and send zboot.zuu]
+		cksum 0xa7000000 0x20000
+		nflash erase -p 0 0x20000 0
+		nflash write -p 0 0xa7000000 0x20000 0
+		cksum 0xa7020000 0x20000
+		nflash read  -p 0 0xa7020000 0x20000 0
+		cksum 0xa7020000 0x20000
+
+2-3)
+write YAMON
+		load uu -z 0xa7000000
+			[use Teraterm    File tabÅ®Send file. should check 'binaly' option.]
+			[and send yamon.zuu]
+		cksum 0xa7000000 0x00033800
+		nflash write 0x80000 0xa7000000 0x40000 0
+		cksum 0xa7040000 0x00033800
+		nflash read 0x80000 0xa7040000 0x40000 0
+		cksum 0xa7040000 0x00033800
+
+3)
+power off board
+power off ICE
+Remove jumper
+
+
+
+**********************************************************************************************
+
+
+
+
+4)
+write partion and write Romimage
+	load -b tftp://xxx.xxx.xxx.xxx/BootLoaderXenv.bin.Part15.XXXXXXX  0xb0000000
+	load -b tftp://xxx.xxx.xxx.xxx/Yamon.bin.Part15.XXXXXX  0xb0020000
+	load -b tftp://xxx.xxx.xxx.xxx/SystemKernel.bin.Part15.XXXXXX  0xb0060000
+
+	nflash  format 0
+	nflash  format 0
+	nflash  erase -p  0        0x20000    0
+	nflash  write -p  0        0xb0000000 0x20000 0
+	nflash  write     0x80000  0xb0020000 262144  0
+	nflash  write     0xc0000  0xb0060000 8388608 0
+	nflash  write     0x8c0000 0xb0060000 8388608 0
+
+use USB
+Press 3
+Reboot
+
+5)
+create itb5000 environment
+	change aplstart.sh(stop automatical boot up)
+	Reboot
+	use phyblock0-0x20000padded.922-A2c.ITB5K
+	change path(mount path)
+	nwff -f phyblock0-0x20000padded.922-A2c.ITB5K -d 0 -v
+	Reboot
+	change /home/isense/iSense/lib
+	change /home/isense/Thirdp/SMP8654/lib

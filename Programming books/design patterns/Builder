@@ -1,0 +1,54 @@
+Builder
+=======
+Intent:
+-------
+Separate the construction of complex object from its representation so that the same construction process can create different representations.
+
+Motivation:
+-----------
+- RTF Reader (Rich Text Format)
+- Can convert to different formats
+- Use a TextConverter.
+- RTF Reader tokenizes RTF tokens and issues a request to TextConverter to convert the token.
+- TextConverter objects are responsible for both data conversion and for representing the token in a particular format.
+- Subclasses of TextConverter specialize in different formats.
+    + ASCIIConverter - Only plain text
+    + TexConverter - TeX representation and coaptures stylistic information
+    + TextWidgetConverter - Produces a complex UI that lets the user see and edit the text
+
+
+              ========================                                                 ======================== 
+             |       RTFReader        |                                               |                        |
+              ========================                                                 ======================== 
+             |                        |                                               |                        |
+             |       ParseRTF()       |                                               |                        |
+             |                        |                                               |                        |
+              ------------------------                                                 ------------------------ 
+
+     ================================= 
+    |                                 |
+     =================================                                                                          
+    | while(t = get_next_token) {     |         ========================               ========================                ======================== 
+    |    switch(t.Type) {             |        |                        |             |                        |              |                        |
+    |    CHAR:                        |         ========================               ========================                ======================== 
+    |       builder->convertCharacter |        |                        |             |                        |              |                        |
+    |                                 |        |                        |             |                        |              |                        |
+    |                                 |         ------------------------              |                        |              |                        |
+    |                                 |                                               |                        |              |                        |             
+    |                                 |                                                ------------------------                ------------------------              
+     ---------------------------------                                                                         
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    

@@ -1,0 +1,17 @@
+10 to 11
+Status mail, getting ready
+
+11 to 6
+WebKit - Product
+
+6 to 10
+Python - For website
+GAE - For website
+GIMP - For logo
+Jquery - For website
+CSS - For website
+JavaScript - For website
+HTML - For website
+
+10 to 3
+DVB - Product

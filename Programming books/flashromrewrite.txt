@@ -1,0 +1,27 @@
+Flash-Rom Rewrite
+=================
+net init
+gw32 0x6f014 0x80000000
+load -b tftp://192.168.5.31/CACTUS_ES1/R3.6.0/BootLoaderXenv.bin.Part15 0xb0000000
+load -b tftp://192.168.5.31/CACTUS_ES1/R3.6.0/Yamon.bin.Part15 0xb0020000
+load -b tftp://192.168.5.31/CACTUS_ES1/R3.6.0/SystemKernel.bin.Part15 0xb0060000
+nflash format 0
+nflash format 0
+nflash erase -p 0 0x20000 0
+nflash write -p 0 0xb0000000 0x20000 0
+nflash write 0x80000 0xb0020000 262144 0
+nflash write 0xc0000 0xb0060000 8388608 0
+nflash write 0x8c0000 0xb0060000 8388608 0
+
+Creating USB image:
+====================
+mkfs.ext3 -b 4096 /dev/sdb1 # Make sure that /dev/sdb1 is the name of your USB device
+mount -t ext3 /dev/sda1 /USB
+modprobe nfs
+Copy file RoyalChallenge/trunk/stable/release/SMP8654/sanyo_partition_etc/ManualRootFS_auto.ES2.tgz
+mount -t nfs -o nolock 192.168.xxx.xxx:/home/isense/SMP8654 /NFS
+cd /USB/
+tar zxf  /NFS/ManualRootFS_auto.ES2.tgz
+cd
+sync;sync;sync
+umount /USB

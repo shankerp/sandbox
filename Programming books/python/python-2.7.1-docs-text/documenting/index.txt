@@ -1,0 +1,25 @@
+
+Documenting Python
+******************
+
+The Python language has a substantial body of documentation, much of
+it contributed by various authors. The markup used for the Python
+documentation is reStructuredText, developed by the docutils project,
+amended by custom directives and using a toolset named Sphinx to
+postprocess the HTML output.
+
+This document describes the style guide for our documentation as well
+as the custom reStructuredText markup introduced by Sphinx to support
+Python documentation and how it should be used.
+
+Note: If you're interested in contributing to Python's documentation,
+  there's no need to write reStructuredText if you're not so inclined;
+  plain text contributions are more than welcome as well.  Send an
+  e-mail to docs@python.org or open an issue on the *tracker*.
+
+* Introduction
+* Style Guide
+* reStructuredText Primer
+* Additional Markup Constructs
+* Differences to the LaTeX markup
+* Building the documentation

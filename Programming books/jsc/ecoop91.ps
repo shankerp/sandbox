@@ -1,0 +1,4375 @@
+%!
+%%BoundingBox: (atend)
+%%Pages: (atend)
+%%DocumentFonts: (atend)
+%%EndComments
+%
+% FrameMaker PostScript Prolog 2.0, for use with FrameMaker 2.0
+% Copyright (c) 1986,87,89 by Frame Technology, Inc.  All rights reserved.
+%
+% Known Problems:
+%	Due to bugs in Transcript, the 'PS-Adobe-' is omitted from line 1
+/FMversion (2.0) def 
+% Set up Color vs. Black-and-White
+	/FMPrintInColor systemdict /colorimage known def
+% Uncomment this line to force b&w on color printer
+%   /FMPrintInColor false def
+/FrameDict 190 dict def 
+systemdict /errordict known not {/errordict 10 dict def
+		errordict /rangecheck {stop} put} if
+% The readline in 23.0 doesn't recognize cr's as nl's on AppleTalk
+FrameDict /tmprangecheck errordict /rangecheck get put 
+errordict /rangecheck {FrameDict /bug true put} put 
+FrameDict /bug false put 
+mark 
+% Some PS machines read past the CR, so keep the following 3 lines together!
+currentfile 5 string readline
+00
+0000000000
+cleartomark 
+errordict /rangecheck FrameDict /tmprangecheck get put 
+FrameDict /bug get { 
+	/readline {
+		/gstring exch def
+		/gfile exch def
+		/gindex 0 def
+		{
+			gfile read pop 
+			dup 10 eq {exit} if 
+			dup 13 eq {exit} if 
+			gstring exch gindex exch put 
+			/gindex gindex 1 add def 
+		} loop
+		pop 
+		gstring 0 gindex getinterval true 
+		} def
+	} if
+/FMVERSION {
+	FMversion ne {
+		/Times-Roman findfont 18 scalefont setfont
+		100 100 moveto
+		(FrameMaker version does not match postscript_prolog!)
+		dup =
+		show showpage
+		} if
+	} def 
+/FMLOCAL {
+	FrameDict begin
+	0 def 
+	end 
+	} def 
+	/gstring FMLOCAL
+	/gfile FMLOCAL
+	/gindex FMLOCAL
+	/orgxfer FMLOCAL
+	/orgproc FMLOCAL
+	/organgle FMLOCAL
+	/orgfreq FMLOCAL
+	/yscale FMLOCAL
+	/xscale FMLOCAL
+	/manualfeed FMLOCAL
+	/paperheight FMLOCAL
+	/paperwidth FMLOCAL
+/FMDOCUMENT { 
+	array /FMfonts exch def 
+	/#copies exch def
+	FrameDict begin
+	0 ne dup {setmanualfeed} if
+	/manualfeed exch def
+	/paperheight exch def
+	/paperwidth exch def
+	setpapername
+	manualfeed {true} {papersize} ifelse 
+	{manualpapersize} {false} ifelse 
+	{desperatepapersize} if
+	/yscale exch def
+	/xscale exch def
+	currenttransfer cvlit /orgxfer exch def
+	currentscreen cvlit /orgproc exch def
+	/organgle exch def /orgfreq exch def
+	end 
+	} def 
+	/pagesave FMLOCAL
+	/orgmatrix FMLOCAL
+	/landscape FMLOCAL
+/FMBEGINPAGE { 
+	FrameDict begin 
+	/pagesave save def
+	3.86 setmiterlimit
+	/landscape exch 0 ne def
+	landscape { 
+		90 rotate 0 exch neg translate pop 
+		}
+		{pop pop}
+		ifelse
+	xscale yscale scale
+	/orgmatrix matrix def
+	gsave 
+	} def 
+/FMENDPAGE {
+	grestore 
+	pagesave restore
+	end 
+	showpage
+	} def 
+/FMDEFINEFONT { 
+	FrameDict begin
+	findfont 
+	ReEncode 
+	2 index exch 
+	definefont exch 
+	scalefont 
+	FMfonts 3 1 roll 
+	put
+	end 
+	} bind def
+/FMNORMALIZEGRAPHICS { 
+	newpath
+	0.0 0.0 moveto
+	1 setlinewidth
+	0 setlinecap
+	0 0 0 sethsbcolor
+	0 setgray 
+	} bind def
+	/fx FMLOCAL
+	/fy FMLOCAL
+	/fh FMLOCAL
+	/fw FMLOCAL
+	/llx FMLOCAL
+	/lly FMLOCAL
+	/urx FMLOCAL
+	/ury FMLOCAL
+/FMBEGINEPSF { 
+	end 
+	/FMEPSF save def 
+	/showpage {} def 
+	FMNORMALIZEGRAPHICS 
+	[/fy /fx /fh /fw /ury /urx /lly /llx] {exch def} forall 
+	fx fy translate 
+	rotate
+	fw urx llx sub div fh ury lly sub div scale 
+	llx neg lly neg translate 
+	} bind def
+/FMENDEPSF {
+	FMEPSF restore
+	FrameDict begin 
+	} bind def
+FrameDict begin 
+/setmanualfeed {
+%%BeginFeature *ManualFeed True
+	 statusdict /manualfeed true put
+%%EndFeature
+	} def
+/max {2 copy lt {exch} if pop} bind def
+/min {2 copy gt {exch} if pop} bind def
+/inch {72 mul} def
+/pagedimen { 
+	paperheight sub abs 16 lt exch 
+	paperwidth sub abs 16 lt and
+	{/papername exch def} {pop} ifelse
+	} def
+	/papersizedict FMLOCAL
+/setpapername { 
+	/papersizedict 14 dict def 
+	papersizedict begin
+	/papername /unknown def 
+		/Letter 8.5 inch 11.0 inch pagedimen
+		/LetterSmall 7.68 inch 10.16 inch pagedimen
+		/Tabloid 11.0 inch 17.0 inch pagedimen
+		/Ledger 17.0 inch 11.0 inch pagedimen
+		/Legal 8.5 inch 14.0 inch pagedimen
+		/Statement 5.5 inch 8.5 inch pagedimen
+		/Executive 7.5 inch 10.0 inch pagedimen
+		/A3 11.69 inch 16.5 inch pagedimen
+		/A4 8.26 inch 11.69 inch pagedimen
+		/A4Small 7.47 inch 10.85 inch pagedimen
+		/B4 10.125 inch 14.33 inch pagedimen
+		/B5 7.16 inch 10.125 inch pagedimen
+	end
+	} def
+/papersize {
+	papersizedict begin
+		/Letter {lettertray} def
+		/LetterSmall {lettertray lettersmall} def
+		/Tabloid {11x17tray} def
+		/Ledger {ledgertray} def
+		/Legal {legaltray} def
+		/Statement {statementtray} def
+		/Executive {executivetray} def
+		/A3 {a3tray} def
+		/A4 {a4tray} def
+		/A4Small {a4tray a4small} def
+		/B4 {b4tray} def
+		/B5 {b5tray} def
+		/unknown {unknown} def
+	papersizedict dup papername known {papername} {/unknown} ifelse get
+	end
+	/FMdicttop countdictstack 1 add def
+	statusdict begin stopped end 
+	countdictstack -1 FMdicttop {pop end} for
+	} def
+/manualpapersize {
+	papersizedict begin
+		/Letter {letter} def
+		/LetterSmall {lettersmall} def
+		/Tabloid {11x17} def
+		/Ledger {ledger} def
+		/Legal {legal} def
+		/Statement {statement} def
+		/Executive {executive} def
+		/A3 {a3} def
+		/A4 {a4} def
+		/A4Small {a4small} def
+		/B4 {b4} def
+		/B5 {b5} def
+		/unknown {unknown} def
+	papersizedict dup papername known {papername} {/unknown} ifelse get
+	end
+	stopped 
+	} def
+/desperatepapersize {
+	statusdict /setpageparams known
+		{
+		paperwidth paperheight 0 1 
+		statusdict begin
+		{setpageparams} stopped pop 
+		end
+		} if
+	} def
+/savematrix {
+	orgmatrix currentmatrix pop
+	} bind def
+/restorematrix {
+	orgmatrix setmatrix
+	} bind def
+/dmatrix matrix def
+/dpi    72 0 dmatrix defaultmatrix dtransform
+    dup mul exch   dup mul add   sqrt def
+/freq dpi 18.75 div 8 div round dup 0 eq {pop 1} if 8 mul dpi exch div def
+/sangle 1 0 dmatrix defaultmatrix dtransform exch atan def
+/DiacriticEncoding [
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /space /exclam /quotedbl
+/numbersign /dollar /percent /ampersand /quotesingle /parenleft
+/parenright /asterisk /plus /comma /hyphen /period /slash /zero /one
+/two /three /four /five /six /seven /eight /nine /colon /semicolon
+/less /equal /greater /question /at /A /B /C /D /E /F /G /H /I /J /K
+/L /M /N /O /P /Q /R /S /T /U /V /W /X /Y /Z /bracketleft /backslash
+/bracketright /asciicircum /underscore /grave /a /b /c /d /e /f /g /h
+/i /j /k /l /m /n /o /p /q /r /s /t /u /v /w /x /y /z /braceleft /bar
+/braceright /asciitilde /.notdef /Adieresis /Aring /Ccedilla /Eacute
+/Ntilde /Odieresis /Udieresis /aacute /agrave /acircumflex /adieresis
+/atilde /aring /ccedilla /eacute /egrave /ecircumflex /edieresis
+/iacute /igrave /icircumflex /idieresis /ntilde /oacute /ograve
+/ocircumflex /odieresis /otilde /uacute /ugrave /ucircumflex
+/udieresis /dagger /.notdef /cent /sterling /section /bullet
+/paragraph /germandbls /registered /copyright /trademark /acute
+/dieresis /.notdef /AE /Oslash /.notdef /.notdef /.notdef /.notdef
+/yen /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/ordfeminine /ordmasculine /.notdef /ae /oslash /questiondown
+/exclamdown /logicalnot /.notdef /florin /.notdef /.notdef
+/guillemotleft /guillemotright /ellipsis /.notdef /Agrave /Atilde
+/Otilde /OE /oe /endash /emdash /quotedblleft /quotedblright
+/quoteleft /quoteright /.notdef /.notdef /ydieresis /Ydieresis
+/fraction /currency /guilsinglleft /guilsinglright /fi /fl /daggerdbl
+/periodcentered /quotesinglbase /quotedblbase /perthousand
+/Acircumflex /Ecircumflex /Aacute /Edieresis /Egrave /Iacute
+/Icircumflex /Idieresis /Igrave /Oacute /Ocircumflex /.notdef /Ograve
+/Uacute /Ucircumflex /Ugrave /dotlessi /circumflex /tilde /macron
+/breve /dotaccent /ring /cedilla /hungarumlaut /ogonek /caron
+] def
+/ReEncode { 
+	dup 
+	length 
+	dict begin 
+	{
+	1 index /FID ne 
+		{def} 
+		{pop pop} ifelse 
+	} forall
+	Encoding StandardEncoding eq 
+	{
+		/Encoding DiacriticEncoding def
+	}if
+	currentdict 
+	end 
+	} bind def
+/graymode true def
+	/bwidth FMLOCAL
+	/bpside FMLOCAL
+	/bstring FMLOCAL
+	/onbits FMLOCAL
+	/offbits FMLOCAL
+	/xindex FMLOCAL
+	/yindex FMLOCAL
+	/x FMLOCAL
+	/y FMLOCAL
+/setpattern {
+	 /bwidth  exch def
+	 /bpside  exch def
+	 /bstring exch def
+	 /onbits 0 def  /offbits 0 def
+	 freq sangle landscape {90 add} if 
+		{/y exch def
+		 /x exch def
+		 /xindex x 1 add 2 div bpside mul cvi def
+		 /yindex y 1 add 2 div bpside mul cvi def
+		 bstring yindex bwidth mul xindex 8 idiv add get
+		 1 7 xindex 8 mod sub bitshift and 0 ne
+		 {/onbits  onbits  1 add def 1}
+		 {/offbits offbits 1 add def 0}
+		 ifelse
+		}
+		setscreen
+	 {} settransfer
+	 offbits offbits onbits add div FMsetgray
+	/graymode false def
+	} bind def
+/grayness {
+	FMsetgray
+	graymode not {
+		/graymode true def
+		orgxfer cvx settransfer
+		orgfreq organgle orgproc cvx setscreen
+		} if
+	} bind def
+	/HUE FMLOCAL
+	/SAT FMLOCAL
+	/BRIGHT FMLOCAL
+	/Colors FMLOCAL
+FMPrintInColor 
+	
+	{
+	/HUE 0 def
+	/SAT 0 def
+	/BRIGHT 0 def
+	% array of arrays Hue and Sat values for the separations [HUE BRIGHT]
+	/Colors   
+	[[0    0  ]    % black
+	 [0    0  ]    % white
+	 [0.00 1.0]    % red
+	 [0.37 1.0]    % green
+	 [0.60 1.0]    % blue
+	 [0.50 1.0]    % cyan
+	 [0.83 1.0]    % magenta
+	 [0.16 1.0]    % comment / yellow
+	 ] def
+      
+	/BEGINBITMAPCOLOR { 
+		BITMAPCOLOR} def
+	/BEGINBITMAPCOLORc { 
+		BITMAPCOLORc} def
+	/K { 
+		Colors exch get dup
+		0 get /HUE exch store 
+		1 get /BRIGHT exch store
+		  HUE 0 eq BRIGHT 0 eq and
+			{1.0 SAT sub setgray}
+			{HUE SAT BRIGHT sethsbcolor} 
+		  ifelse
+		} def
+	/FMsetgray { 
+		/SAT exch 1.0 exch sub store 
+		  HUE 0 eq BRIGHT 0 eq and
+			{1.0 SAT sub setgray}
+			{HUE SAT BRIGHT sethsbcolor} 
+		  ifelse
+		} bind def
+	}
+	
+	{
+	/BEGINBITMAPCOLOR { 
+		BITMAPGRAY} def
+	/BEGINBITMAPCOLORc { 
+		BITMAPGRAYc} def
+	/FMsetgray {setgray} bind def
+	/K { 
+		pop
+		} def
+	}
+ifelse
+/normalize {
+	transform round exch round exch itransform
+	} bind def
+/dnormalize {
+	dtransform round exch round exch idtransform
+	} bind def
+/lnormalize { 
+	0 dtransform exch cvi 2 idiv 2 mul 1 add exch idtransform pop
+	} bind def
+/H { 
+	lnormalize setlinewidth
+	} bind def
+/Z {
+	setlinecap
+	} bind def
+/X { 
+	fillprocs exch get exec
+	} bind def
+/V { 
+	gsave eofill grestore
+	} bind def
+/N { 
+	stroke
+	} bind def
+/M {newpath moveto} bind def
+/E {lineto} bind def
+/D {curveto} bind def
+/O {closepath} bind def
+	/n FMLOCAL
+/L { 
+ 	/n exch def
+	newpath
+	normalize
+	moveto 
+	2 1 n {pop normalize lineto} for
+	} bind def
+/Y { 
+	L 
+	closepath
+	} bind def
+	/x1 FMLOCAL
+	/x2 FMLOCAL
+	/y1 FMLOCAL
+	/y2 FMLOCAL
+	/rad FMLOCAL
+/R { 
+	/y2 exch def
+	/x2 exch def
+	/y1 exch def
+	/x1 exch def
+	x1 y1
+	x2 y1
+	x2 y2
+	x1 y2
+	4 Y 
+	} bind def
+/RR { 
+	/rad exch def
+	normalize
+	/y2 exch def
+	/x2 exch def
+	normalize
+	/y1 exch def
+	/x1 exch def
+	newpath
+	x1 y1 rad add moveto
+	x1 y2 x2 y2 rad arcto
+	x2 y2 x2 y1 rad arcto
+	x2 y1 x1 y1 rad arcto
+	x1 y1 x1 y2 rad arcto
+	closepath
+	16 {pop} repeat
+	} bind def
+/C { 
+	grestore
+	gsave
+	R 
+	clip
+	} bind def
+/U { 
+	grestore
+	gsave
+	} bind def
+/F { 
+	FMfonts exch get
+	setfont
+	} bind def
+/T { 
+	moveto show
+	} bind def
+/RF { 
+	rotate
+	0 ne {-1 1 scale} if
+	} bind def
+/TF { 
+	gsave
+	moveto 
+	RF
+	show
+	grestore
+	} bind def
+/P { 
+	moveto
+	0 32 3 2 roll widthshow
+	} bind def
+/PF { 
+	gsave
+	moveto 
+	RF
+	0 32 3 2 roll widthshow
+	grestore
+	} bind def
+/S { 
+	moveto
+	0 exch ashow
+	} bind def
+/SF { 
+	gsave
+	moveto
+	RF
+	0 exch ashow
+	grestore
+	} bind def
+/B { 
+	moveto
+	0 32 4 2 roll 0 exch awidthshow
+	} bind def
+/BF { 
+	gsave
+	moveto
+	RF
+	0 32 4 2 roll 0 exch awidthshow
+	grestore
+	} bind def
+	/x FMLOCAL
+	/y FMLOCAL
+	/dx FMLOCAL
+	/dy FMLOCAL
+	/dl FMLOCAL
+	/t FMLOCAL
+	/t2 FMLOCAL
+	/Cos FMLOCAL
+	/Sin FMLOCAL
+	/r FMLOCAL
+/W { 
+	dnormalize
+	/dy exch def
+	/dx exch def
+	normalize
+	/y  exch def
+	/x  exch def
+	/dl dx dx mul dy dy mul add sqrt def
+	dl 0.0 gt {
+		/t currentlinewidth def
+		savematrix
+		/Cos dx dl div def
+		/Sin dy dl div def
+		/r [Cos Sin Sin neg Cos 0.0 0.0] def
+		/t2 t 2.5 mul 3.5 max def
+		newpath
+		x y translate
+		r concat
+		0.0 0.0 moveto
+		dl t 2.7 mul sub 0.0 rlineto
+		stroke
+		restorematrix
+		x dx add y dy add translate
+		r concat
+		t 0.67 mul setlinewidth
+		t 1.61 mul neg  0.0 translate
+		0.0 0.0 moveto
+		t2 1.7 mul neg  t2 2.0 div     moveto
+		0.0 0.0 lineto
+		t2 1.7 mul neg  t2 2.0 div neg lineto
+		stroke
+		t setlinewidth
+		restorematrix
+		} if
+	} bind def
+/G { 
+	gsave
+	newpath
+	normalize translate 0.0 0.0 moveto 
+	dnormalize scale 
+	0.0 0.0 1.0 5 3 roll arc 
+	closepath fill
+	grestore
+	} bind def
+/A { 
+	gsave
+	savematrix
+	newpath
+	2 index 2 div add exch 3 index 2 div sub exch 
+	normalize 2 index 2 div sub exch 3 index 2 div add exch 
+	translate 
+	scale 
+	0.0 0.0 1.0 5 3 roll arc 
+	restorematrix
+	stroke
+	grestore
+	} bind def
+	/x FMLOCAL
+	/y FMLOCAL
+	/w FMLOCAL
+	/h FMLOCAL
+	/xx FMLOCAL
+	/yy FMLOCAL
+	/ww FMLOCAL
+	/hh FMLOCAL
+	/FMsaveobject FMLOCAL
+	/FMoptop FMLOCAL
+	/FMdicttop FMLOCAL
+/BEGINPRINTCODE { 
+	/FMdicttop countdictstack 1 add def 
+	/FMoptop count 4 sub def 
+	/FMsaveobject save def
+	userdict begin 
+	/showpage {} def 
+	FMNORMALIZEGRAPHICS 
+	3 index neg 3 index neg translate
+	} bind def
+/ENDPRINTCODE {
+	count -1 FMoptop {pop pop} for 
+	countdictstack -1 FMdicttop {pop end} for 
+	FMsaveobject restore 
+	} bind def
+/gn { 
+	0 
+	{	46 mul 
+		cf read pop 
+		32 sub 
+		dup 46 lt {exit} if 
+		46 sub add 
+		} loop
+	add 
+	} bind def
+	/str FMLOCAL
+/cfs { 
+	/str sl string def 
+	0 1 sl 1 sub {str exch val put} for 
+	str def 
+	} bind def
+/ic [ 
+	0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0223
+	0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0223
+	0
+	{0 hx} {1 hx} {2 hx} {3 hx} {4 hx} {5 hx} {6 hx} {7 hx} {8 hx} {9 hx}
+	{10 hx} {11 hx} {12 hx} {13 hx} {14 hx} {15 hx} {16 hx} {17 hx} {18 hx}
+	{19 hx} {gn hx} {0} {1} {2} {3} {4} {5} {6} {7} {8} {9} {10} {11} {12}
+	{13} {14} {15} {16} {17} {18} {19} {gn} {0 wh} {1 wh} {2 wh} {3 wh}
+	{4 wh} {5 wh} {6 wh} {7 wh} {8 wh} {9 wh} {10 wh} {11 wh} {12 wh}
+	{13 wh} {14 wh} {gn wh} {0 bl} {1 bl} {2 bl} {3 bl} {4 bl} {5 bl} {6 bl}
+	{7 bl} {8 bl} {9 bl} {10 bl} {11 bl} {12 bl} {13 bl} {14 bl} {gn bl}
+	{0 fl} {1 fl} {2 fl} {3 fl} {4 fl} {5 fl} {6 fl} {7 fl} {8 fl} {9 fl}
+	{10 fl} {11 fl} {12 fl} {13 fl} {14 fl} {gn fl}
+	] def
+	/sl FMLOCAL
+	/val FMLOCAL
+	/ws FMLOCAL
+	/im FMLOCAL
+	/bs FMLOCAL
+	/cs FMLOCAL
+	/len FMLOCAL
+	/pos FMLOCAL
+/ms { 
+	/sl exch def 
+	/val 255 def 
+	/ws cfs 
+	/im cfs 
+	/val 0 def 
+	/bs cfs 
+	/cs cfs 
+	} bind def
+400 ms 
+/ip { 
+	is 
+	0 
+	cf cs readline pop 
+	{	ic exch get exec 
+		add 
+		} forall 
+	pop 
+	
+	} bind def
+/wh { 
+	/len exch def 
+	/pos exch def 
+	ws 0 len getinterval im pos len getinterval copy pop
+	pos len 
+	} bind def
+/bl { 
+	/len exch def 
+	/pos exch def 
+	bs 0 len getinterval im pos len getinterval copy pop
+	pos len 
+	} bind def
+/s1 1 string def
+/fl { 
+	/len exch def 
+	/pos exch def 
+	/val cf s1 readhexstring pop 0 get def
+	pos 1 pos len add 1 sub {im exch val put} for
+	pos len 
+	} bind def
+/hx { 
+	3 copy getinterval 
+	cf exch readhexstring pop pop 
+	} bind def
+	/h FMLOCAL
+	/w FMLOCAL
+	/d FMLOCAL
+	/lb FMLOCAL
+	/bitmapsave FMLOCAL
+	/is FMLOCAL
+	/cf FMLOCAL
+/wbytes { 
+	dup 
+	8 eq {pop} {1 eq {7 add 8 idiv} {3 add 4 idiv} ifelse} ifelse
+	} bind def
+/BEGINBITMAPBWc { 
+	1 {} COMMONBITMAPc
+	} bind def
+/BEGINBITMAPGRAYc { 
+	8 {} COMMONBITMAPc
+	} bind def
+/BEGINBITMAP2BITc { 
+	2 {} COMMONBITMAPc
+	} bind def
+/COMMONBITMAPc { 
+	/r exch def
+	/d exch def
+	gsave
+	translate rotate scale /h exch def /w exch def
+	/lb w d wbytes def 
+	sl lb lt {lb ms} if 
+	/bitmapsave save def 
+	r                    
+	/is im 0 lb getinterval def 
+	ws 0 lb getinterval is copy pop 
+	/cf currentfile def 
+	w h d [w 0 0 h neg 0 h] 
+	{ip} image 
+	bitmapsave restore 
+	grestore
+	} bind def
+/BEGINBITMAPBW { 
+	1 {} COMMONBITMAP
+	} bind def
+/BEGINBITMAPGRAY { 
+	8 {} COMMONBITMAP
+	} bind def
+/BEGINBITMAP2BIT { 
+	2 {} COMMONBITMAP
+	} bind def
+/COMMONBITMAP { 
+	/r exch def
+	/d exch def
+	gsave
+	translate rotate scale /h exch def /w exch def
+	/bitmapsave save def 
+	r                    
+	/is w d wbytes string def
+	/cf currentfile def 
+	w h d [w 0 0 h neg 0 h] 
+	{cf is readhexstring pop} image
+	bitmapsave restore 
+	grestore
+	} bind def
+	/proc1 FMLOCAL
+	/proc2 FMLOCAL
+	/newproc FMLOCAL
+/Fmcc {
+    /proc2 exch cvlit def
+    /proc1 exch cvlit def
+    /newproc proc1 length proc2 length add array def
+    newproc 0 proc1 putinterval
+    newproc proc1 length proc2 putinterval
+    newproc cvx
+} bind def
+/ngrayt 256 array def
+/nredt 256 array def
+/nbluet 256 array def
+/ngreent 256 array def
+	/gryt FMLOCAL
+	/blut FMLOCAL
+	/grnt FMLOCAL
+	/redt FMLOCAL
+	/indx FMLOCAL
+	/cynu FMLOCAL
+	/magu FMLOCAL
+	/yelu FMLOCAL
+	/k FMLOCAL
+	/u FMLOCAL
+/colorsetup {
+	currentcolortransfer
+	/gryt exch def
+	/blut exch def
+	/grnt exch def
+	/redt exch def
+	0 1 255 {
+		/indx exch def
+		/cynu 1 red indx get 255 div sub def
+		/magu 1 green indx get 255 div sub def
+		/yelu 1 blue indx get 255 div sub def
+		/k cynu magu min yelu min def
+		/u k currentundercolorremoval exec def
+		nredt indx 1 0 cynu u sub max sub redt exec put
+		ngreent indx 1 0 magu u sub max sub grnt exec put
+		nbluet indx 1 0 yelu u sub max sub blut exec put
+		ngrayt indx 1 k currentblackgeneration exec sub gryt exec put
+	} for
+	{255 mul cvi nredt exch get}
+	{255 mul cvi ngreent exch get}
+	{255 mul cvi nbluet exch get}
+	{255 mul cvi ngrayt exch get}
+	setcolortransfer
+	{pop 0} setundercolorremoval
+	{} setblackgeneration
+	} bind def
+	/tran FMLOCAL
+/fakecolorsetup {
+	/tran 256 string def
+	0 1 255 {/indx exch def 
+		tran indx
+		red indx get 77 mul
+		green indx get 151 mul
+		blue indx get 28 mul
+		add add 256 idiv put} for
+	currenttransfer
+	{255 mul cvi tran exch get 255.0 div}
+	exch Fmcc settransfer
+} bind def
+/BITMAPCOLOR { 
+	/d 8 def
+	gsave
+	translate rotate scale /h exch def /w exch def
+	/bitmapsave save def 
+	colorsetup
+	/is w d wbytes string def
+	/cf currentfile def 
+	w h d [w 0 0 h neg 0 h] 
+	{cf is readhexstring pop} {is} {is} true 3 colorimage 
+	bitmapsave restore 
+	grestore
+	} bind def
+/BITMAPCOLORc { 
+	/d 8 def
+	gsave
+	translate rotate scale /h exch def /w exch def
+	/lb w d wbytes def 
+	sl lb lt {lb ms} if 
+	/bitmapsave save def 
+	colorsetup
+	/is im 0 lb getinterval def 
+	ws 0 lb getinterval is copy pop 
+	/cf currentfile def 
+	w h d [w 0 0 h neg 0 h] 
+	{ip} {is} {is} true 3 colorimage
+	bitmapsave restore 
+	grestore
+	} bind def
+/BITMAPGRAY { 
+	8 {fakecolorsetup} COMMONBITMAP
+	} bind def
+/BITMAPGRAYc { 
+	8 {fakecolorsetup} COMMONBITMAPc
+	} bind def
+/ENDBITMAP {
+	} bind def
+end 
+%%EndProlog
+%%BeginSetup
+(2.0) FMVERSION
+0.85 0.85 612 792 0 1 18 FMDOCUMENT
+/fillprocs 32 array def
+fillprocs 0 { 0.000000 grayness } put
+fillprocs 1 { 0.100000 grayness } put
+fillprocs 2 { 0.300000 grayness } put
+fillprocs 3 { 0.500000 grayness } put
+fillprocs 4 { 0.700000 grayness } put
+fillprocs 5 { 0.900000 grayness } put
+fillprocs 6 { 0.970000 grayness } put
+fillprocs 7 { 1.000000 grayness } put
+fillprocs 8 {<0f87c3e1f0783c1e> 8 1 setpattern } put
+fillprocs 9 {<0f1e3c78f0e1c387> 8 1 setpattern } put
+fillprocs 10 {<cccccccccccccccc> 8 1 setpattern } put
+fillprocs 11 {<ffff0000ffff0000> 8 1 setpattern } put
+fillprocs 12 {<8142241818244281> 8 1 setpattern } put
+fillprocs 13 {<8040201008040201> 8 1 setpattern } put
+fillprocs 14 {<03060c183060c081> 8 1 setpattern } put
+fillprocs 15 {} put
+fillprocs 16 { 1.000000 grayness } put
+fillprocs 17 { 0.900000 grayness } put
+fillprocs 18 { 0.700000 grayness } put
+fillprocs 19 { 0.500000 grayness } put
+fillprocs 20 { 0.300000 grayness } put
+fillprocs 21 { 0.100000 grayness } put
+fillprocs 22 { 0.030000 grayness } put
+fillprocs 23 { 0.000000 grayness } put
+fillprocs 24 {<f0783c1e0f87c3e1> 8 1 setpattern } put
+fillprocs 25 {<f0e1c3870f1e3c78> 8 1 setpattern } put
+fillprocs 26 {<3333333333333333> 8 1 setpattern } put
+fillprocs 27 {<0000ffff0000ffff> 8 1 setpattern } put
+fillprocs 28 {<7ebddbe7e7dbbd7e> 8 1 setpattern } put
+fillprocs 29 {<7fbfdfeff7fbfdfe> 8 1 setpattern } put
+fillprocs 30 {<fcf9f3e7cf9f3f7e> 8 1 setpattern } put
+fillprocs 31 {} put
+%%EndSetup
+0 12 /Times-Roman FMDEFINEFONT
+1 16 /Times-Bold FMDEFINEFONT
+2 12 /Courier FMDEFINEFONT
+3 11 /Courier FMDEFINEFONT
+4 11 /Times-Roman FMDEFINEFONT
+5 10 /Times-Bold FMDEFINEFONT
+6 10 /Times-Roman FMDEFINEFONT
+%%Page: "18" 18
+%%BeginPaperSize: Letter
+%%EndPaperSize
+612 792 0 FMBEGINPAGE
+91.99 73.9 604.97 85.89 R
+7 X
+0 K
+V
+0 F
+0 X
+(18) 342.48 77.89 T
+94.71 91.7 604.94 842.88 R
+7 X
+V
+1 F
+0 X
+(Appendix) 94.71 832.22 T
+(B.) 165.36 832.22 T
+(Example Code) 194.01 832.22 T
+0 F
+1.26 (The following code was produced by our system for a PIC containing two dif) 94.71 811.88 P
+1.26 (ferent receiver types; the) 482.28 811.88 P
+1.02 (code is given in SP) 94.71 797.88 P
+1.02 (ARC assembler syntax. Branches have one delay slot on the SP) 189.66 797.88 P
+1.02 (ARC; instructions in) 503.6 797.88 P
+0.6 (annulled delay slots \050indicated by ) 94.71 783.88 P
+2 F
+1.44 (,a) 261.94 783.88 P
+0 F
+0.6 (\051 are only executed if the branch is taken, except for branch always) 276.34 783.88 P
+-0.04 (where the instruction in the delay slot is never executed. ) 94.71 769.88 P
+2 F
+-0.1 (sethi) 367.09 769.88 P
+0 F
+-0.04 (/) 403.07 769.88 P
+2 F
+-0.1 (add) 406.41 769.88 P
+0 F
+-0.04 ( combinations are needed to load 32-) 427.99 769.88 P
+(bit constants.) 94.71 755.88 T
+3 F
+(andcc %i0, 1) 130.71 737.55 T
+4 F
+(tag test for immediate \050integer, float\051) 328.99 737.55 T
+3 F
+(bnz,a _mapTest) 130.71 723.55 T
+4 F
+(branch to _mapTest if not an immediate) 328.99 723.55 T
+3 F
+(load ) 130.71 709.55 T
+([%i0+7], %g5) 170.26 709.55 T
+4 F
+(load receiver map \050annulled delay slot\051) 328.99 709.55 T
+3 F
+(bra,a _miss) 130.71 695.55 T
+4 F
+(immediate: branch to _miss) 328.99 695.55 T
+3 F
+(_mapTest:) 112.71 681.55 T
+(sethi %hi\050type1\051, %g4) 130.71 667.55 T
+4 F
+(load first part of type 1 \05032-bit literal\051) 328.99 667.55 T
+3 F
+(add) 130.71 653.55 T
+(%g4, %lo\050type1\051, %g4) 170.26 653.55 T
+4 F
+(load second part of type 1) 328.99 653.55 T
+3 F
+(cmp) 130.71 639.55 T
+(%g4, %g5) 170.26 639.55 T
+4 F
+(compare with receiver type) 328.99 639.55 T
+3 F
+(bne,a _next) 130.71 625.55 T
+4 F
+(try next case if not equal) 328.99 625.55 T
+3 F
+(sethi %hi\050type2\051, %g4) 130.71 611.55 T
+4 F
+(load first part of type 2 \050annulled delay slot\051) 328.99 611.55 T
+3 F
+(sethi %hi\050method1\051, %g4) 130.71 597.55 T
+4 F
+(success: load first part of first method\325s address) 328.99 597.55 T
+3 F
+(jmp ) 130.71 583.55 T
+(%g4 + %lo\050method1\051) 170.26 583.55 T
+4 F
+(and branch to the method) 328.99 583.55 T
+3 F
+(_next:) 112.71 569.55 T
+(add) 130.71 555.55 T
+(%g4, %lo\050type2\051, %g4) 170.26 555.55 T
+4 F
+(complete the load of type 2) 328.99 555.55 T
+3 F
+(cmp) 130.71 541.55 T
+(%g4, %g5) 170.26 541.55 T
+4 F
+(compare with receiver type) 328.99 541.55 T
+3 F
+(bne,a _miss) 130.71 527.55 T
+4 F
+(no more types to check; ) 328.99 527.55 T
+(goto _miss if not equal) 436.7 527.55 T
+3 F
+(nop) 130.71 513.55 T
+4 F
+(empty delay slot \050could be eliminated\051) 328.99 513.55 T
+3 F
+(sethi %hi\050method2\051, %g4) 130.71 499.55 T
+4 F
+(success: load first part of second method\325s address) 328.99 499.55 T
+3 F
+(jmp ) 130.71 485.55 T
+(%g4 + %lo\050method2\051) 170.26 485.55 T
+4 F
+(and branch to the method) 328.99 485.55 T
+3 F
+(_miss:) 112.71 471.55 T
+(sethi %hi\050Lookup\051, %g4) 130.71 457.55 T
+4 F
+(miss: load first part of lookup routine) 328.99 457.55 T
+3 F
+(jmp ) 130.71 443.55 T
+(%g4 + %lo\050Lookup\051) 170.26 443.55 T
+4 F
+(and branch to the lookup routine) 328.99 443.55 T
+3 F
+(nop) 130.71 429.55 T
+4 F
+(empty delay slot) 328.99 429.55 T
+94.71 91.7 604.94 842.88 C
+130.22 134.95 569.44 406.89 C
+130.22 134.95 569.44 406.89 R
+7 X
+0 K
+V
+158.57 190.19 541.24 346.1 R
+V
+0 F
+0 X
+2.05 (Since this paper went to print, some of the performance bugs mentioned in) 158.57 338.1 P
+2.14 (section 5.5 have been \336xed. These modi\336cations substantially improved the) 158.57 324.1 P
+0.06 (performance of recompiled code; the new numbers \050relative to the base system\051) 158.57 310.1 P
+(are as follows:) 158.57 296.1 T
+5 F
+(PIC) 249.64 278.43 T
+(r) 295.25 278.43 T
+(ecompiled) 299.51 278.43 T
+6 F
+(Richards) 158.57 266.43 T
+(73%) 248.53 266.43 T
+(55%) 324.5 266.43 T
+(Parser) 158.57 254.43 T
+(78%) 248.53 254.43 T
+(59%) 324.5 254.43 T
+(PrimMaker) 158.57 242.43 T
+(89%) 248.53 242.43 T
+(79%) 324.5 242.43 T
+(UI) 158.57 230.43 T
+(N/A) 249.64 230.43 T
+(N/A) 325.61 230.43 T
+(PathCache) 158.57 218.43 T
+(98%) 248.53 218.43 T
+(56%) 324.5 218.43 T
+(PolyT) 158.57 206.43 T
+(est) 182.3 206.43 T
+(16%) 248.53 206.43 T
+(13%) 324.5 206.43 T
+151.57 187.02 548.42 357.1 R
+1 H
+2 Z
+N
+94.71 91.7 604.94 842.88 C
+54 69.88 666 861.88 C
+FMENDPAGE
+%%EndPage: "18" 17
+3 8 /Times-Roman FMDEFINEFONT
+%%Page: "17" 17
+612 792 0 FMBEGINPAGE
+91.99 73.9 604.97 85.89 R
+7 X
+0 K
+V
+0 F
+0 X
+(17) 342.48 77.89 T
+94.71 91.7 604.94 842.88 R
+7 X
+V
+1 F
+0 X
+(Appendix) 94.71 832.22 T
+(A.) 165.36 832.22 T
+(Raw Benchmark Data) 194.01 832.22 T
+0 F
+0.5 (The following table gives the execution times \050in seconds\051 of all benchmarks. W) 94.71 811.88 P
+0.5 (e estimate that inaccura-) 486.53 811.88 P
+(cies due to hardware caching and context switching ef) 94.71 797.88 T
+(fects are below 5%. ) 354.28 797.88 T
+5 F
+(base) 184.11 780.22 T
+(PIC) 239.78 780.22 T
+(r) 263.43 780.22 T
+(ecompiled) 267.69 780.22 T
+(Smalltalk-80) 339.74 780.22 T
+6 F
+(Richards) 94.71 768.22 T
+(2.95) 185.5 768.22 T
+(2.16) 239.5 768.22 T
+(1.94) 293.5 768.22 T
+(7.74) 372.49 768.22 T
+(Parser) 94.71 756.22 T
+(3.32) 185.5 756.22 T
+(2.58) 239.5 756.22 T
+(2.25) 293.5 756.22 T
+(PrimMaker) 94.71 744.22 T
+(3.13) 185.5 744.22 T
+(2.79) 239.5 744.22 T
+(2.46) 293.5 744.22 T
+(UI) 94.71 732.22 T
+(5.97) 185.5 732.22 T
+(5.97) 239.5 732.22 T
+(5.77) 293.5 732.22 T
+(PathCache) 94.71 720.22 T
+(1.62) 185.5 720.22 T
+(1.58) 239.5 720.22 T
+(1.54) 293.5 720.22 T
+(PolyT) 94.71 708.22 T
+(est) 118.45 708.22 T
+(20.48) 180.51 708.22 T
+(3.76) 239.5 708.22 T
+(3.68) 293.5 708.22 T
+(19.14) 367.49 708.22 T
+3 F
+(\240) 389.98 712.22 T
+0 F
+0.87 (A variation of the ) 94.71 690.89 P
+2 F
+2.09 (PolyTest) 186.12 690.89 P
+0 F
+0.87 ( benchmark which performs 1,000,000 monomorphic sends instead of the) 243.69 690.89 P
+1.28 (polymorphic sends runs in 4.2 seconds in ParcPlace Smalltalk-80. Thus, we estimate that a cache miss) 94.71 676.89 P
+(takes about 15 microseconds in this system, or about the same time as a S) 94.71 662.89 T
+4 F
+(ELF) 448.15 662.89 T
+0 F
+( inline cache miss.) 467.69 662.89 T
+1.84 (The space overhead of PICs is given in the next table. The \336rst column lists the size in bytes of the) 94.71 643.89 P
+0.01 (compiled code \050without PICs\051 for each benchmark; this includes the code for all parts of the system which) 94.71 629.89 P
+1.44 (are used by the benchmark \050e.g. strings, collections, etc.\051. The code sizes given below include method) 94.71 615.89 P
+-0.09 (headers and relocation tables but not debugging information. The second column contains the size in bytes) 94.71 601.89 P
+0.02 (of the PICs \050including headers and relocation tables\051, and the third column shows the space overhead rela-) 94.71 587.89 P
+(tive to the base version.) 94.71 573.89 T
+5 F
+(code size) 165.52 556.22 T
+(PIC size) 221.74 556.22 T
+(overhead) 271.57 556.22 T
+6 F
+(Richards) 94.71 544.22 T
+(30,000) 175.51 544.22 T
+(240) 242 544.22 T
+(0.8%) 290.17 544.22 T
+(Parser) 94.71 532.22 T
+(269,000) 170.51 532.22 T
+(4,000) 234.51 532.22 T
+(1.5%) 290.17 532.22 T
+(PrimMaker) 94.71 520.22 T
+(973,000) 170.51 520.22 T
+(16,500) 229.51 520.22 T
+(1.7%) 290.17 520.22 T
+(PathCache) 94.71 508.22 T
+(64,000) 175.51 508.22 T
+(4,400) 234.51 508.22 T
+(6.9%) 290.17 508.22 T
+(UI) 94.71 496.22 T
+(not available) 213.63 496.22 T
+0 F
+0.75 (The next table describes the number of sends that the benchmarks execute when compiled with the base) 94.71 466.89 P
+0.66 (system \050see Figure 9\051. The column labelled \322polymorphic\323 lists the number of messages sent from poly-) 94.71 452.89 P
+(morphic call sites; \322misses\323 is the number of inline cache misses in the base system.) 94.71 438.89 T
+5 F
+(normal) 166.91 421.22 T
+(access) 225.92 421.22 T
+(DI) 294.9 421.22 T
+(total) 340.58 421.22 T
+(polymorphic) 368.57 421.22 T
+(misses) 439.78 421.22 T
+6 F
+(Richards) 94.71 409.22 T
+(380,600) 165.52 409.22 T
+(421,600) 219.52 409.22 T
+(0) 301.01 409.22 T
+(802,200) 327.52 409.22 T
+(65,800) 395.51 409.22 T
+(35,500) 439.5 409.22 T
+(Parser) 94.71 397.22 T
+(176,200) 165.52 397.22 T
+(66,300) 224.52 397.22 T
+(139,600) 273.52 397.22 T
+(382,100) 327.52 397.22 T
+(90,900) 395.51 397.22 T
+(23,600) 439.5 397.22 T
+(PrimMaker) 94.71 385.22 T
+(129,500) 165.52 385.22 T
+(64,400) 224.52 385.22 T
+(123,000) 273.52 385.22 T
+(316,900) 327.52 385.22 T
+(63,400) 395.51 385.22 T
+(21,100) 439.5 385.22 T
+(UI) 94.71 373.22 T
+(1) 165.89 373.22 T
+(19,900) 170.52 373.22 T
+(212,300) 219.52 373.22 T
+(88,600) 278.52 373.22 T
+(420,800) 327.52 373.22 T
+(35,500) 395.51 373.22 T
+(2,600) 444.5 373.22 T
+(PathCache) 94.71 361.22 T
+(60,700) 170.52 361.22 T
+(10,500) 224.52 361.22 T
+(0) 301.01 361.22 T
+(71,200) 332.52 361.22 T
+(52,000) 395.51 361.22 T
+(4,100) 444.5 361.22 T
+(PolyT) 94.71 349.22 T
+(est) 118.45 349.22 T
+(1,000,000) 158.03 349.22 T
+(0) 247.01 349.22 T
+(0) 301.01 349.22 T
+(1,000,000) 320.03 349.22 T
+(1,000,000) 383.01 349.22 T
+(1,000,000) 427.01 349.22 T
+0 F
+(For the experimental system, the number of sends are as follows \050the DI numbers remain unchanged\051:) 94.71 319.89 T
+5 F
+(after one r) 161.14 302.22 T
+(ecompilation) 205.92 302.22 T
+(steady state) 310.16 302.22 T
+(normal) 166.91 290.22 T
+(access) 225.92 290.22 T
+(normal) 292.91 290.22 T
+(access) 351.92 290.22 T
+6 F
+(Richards) 94.71 278.22 T
+(241,400) 165.52 278.22 T
+(41,800) 224.52 278.22 T
+(241,400) 291.52 278.22 T
+(0) 373.01 278.22 T
+(Parser) 94.71 266.22 T
+(63,500) 170.52 266.22 T
+(3,300) 229.52 266.22 T
+(32,800) 296.52 266.22 T
+(0) 373.01 266.22 T
+(PrimMaker) 94.71 254.22 T
+(42,700) 170.52 254.22 T
+(17,500) 224.52 254.22 T
+(19,600) 296.52 254.22 T
+(1) 350.75 254.22 T
+(1,600) 355.37 254.22 T
+3 F
+(\340) 377.86 258.22 T
+6 F
+(UI) 94.71 242.22 T
+(67,400) 170.52 242.22 T
+(61,800 ) 224.52 242.22 T
+(43,100) 296.52 242.22 T
+(20,000) 350.38 242.22 T
+3 F
+(\340) 377.86 246.22 T
+6 F
+(PathCache) 94.71 230.22 T
+(15,300) 170.52 230.22 T
+(2,600) 229.52 230.22 T
+(12,800) 296.52 230.22 T
+(0) 373.01 230.22 T
+(PolyT) 94.71 218.22 T
+(est) 118.45 218.22 T
+(0) 193.01 218.22 T
+(0) 247.01 218.22 T
+(0) 319.01 218.22 T
+(0) 373.01 218.22 T
+94.71 125.7 604.94 140.67 C
+94.71 125.7 604.94 140.67 R
+7 X
+0 K
+V
+94.71 131.6 247.72 131.6 2 L
+V
+0.5 H
+2 Z
+0 X
+N
+54 69.88 666 861.88 C
+3 F
+0 X
+0 K
+(\240) 94.71 123.04 T
+6 F
+0.53 (The main loop of the benchmark was hand-inlined so that the Smalltalk compiler could produce better code; otherwise, the) 103.78 119.04 P
+(time would be 36.7 seconds. ) 94.71 109.04 T
+3 F
+(\340) 94.71 101.04 T
+6 F
+(Our experimental system cannot recompile this benchmark often enough to reach the steady state.) 103.78 97.04 T
+FMENDPAGE
+%%EndPage: "17" 16
+5 11 /Times-Italic FMDEFINEFONT
+%%Page: "16" 16
+612 792 0 FMBEGINPAGE
+91.99 73.9 604.97 85.89 R
+7 X
+0 K
+V
+0 F
+0 X
+(16) 342.48 77.89 T
+94.71 91.7 604.94 842.88 R
+7 X
+V
+4 F
+0 X
+([MIPS86]) 94.71 835.55 T
+0.69 (MIPS Computer Systems, ) 157.72 835.55 P
+5 F
+0.69 (MIPS Language Programmer\325s Guide) 276.98 835.55 P
+4 F
+0.69 (. MIPS Computer Systems, Sunny-) 447.77 835.55 P
+(vale, CA, 1986.) 157.72 822.55 T
+([Mit70]) 94.71 808.55 T
+0.55 (J. G. Mitchell, ) 157.72 808.55 P
+5 F
+0.55 (Design and Construction of Flexible and Efficient Interactive Programming Systems) 225.28 808.55 P
+4 F
+0.55 (.) 602.2 808.55 P
+(Ph.D. Thesis, Carnegie-Mellon University, 1970.) 157.72 795.55 T
+([PW90]) 94.71 781.55 T
+1.8 (William Pugh and Grant Weddell, \322Two-Directional Record Layout for Multiple Inheritance.\323 In) 157.72 781.55 P
+5 F
+-0.46 (Proceedings of the SIGPLAN \32590 Conference on Programming Language Design and Implementation) 157.72 768.55 P
+4 F
+-0.46 (,) 602.2 768.55 P
+(pp. 85-91, White Plains, NY, June, 1990. Published as ) 157.72 755.55 T
+5 F
+(SIGPLAN Notices 25\0506\051) 399.72 755.55 T
+4 F
+(, June, 1990.) 505.91 755.55 T
+([Ros88]) 94.71 741.55 T
+-0.48 (John R. Rose, \322Fast Dispatch Mechanisms for Stock Hardware.\323 In ) 157.72 741.55 P
+5 F
+-0.48 (OOPSLA \32588 Conference Proceed-) 451.68 741.55 P
+0.83 (ings) 157.72 728.55 P
+4 F
+0.83 (, pp. 27-35, San Diego, CA, October, 1988. Published as ) 176.04 728.55 P
+5 F
+0.83 (SIGPLAN Notices 23\05011\051) 436.14 728.55 P
+4 F
+0.83 (, November,) 549.5 728.55 P
+(1988.) 157.72 715.55 T
+([ST84]) 94.71 701.55 T
+0.02 (Norihisa Suzuki and Minoru Terada, \322Creating Efficient Systems for Object-Oriented Languages.\323 In) 157.72 701.55 P
+5 F
+1.04 (Proceedings of the 11th Symposium on the Principles of Programming Languages) 157.72 688.55 P
+4 F
+1.04 (, Salt Lake City,) 530.09 688.55 P
+(January, 1984.) 157.72 675.55 T
+([Suz81]) 94.71 661.55 T
+0.21 (Norihisa Suzuki, \322Inferring Types in Smalltalk.\323 In ) 157.72 661.55 P
+5 F
+0.21 (Proceedings of the 8th Symposium on the Princi-) 387.74 661.55 P
+(ples of Programming Languages) 157.72 648.55 T
+4 F
+(, 1981.) 302.07 648.55 T
+([UBF+84]) 94.71 634.55 T
+0.75 (D. Ungar, R. Blau, P. Foley, D. Samples, and D. Patterson, \322Architecture of SOAR: Smalltalk on a) 157.72 634.55 P
+-0.39 (RISC.\323 In ) 157.72 621.55 P
+5 F
+-0.39 (Eleventh Annual International Symposium on Computer Architecture) 203.63 621.55 P
+4 F
+-0.39 (, Ann Arbor, MI, June,) 505.82 621.55 P
+(1984.) 157.72 608.55 T
+([Ung86]) 94.71 594.55 T
+2.15 (David Ungar, ) 157.72 594.55 P
+5 F
+2.15 (The Design and Evaluation of a High Performance Smalltalk System.) 224.57 594.55 P
+4 F
+2.15 ( MIT Press,) 549.08 594.55 P
+(Cambridge, MA, 1986.) 157.72 581.55 T
+([UP83]) 94.71 567.55 T
+1.64 (David Ungar and David Patterson, \322Berkeley Smalltalk: Who Knows Where the Time Goes?\323 In) 157.72 567.55 P
+([Kra83].) 157.72 554.55 T
+([UP87]) 94.71 540.55 T
+(David Ungar and David Patterson, \322What Price Smalltalk?\323 In ) 157.72 540.55 T
+5 F
+(IEEE Computer 20\0501\051) 435.38 540.55 T
+4 F
+(, January, 1987.) 532.41 540.55 T
+([WM89]) 94.71 526.55 T
+3.02 (Paul R. Wilson and Thomas G. Mohler, \322Design of the Opportunistic Garbage Collector.\323 In) 157.72 526.55 P
+5 F
+1.63 (OOPSLA) 157.72 513.55 P
+1.63 (\32589 Conference Proceedings) 201.36 513.55 P
+4 F
+1.63 (, pp. 23-35, New Orleans, LA, October, 1989. Published as) 330.32 513.55 P
+5 F
+(SIGPLAN Notices 24\05010\051) 157.72 500.55 T
+4 F
+(, October, 1989.) 269.41 500.55 T
+FMENDPAGE
+%%EndPage: "16" 15
+7 10 /Times-Italic FMDEFINEFONT
+%%Page: "15" 15
+612 792 0 FMBEGINPAGE
+91.99 73.9 604.97 85.89 R
+7 X
+0 K
+V
+0 F
+0 X
+(15) 342.48 77.89 T
+94.71 91.7 604.94 842.88 R
+7 X
+V
+1 F
+0 X
+(9.) 94.71 832.22 T
+(References) 121.69 832.22 T
+4 F
+([BI82]) 94.71 812.55 T
+1.08 (A. H. Borning and D. H. H. Ingalls, \322A Type Declaration and Inference System for Smalltalk.\323 In) 157.72 812.55 P
+5 F
+-0.57 (Conference Record of the Ninth Annual Symposium on Foundations of Computer Science) 157.72 799.55 P
+4 F
+-0.57 (, pp. 133-139,) 544.76 799.55 P
+(1982.) 157.72 786.55 T
+([Cha91]) 94.71 772.55 T
+0.24 (Craig Chambers, ) 157.72 772.55 P
+5 F
+0.24 (The Design and Implementation of the S) 235.41 772.55 P
+7 F
+0.22 (ELF) 413.84 772.55 P
+5 F
+0.24 ( Compiler, an Optimizing Compiler for) 431.61 772.55 P
+(Object-Oriented Programming Languages) 157.72 759.55 T
+4 F
+(. Ph.D. Thesis, Stanford University. In preparation.) 345.08 759.55 T
+([CPL83]) 94.71 745.55 T
+2.07 (Thomas J. Conroy and Eduardo Pelegri-Llopart, \322An Assessment of Method-Lookup Caches for) 157.72 745.55 P
+(Smalltalk-80 Implementations.\323 In [Kra83].) 157.72 732.55 T
+([CU89]) 94.71 718.55 T
+1.34 (Craig Chambers and David Ungar, \322Customization: Optimizing Compiler Technology for S) 157.72 718.55 P
+6 F
+1.22 (ELF) 575.46 718.55 P
+4 F
+1.34 (, a) 593.23 718.55 P
+0.74 (Dynamically-Typed Object-Oriented Programming Language.\323 In ) 157.72 705.55 P
+5 F
+0.74 (Proceedings of the SIGPLAN \32589) 455.53 705.55 P
+3.04 (Conference on Programming Language Design and Implementation) 157.72 692.55 P
+4 F
+3.04 (, Portland, OR, June 1989.) 476.22 692.55 P
+(Published as ) 157.72 679.55 T
+5 F
+(SIGPLAN Notices 24\0507\051) 215.71 679.55 T
+4 F
+(, July, 1989.) 321.9 679.55 T
+([CUL89]) 94.71 665.55 T
+-0.41 (Craig Chambers, David Ungar, and Elgin Lee, \322An Efficient Implementation of SELF, a Dynamically-) 157.72 665.55 P
+-0.45 (Typed Object-Oriented Language Based on Prototypes.\323 In ) 157.72 652.55 P
+5 F
+-0.45 (OOPSLA \32589 Conference Proceeding) 418.18 652.55 P
+4 F
+-0.45 (s, pp.) 581.9 652.55 P
+(49-70, New Orleans, LA, 1989. Published as ) 157.72 639.55 T
+5 F
+(SIGPLAN Notices 24\05010\051) 357.59 639.55 T
+4 F
+(, October, 1989.) 469.27 639.55 T
+([CU90]) 94.71 625.55 T
+0.83 (Craig Chambers and David Ungar, \322) 157.72 625.55 P
+0.83 (Iterative Type Analysis and Extended Message Splitting: Opti-) 322.36 625.55 P
+0.08 (mizing Dynamically-Typed Object-Oriented Programs.\323 In ) 157.72 612.55 P
+5 F
+0.08 (Proceedings of the SIGPLAN \32590 Confer-) 421.14 612.55 P
+-0.65 (ence on Programming Language Design and Implementation) 157.72 599.55 P
+4 F
+-0.65 (, White Plains, NY, June, 1990. Published) 423.59 599.55 P
+(as ) 157.72 586.55 T
+5 F
+(SIGPLAN Notices 25\0506\051) 169.62 586.55 T
+4 F
+(, June, 1990.) 275.82 586.55 T
+([CU91]) 94.71 572.55 T
+2.57 (Craig Chambers and David Ungar, \322) 157.72 572.55 P
+2.57 (Making Pure Object-Oriented Languages Practical.\323 To be) 331.08 572.55 P
+(presented at OOPSLA \32491, Phoenix, AZ, October, 1991.) 157.72 559.55 T
+([Deu83]) 94.71 545.55 T
+1.7 (L. Peter Deutsch, \322The Dorado Smalltalk-80 Implementation: Hardware Architecture\325s Impact on) 157.72 545.55 P
+(Software Architecture.\323 In [Kra83].) 157.72 532.55 T
+([DMSV89]) 94.71 518.55 T
+1.69 (R. Dixon, T. McKee, P. Schweitzer, and M. Vaughan, \322A Fast Method Dispatcher for Compiled) 157.72 518.55 P
+0.74 (Languages with Multiple Inheritance.\323 In ) 157.72 505.55 P
+5 F
+0.74 (OOPSLA \32589 Conference Proceedings) 346.33 505.55 P
+4 F
+0.74 (, pp. 211-214, New) 517.9 505.55 P
+(Orleans, LA, October, 1989. Published as ) 157.72 492.55 T
+5 F
+(SIGPLAN Notices 24\05010\051) 343.85 492.55 T
+4 F
+(, October, 1989.) 455.54 492.55 T
+([DS84]) 94.71 478.55 T
+2.82 (L. Peter Deutsch and Alan Schiffman, \322Efficient Implementation of the Smalltalk-80 System.\323) 157.72 478.55 P
+5 F
+-0.47 (Proceedings of the 11th Symposium on the Principles of Programming Languages) 157.72 465.55 P
+4 F
+-0.47 (, Salt Lake City, UT,) 514.96 465.55 P
+(1984.) 157.72 452.55 T
+([ES90]) 94.71 438.55 T
+1 (Margaret A. Ellis and Bjarne Stroustrup, ) 157.72 438.55 P
+5 F
+1 (The Annotated C++ Reference Manual.) 344.98 438.55 P
+4 F
+1 ( Addison-Wesley,) 524.61 438.55 P
+(Reading, MA, 1990.) 157.72 425.55 T
+([GJ90]) 94.71 411.55 T
+0.38 (Justin Graver and Ralph Johnson, \322A Type System for Smalltalk.\323 In ) 157.72 411.55 P
+5 F
+0.38 (Conference Record of the 17th) 468.56 411.55 P
+1.62 (Annual ACM Symposium on Principles of Programming Languages) 157.72 398.55 P
+4 F
+1.62 (, San Francisco, CA, January,) 467.85 398.55 P
+(1990.) 157.72 385.55 T
+([GR83]) 94.71 371.55 T
+0.9 (Adele Goldberg and David Robson, ) 157.72 371.55 P
+5 F
+0.9 (Smalltalk-80: The Language and Its Implementation.) 322.74 371.55 P
+4 F
+0.9 ( Addison-) 560.4 371.55 P
+(Wesley, Reading, MA, 1983.) 157.72 358.55 T
+([Han74]) 94.71 344.55 T
+1.64 (Gilbert J. Hansen, ) 157.72 344.55 P
+5 F
+1.64 (Adaptive Systems for the Dynamic Run-Time Optimization of Programs) 244.73 344.55 P
+4 F
+1.64 (. Ph.D.) 572.78 344.55 P
+(Thesis, Carnegie-Mellon University, 1974.) 157.72 331.55 T
+([Hei90]) 94.71 317.55 T
+1.71 (Richard L. Heintz, Jr., ) 157.72 317.55 P
+5 F
+1.71 (Low Level Optimizations for an Object-Oriented Programming Language) 265.24 317.55 P
+4 F
+1.71 (.) 602.2 317.55 P
+(Master\325s Thesis, University of Illinois at Urbana-Champaign, 1990.) 157.72 304.55 T
+([Ing86]) 94.71 290.55 T
+2.07 (Daniel H. Ingalls, \322A Simple Technique for Handling Multiple Polymorphism.\323 In ) 157.72 290.55 P
+5 F
+2.07 (OOPSLA) 546.66 290.55 P
+2.07 (\32586) 590.3 290.55 P
+1.82 (Conference Proceedings) 157.72 277.55 P
+4 F
+1.82 (, Portland, OR, 1986. Published as ) 267.86 277.55 P
+5 F
+1.82 (SIGPLAN Notices 21\05011\051) 433.19 277.55 P
+4 F
+1.82 (, November,) 548.51 277.55 P
+(1986.) 157.72 264.55 T
+([JGZ88]) 94.71 250.55 T
+0.69 (Ralph E. Johnson, Justin O. Graver, and Lawrence W. Zurawski, \322TS: An Optimizing Compiler for) 157.72 250.55 P
+1.87 (Smalltalk.\323 In ) 157.72 237.55 P
+5 F
+1.87 (OOPSLA \32588 Conference Proceedings) 225.86 237.55 P
+4 F
+1.87 (, pp. 18-26, San Diego, CA, October, 1988.) 400.82 237.55 P
+(Published as ) 157.72 224.55 T
+5 F
+(SIGPLAN Notices 23\05011\051) 215.71 224.55 T
+4 F
+(, November, 1988.) 327.4 224.55 T
+([Joh87]) 94.71 210.55 T
+3.92 (Ralph Johnson, ed., \322Workshop on Compiling and Optimizing Object-Oriented Programming) 157.72 210.55 P
+1.72 (Languages.\323 In ) 157.72 197.55 P
+5 F
+1.72 (Addendum to the OOPSLA \32587 Conference Proceedings) 231.03 197.55 P
+4 F
+1.72 (, pp. 59-65, Orlando, FL,) 487.9 197.55 P
+(October, 1987. Published as ) 157.72 184.55 T
+5 F
+(SIGPLAN Notices 23\0505\051) 284.05 184.55 T
+4 F
+(, May, 1988.) 390.25 184.55 T
+([KiRo89]) 94.71 170.55 T
+-0.16 (Gregor Kiczales and Luis Rodriguez, \322Efficient Method Dispatch in PCL.\323 Technical Report SSL-89-) 157.72 170.55 P
+(95, Xerox PARC, 1989.) 157.72 157.55 T
+([Kra83]) 94.71 143.55 T
+1.11 (Glenn Krasner, ed., ) 157.72 143.55 P
+5 F
+1.11 (Smalltalk-80: Bits of History and Words of Advice.) 249.53 143.55 P
+4 F
+1.11 ( Addison-Wesley, Reading,) 481.28 143.55 P
+(MA, 1983.) 157.72 130.55 T
+([Lea90]) 94.71 116.55 T
+0.01 (Douglas Lea, \322Customization in C++.\323 In ) 157.72 116.55 P
+5 F
+0.01 (Proceedings of the 1990 Usenix C++ Conference) 344.1 116.55 P
+4 F
+0.01 (, pp. 301-) 562.82 116.55 P
+(314, San Francisco, CA, April, 1990.) 157.72 103.55 T
+FMENDPAGE
+%%EndPage: "15" 14
+8 12 /Times-Italic FMDEFINEFONT
+9 12 /Times-Bold FMDEFINEFONT
+%%Page: "14" 14
+612 792 0 FMBEGINPAGE
+91.99 73.9 604.97 85.89 R
+7 X
+0 K
+V
+0 F
+0 X
+(14) 342.48 77.89 T
+94.71 91.7 604.94 842.88 R
+7 X
+V
+0 X
+0.32 (type test take about the same time \0506 cycles\051 as a full \322lookup\323. However) 94.71 834.88 P
+0.32 (, statically-typed object-oriented) 448.76 834.88 P
+(languages could bene\336t from customization, type casing, and inlining [Lea90]) 94.71 820.88 T
+6 F
+(.) 469.45 820.88 T
+0 F
+1.74 (Kiczales and Rodriguez [KiRo89] describe a mechanism similar to PICs for a CLOS implementation.) 94.71 801.88 P
+2.12 (Their implementation of message dispatch does not use inline caching per se but it does use special) 94.71 787.88 P
+0.19 (dispatch handlers for some cases, e.g. when a call site uses only one or two distinct classes. In the general) 94.71 773.88 P
+(case, the lookup uses speci\336c hash tables speci\336c to the message names.) 94.71 759.88 T
+2.02 (The concept of adaptive systems is not new) 94.71 740.88 P
+2.02 (. For example, Hansen describes an adaptive compiler in) 316.95 740.88 P
+0.99 ([Han74]. His compiler optimized the inner loops of Fortran programs at run-time. The main goal of his) 94.71 726.88 P
+0.23 (work was to minimize the total cost of running a program which presumably was executed only once. All) 94.71 712.88 P
+1.59 (optimizations could be applied statically) 94.71 698.88 P
+1.59 (, but Hansen\325) 294.19 698.88 P
+1.59 (s system tried to allocate compile time wisely in) 361 698.88 P
+(order to minimize total execution time, i.e. the sum of compile and run-time.) 94.71 684.88 T
+1.1 (Some modern compilers for conventional languages use pro\336ling information to perform branch sched-) 94.71 665.88 P
+-0.27 (uling and to reduce cache con\337icts [MIPS86]. The optimizations enabled by this form of feedback are typi-) 94.71 651.88 P
+(cally very low-level and machine-dependent. ) 94.71 637.88 T
+4.49 (Mitchell [Mit70] converted parts of dynamically-typed interpreted programs into compiled form,) 94.71 618.88 P
+1.84 (assuming that the types of variables remained constant. Whenever the type of a variable changed, all) 94.71 604.88 P
+1.02 (compiled code which depended on its type was discarded. Since the language did not support polymor-) 94.71 590.88 P
+0.08 (phism and was not object-oriented, the main motivation for this scheme was to reduce interpretation over-) 94.71 576.88 P
+2.06 (head and to replace generic built-in operators by simpler) 94.71 562.88 P
+2.06 (, specialized code sequences \050e.g. to replace) 381.8 562.88 P
+(generic addition by integer addition\051.) 94.71 548.88 T
+1.3 (Suzuki [Suz81] reports that a type accumulation phase for Smalltalk-80 was suggested to him by Alan) 94.71 529.88 P
+1.54 (Perlis as an alternative to type analysis. In this approach, a program would be run in interpreted form) 94.71 515.88 P
+0.28 (against some examples and then compiled into more ef) 94.71 501.88 P
+0.28 (\336cient code. However) 360.57 501.88 P
+0.28 (, the information would only) 466.23 501.88 P
+1.35 (be used to avoid lookups by inserting a type test for a likely receiver type and branching to the corre-) 94.71 487.88 P
+0.04 (sponding method \050inline caching was not yet known at that time\051. As far as we know) 94.71 473.88 P
+0.04 (, Suzuki never imple-) 501.57 473.88 P
+0.73 (mented such a system. Furthermore, he maintained that the information obtained by a training run could) 94.71 459.88 P
+(never give useful information on polymorphic types, which is contradicted by our results. ) 94.71 445.88 T
+1 F
+(8.) 94.71 414.22 T
+(Conclusion) 121.69 414.22 T
+0 F
+2.56 (Polymorphic inline caches \050PICs\051 signi\336cantly speed up polymorphic sends: some programs making) 94.71 393.88 P
+1.86 (frequent use of polymorphism run up to 37% faster with PICs. More importantly) 94.71 379.88 P
+1.86 (, polymorphic inline) 503.62 379.88 P
+1 (caches are an important source of type information since they record the set of likely receiver types for) 94.71 365.88 P
+1.84 (every send; such type information is essential for optimizing compilers to generate ef) 94.71 351.88 P
+1.84 (\336cient code. By) 525.64 351.88 P
+1.61 (taking advantage of this information, our experimental implementation of the S) 94.71 337.88 P
+4 F
+1.48 (ELF) 491.6 337.88 P
+0 F
+1.61 ( language executes) 511.13 337.88 P
+-0.29 (some fairly typical object-oriented programs up to 52% faster than the base system and reduces the number) 94.71 323.88 P
+(of dynamically executed message sends by a factor of two to four) 94.71 309.88 T
+(.) 408.8 309.88 T
+0.43 (The presence of PIC-based type information may fundamentally alter the problem of optimizing dynami-) 94.71 290.88 P
+-0.22 (cally-typed object-oriented languages. In current systems, type information is ) 94.71 276.88 P
+8 F
+-0.22 (scar) 467.48 276.88 P
+-0.22 (ce) 487.69 276.88 P
+0 F
+-0.22 (, and consequently the) 498.34 276.88 P
+0.34 (compiler needs to work hard in order to preserve and exploit the scarce information it has. Unfortunately) 94.71 262.88 P
+0.34 (,) 601.95 262.88 P
+0.83 (such techniques are expensive both in terms of compile time and compiled code space. In contrast, type) 94.71 248.88 P
+0.78 (information is ) 94.71 234.88 P
+8 F
+0.78 (abundant) 166.89 234.88 P
+0 F
+0.78 ( in a system using adaptive compilation. Such a system may reduce compilation) 212.2 234.88 P
+0.37 (times signi\336cantly by eliminating most of the computationally expensive type analysis phase and by only) 94.71 220.88 P
+-0.29 (optimizing the most-used parts of programs. In addition, adaptive compilation could overcome some draw-) 94.71 206.88 P
+1.09 (backs of existing optimization techniques such as static type prediction. W) 94.71 192.88 P
+1.09 (e are currently implementing) 462.77 192.88 P
+(such a system for the S) 94.71 178.88 T
+4 F
+(ELF) 205.64 178.88 T
+0 F
+( language in order to validate our ideas. ) 225.17 178.88 T
+9 F
+0.58 (Acknowledgments) 94.71 115.88 P
+0 F
+0.58 (. W) 188.65 115.88 P
+0.58 (e would like to thank Bay-W) 205.6 115.88 P
+0.58 (ei Chang and Ole Agesen for their helpful comments) 346.46 115.88 P
+(on earlier drafts of this paper) 94.71 101.88 T
+(.) 232.93 101.88 T
+FMENDPAGE
+%%EndPage: "14" 13
+10 14 /Times-Bold FMDEFINEFONT
+%%Page: "13" 13
+612 792 0 FMBEGINPAGE
+91.99 73.9 604.97 85.89 R
+7 X
+0 K
+V
+0 F
+0 X
+(13) 342.48 77.89 T
+94.71 91.7 604.94 842.88 R
+7 X
+V
+10 F
+0 X
+(6.2.) 94.71 833.55 T
+(Trade-offs) 121.69 833.55 T
+0 F
+1.07 (T) 94.71 814.88 P
+1.07 (o work well, an adaptive system needs to quickly adapt to the application to maximize overall perfor-) 101.2 814.88 P
+(mance. Speci\336cally) 94.71 800.88 T
+(, the system must make three decisions: ) 187.86 800.88 T
+(\245) 103.69 781.88 T
+8 F
+-0.49 (What to recompile) 112.71 781.88 P
+0 F
+-0.49 (. The system needs to identify the dominating parts of an application \050the \322hot spots\323\051) 200.35 781.88 P
+-0.51 (in order to optimize them. A simple approach is to count the number of times a method is executed. This) 112.71 767.88 P
+-0.74 (should work well for relatively unoptimized programs which contain message sends in the body of every) 112.71 753.88 P
+0.01 (loop. The counters of the leaf methods called by the innermost loop will overflow first, and the system) 112.71 739.88 P
+-0.5 (can then search up the call stack to find the loop. Once the methods become more optimized and contain) 112.71 725.88 P
+0.06 (inlined loops, standard profiling methods such as interrupt-driven PC-sampling can be used to find the) 112.71 711.88 P
+(methods responsible for significant amounts of execution time.) 112.71 697.88 T
+(\245) 103.69 679.88 T
+8 F
+-0.14 (When to recompile. ) 112.71 679.88 P
+0 F
+-0.14 (When a method exceeds a certain threshold in the number of invocations, it will be) 208.88 679.88 P
+1.25 (recompiled. Thus the value of this threshold is one of the primary points of control of the adaptive) 112.71 665.88 P
+0.03 (system, and the system needs to do a good job in setting this value. The threshold could be determined) 112.71 651.88 P
+-0.55 (empirically by estimating the cost and gains of recom) 112.71 637.88 P
+-0.55 (pilation. A more dynamic approach could estimate) 365.44 637.88 P
+-0.53 (the recompilation time based on the size \050and maybe previous compilation time\051 of a method, and adjust) 112.71 623.88 P
+(the recompilation threshold accordingly. ) 112.71 609.88 T
+(\245) 103.69 591.88 T
+8 F
+1.82 (How much to optimize) 112.71 591.88 P
+0 F
+1.82 (. Spending more effort during recompilation can result in bigger savings in) 225.79 591.88 P
+-0.54 (execution time and reduce the need for or number of future recompilations, but it will also lead to longer) 112.71 577.88 P
+-0.16 (compile pauses. In some situations \050e.g. when starting up a new application\051, latency is more important) 112.71 563.88 P
+(than absolute speed, and too much optimization would impair the responsiveness of the system. ) 112.71 549.88 T
+1.41 (One approach to managing the optimization strategy would be to have the system monitor the ratio of) 94.71 531.88 P
+-0.19 (compile time to program execution time. When this ratio is high \050when compilation time dominates execu-) 94.71 517.88 P
+3.13 (tion time\051, the compiler would optimize less aggressively and recompile less frequently) 94.71 503.88 P
+3.13 (. Thus, the) 548.05 503.88 P
+1.83 (compiler would compile a new application\325) 94.71 489.88 P
+1.83 (s working set as quickly as possible. Once execution time) 312.03 489.88 P
+0.31 (returned to the forefront, the compiler could adopt a more aggressive recompilation stance to increase the) 94.71 475.88 P
+(performance of the hot spots of the application.) 94.71 461.88 T
+10 F
+(6.3.) 94.71 436.55 T
+(Preserving Information Across Code Cache Flushes) 121.69 436.55 T
+0 F
+0.07 (Recompilation may interact poorly with dynamic compilation and caching. If the cache for compiled code) 94.71 417.88 P
+0.82 (is too small to hold all of the system\325) 94.71 403.88 P
+0.82 (s code \050especially with a system whose programming environment) 278.56 403.88 P
+1.15 (shares the address space with user applications\051, an optimized method might be \337ushed from the cache) 94.71 389.88 P
+-0.26 (because it had not been used recently) 94.71 375.88 P
+-0.26 (. However) 270.88 375.88 P
+-0.26 (, the fact that the method was optimized indicates that when) 320.09 375.88 P
+(it is used again, it is likely to be used intensively) 94.71 361.88 T
+(. If the compiled code \050and all the information it contains\051) 326.81 361.88 T
+0.91 (is simply discarded when being \337ushed from the cache, the system will for) 94.71 347.88 P
+0.91 (get that the method is a \322hot) 464.21 347.88 P
+-0.05 (spot.\323 When the code is needed again, time will be wasted by \336rst compiling an unoptimized version, only) 94.71 333.88 P
+(to discover later that the method needs optimization. ) 94.71 319.88 T
+0.49 (T) 94.71 300.88 P
+0.49 (o solve this problem, the system could keep some information about optimized methods even after they) 101.2 300.88 P
+1.23 (have been \337ushed from the code cache. For example, the system could keep a compressed form of the) 94.71 286.88 P
+0.04 (method\325) 94.71 272.88 P
+0.04 (s type information so that an ef) 134.02 272.88 P
+0.04 (\336cient compiled version could be regenerated immediately without) 283.25 272.88 P
+0.42 (going through several recompilations. If there is not enough space to keep such compressed methods, the) 94.71 258.88 P
+-0.16 (preserved information could be the mere fact that the method is important \050time-critical\051; when the method) 94.71 244.88 P
+0.17 (has to be regenerated the system could recompile it more aggressively than it would do normally and thus) 94.71 230.88 P
+(could produce optimized code more quickly) 94.71 216.88 T
+(.) 305.45 216.88 T
+1 F
+(7.) 94.71 185.22 T
+(Related Work) 121.69 185.22 T
+0 F
+0.07 (Statically-typed languages can handle polymorphic sends in constant time by indexing into a type-speci\336c) 94.71 164.89 P
+-0.02 (function table, thus reducing the lookup to an indirect procedure call. In C++, for example, a dynamically-) 94.71 150.89 P
+0.7 (bound call takes between 5 and 9 cycles on a SP) 94.71 136.89 P
+0.7 (ARC [Ros88, DMSV89, ES90, PW90]. This is possible) 332.48 136.89 P
+1.17 (because static type checking can guarantee the success of the lookup, i.e. the result of the table lookup) 94.71 122.89 P
+-0.09 (need not be veri\336ed. Inline caching techniques are less attractive in this context because a direct call plus a) 94.71 108.89 P
+FMENDPAGE
+%%EndPage: "13" 12
+%%Page: "12" 12
+612 792 0 FMBEGINPAGE
+91.99 73.9 604.97 85.89 R
+7 X
+0 K
+V
+0 F
+0 X
+(12) 342.48 77.89 T
+94.71 91.7 604.94 842.88 R
+7 X
+V
+0 X
+1.21 (The messages labelled \322DI methods\323 invoke methods which use dynamic inheritance \050DI\051, a feature of) 94.71 834.88 P
+0.87 (S) 94.71 820.88 P
+4 F
+0.8 (ELF) 101.38 820.88 P
+0 F
+0.87 ( which allows objects to change their parents on the \337y) 120.91 820.88 P
+0.87 (. In the current S) 392.68 820.88 P
+4 F
+0.8 (ELF) 476.45 820.88 P
+0 F
+0.87 ( system, the use of DI) 495.98 820.88 P
+1.19 (prevents messages from being inlined even if their receiver type is known. Therefore, the experimental) 94.71 806.88 P
+1.97 (system cannot eliminate these sends. The messages labelled \322normal methods\323 and \322access methods\323) 94.71 792.88 P
+(invoke ordinary methods and \322wrapper\323 methods that only access an instance variable, respectively) 94.71 778.88 T
+(.) 571.89 778.88 T
+3.08 (For our benchmarks, recompilation is extremely successful in reducing the number of dynamically) 94.71 759.88 P
+0.8 (executed message sends: recompiling once ) 94.71 745.88 P
+8 F
+0.8 (halves) 307.53 745.88 P
+0 F
+0.8 ( the total number of message sends. If DI methods are) 338.18 745.88 P
+1.83 (subtracted out, the median reduction of the number of message sends is a factor of 3.2. W) 94.71 731.88 P
+1.83 (ith several) 553.49 731.88 P
+1.57 (recompilations, a factor of 5.6 is achieved for ) 94.71 717.88 P
+2 F
+3.77 (PathCache) 328.44 717.88 P
+0 F
+1.57 (. This surprising reduction provides strong) 393.21 717.88 P
+0.64 (evidence that a compiler using only static techniques such as type analysis, type prediction, and splitting) 94.71 703.88 P
+1.68 (cannot infer the receiver types of many message sends in object-oriented programs. PICs provide this) 94.71 689.88 P
+0.66 (missing information, and our experimental system is able to optimize away most eligible sends with just) 94.71 675.88 P
+(one recompilation. ) 94.71 661.88 T
+1 F
+(6.) 94.71 630.22 T
+(Adaptive Compilation) 121.69 630.22 T
+0 F
+0.77 (Our experimental implementation demonstrates that code quality can be signi\336cantly improved by using) 94.71 609.88 P
+0.09 (the type information contained in PICs. However) 94.71 595.88 P
+0.09 (, it is built on top of a compiler which was designed with) 330.97 595.88 P
+1.64 (fundamentally dif) 94.71 581.88 P
+1.64 (ferent assumptions about what is important and cost-ef) 181.74 581.88 P
+1.64 (fective and therefore does not) 455.84 581.88 P
+0.02 (realize many of the potential bene\336ts of a recompilation-based system. In this section we outline the bene-) 94.71 567.88 P
+0.35 (\336ts and problems of a new framework for ef) 94.71 553.88 P
+0.35 (\336cient implementations of dynamically-typed object-oriented) 309.09 553.88 P
+0.31 (languages, based on the idea of incremental optimization of compiled code in an environment where type) 94.71 539.88 P
+0.47 (information is relatively abundant. In the tradition of Hansen [Han74] we will call this mode of compila-) 94.71 525.88 P
+(tion ) 94.71 511.88 T
+8 F
+(adaptive compilation) 116.37 511.88 T
+0 F
+(.) 217.98 511.88 T
+-0.14 (One goal of such a system is to maximize overall system performance, i.e. to minimize the sum of compile) 94.71 492.88 P
+1.26 (time and execution time over the life of the system. Another somewhat con\337icting goal is to minimize) 94.71 478.88 P
+2.5 (pauses caused by dynamic compilation so that applications always appear to the user to be making) 94.71 464.88 P
+1.33 (progress. These goals can be thought of as maximizing throughput \050overall system performance\051 while) 94.71 450.88 P
+1.13 (minimizing latency \050time to reach a certain point in an application\051, and as with other systems must be) 94.71 436.88 P
+(balanced against each other) 94.71 422.88 T
+(.) 226.26 422.88 T
+0.55 (In our adaptive framework, methods are initially compiled with little or no optimization. As methods are) 94.71 403.88 P
+0.06 (used often, they are recompiled with more optimization. The recompilation can take advantage of the type) 94.71 389.88 P
+1.28 (information present in the previous version\325) 94.71 375.88 P
+1.28 (s PICs to generate reasonably good code without too much) 311.3 375.88 P
+0.3 (expensive analysis. Only those methods that are executed most frequently are eventually recompiled with) 94.71 361.88 P
+(full optimization, using relatively expensive techniques to generate the best possible code.) 94.71 347.88 T
+10 F
+(6.1.) 94.71 322.55 T
+(Faster Compilation) 121.69 322.55 T
+0 F
+-0.1 (Adaptive compilation promises a number of important bene\336ts. Perhaps the most important of these is that) 94.71 303.88 P
+0 (overall system performance should improve dramatically) 94.71 289.88 P
+0 (. W) 368.07 289.88 P
+0 (e believe that a relatively simple and very fast) 384.43 289.88 P
+0.06 (compiler can generate good code using the type information provided by PICs because the greater amount) 94.71 275.88 P
+0.94 (of inlining should compensate for the optimization possibilities lost by not using expensive global tech-) 94.71 261.88 P
+0.14 (niques. The compiler could refrain from using expensive optimizations as long as possible and rely on the) 94.71 247.88 P
+(wealth of type information to generate good code quickly) 94.71 233.88 T
+(.) 369.73 233.88 T
+1.21 (A fast compiler also means short compile pauses. Even for the critical methods which need to be opti-) 94.71 214.88 P
+0.46 (mized, compile pauses could be kept short by distributing the optimization ef) 94.71 200.88 P
+0.46 (fort over several recompila-) 470.01 200.88 P
+1.13 (tions or by compiling in the background. Also, recompilation could be performed in the background or) 94.71 186.88 P
+(during the user) 94.71 172.88 T
+(\325) 167.1 172.88 T
+(s \322think pauses,\323 similar to W) 170.44 172.88 T
+(ilson\325) 313.86 172.88 T
+(s opportunistic garbage collection) 340.53 172.88 T
+([WM89].) 505.75 172.88 T
+0.66 (Of course, recompilation has costs. Some time will be wasted by executing unoptimized code, and some) 94.71 153.88 P
+2.21 (time will be wasted because some work is repeated with every recompilation \050e.g. code generation\051.) 94.71 139.88 P
+0.2 (However) 94.71 125.88 P
+0.2 (, we believe that the time saved by recompiling only the frequently-used methods will more than) 138.19 125.88 P
+(of) 94.71 111.88 T
+(fset this additional overhead.) 104.48 111.88 T
+FMENDPAGE
+%%EndPage: "12" 11
+11 10 /Courier FMDEFINEFONT
+%%Page: "11" 11
+612 792 0 FMBEGINPAGE
+91.99 73.9 604.97 85.89 R
+7 X
+0 K
+V
+0 F
+0 X
+(1) 342.71 77.89 T
+(1) 348.26 77.89 T
+94.71 91.7 604.94 842.88 R
+7 X
+V
+9 F
+0 X
+(Figure 8.) 218.26 666.96 T
+(Performance of the Experimental System) 270.23 666.96 T
+0 F
+0.67 (W) 94.71 637.96 P
+0.67 (ith recompilation, the benchmarks show a median speedup of 27% over the base system and a median) 105.55 637.96 P
+1.03 (speedup of 1) 94.71 623.96 P
+1.03 (1% over the system using PICs alone \050excluding ) 157.61 623.96 P
+2 F
+2.47 (PolyTest) 401.69 623.96 P
+0 F
+1.03 (\051. The experimental system is) 459.26 623.96 P
+0.74 (especially successful for ) 94.71 609.96 P
+2 F
+1.78 (Richards) 217.17 609.96 P
+0 F
+0.74 ( and ) 274.74 609.96 P
+2 F
+1.78 (Parser) 299.54 609.96 P
+0 F
+0.74 ( which are 52% and 48% faster than the base system,) 342.72 609.96 P
+-0.05 (respectively) 94.71 595.96 P
+-0.05 (. Because of several shortcomings of our experimental system, these numbers are conservative) 151.88 595.96 P
+0.29 (estimates of the performance achievable with our techniques. For example, the code for type cases gener-) 94.71 581.96 P
+1 (ated by the experimental compiler is more than two times slower than an equivalent type case of a PIC) 94.71 567.96 P
+0.8 (because it reloads the receiver) 94.71 553.96 P
+0.8 (\325) 242.87 553.96 P
+0.8 (s type before every type test. The extra loads negate much of the savings) 246.2 553.96 P
+2.5 (achieved by inlining short methods; for example, ) 94.71 539.96 P
+2 F
+6 (PolyTest) 350.72 539.96 P
+0 F
+2.5 ( is only mar) 408.29 539.96 P
+2.5 (ginally faster even though) 472.54 539.96 P
+(recompilation has eliminated ) 94.71 525.96 T
+8 F
+(all) 236.95 525.96 T
+0 F
+( message sends. ) 249.62 525.96 T
+0.54 (Figure 9 shows the impact of recompilation on the number of message sends. For each benchmark, three) 94.71 506.96 P
+0.97 (con\336gurations are shown. The \336rst bar represents the number of messages sent by the benchmark when) 94.71 492.96 P
+0.81 (compiled with the base system. The middle bar represents the number of message sends when using the) 94.71 478.96 P
+2.3 (experimental system with one recompilation. The third bar represents the steady state achieved after) 94.71 464.96 P
+1 (several recompilations; it can be viewed as the best possible case for the current compiler) 94.71 450.96 P
+1 (, i.e. what the) 537.31 450.96 P
+0.82 (compiler would produce if it had complete type information and inlined every message it wanted. Thus,) 94.71 436.96 P
+0.45 (the third scenario shows the minimum number of message sends given the inlining strategies used by the) 94.71 422.96 P
+(compiler) 94.71 408.96 T
+(.) 136.69 408.96 T
+6 F
+(\240) 139.68 413.76 T
+0 F
+( The bars are normalized relative to the base system. ) 144.68 408.96 T
+9 F
+(Figure 9.) 183.43 154.83 T
+(Impact of Recompilation on Number of Message Sends) 235.4 154.83 T
+94.71 123.7 604.94 138.67 C
+94.71 123.7 604.94 138.67 R
+7 X
+0 K
+V
+94.71 129.6 247.72 129.6 2 L
+V
+0.5 H
+2 Z
+0 X
+N
+54 69.88 666 861.88 C
+3 F
+0 X
+0 K
+(\240) 94.71 121.04 T
+6 F
+1.14 (Some methods will not be inlined even when their receiver type is known, for example if they are too large. Because of) 103.78 117.04 P
+-0.2 (limitations of the experimental system, the steady states for ) 94.71 107.04 P
+11 F
+-0.47 (PrimitiveMaker) 332.78 107.04 P
+6 F
+-0.2 ( and ) 416.73 107.04 P
+11 F
+-0.47 (UI) 435.76 107.04 P
+6 F
+-0.2 ( are not available; the data shown in the) 447.76 107.04 P
+(graph represent the best case which the experimental system currently can achieve.) 94.71 97.04 T
+157.84 681.96 541.82 838.88 C
+157.84 681.96 541.82 838.88 R
+7 X
+0 K
+V
+0 52 518 424 658 372.02 139.98 163.82 684.99 FMBEGINEPSF
+%%BeginDocument: <inline>
+%!PS-Adobe-2.0 EPSF-1.2%%Creator: DeltaGraph 1.1%%Title: recomp results%%Creation Date: 11/30/90 0:42 AM %%BoundingBox: 52 518 424 658%%DocumentProcSets: DeltaGraph 1.1%%DocumentSuppliedProcSets: DeltaGraph 1.1%%DocumentFonts: DeltaSymbol%%+Times-Roman%%EndComments%%BeginProcSet: DeltaGraph/DeltaGraph 100 dict def DeltaGraph begin/Version 1.1 def/Revision 0 def/bdef{bind def}bind def/ldef{load def}bdef/xdef{exch def}bdef/FillGray 0 def/FillRed 1 def/FillGreen 1 def/FillBlue 1 def/FillMac 8 string def/UseMacFill false def/StrokeGray 0 def/StrokeRed 1 def/StrokeGreen 1 def/StrokeBlue 1 def/StrokeMac 8 string def/UseMacStroke false def/apat 8 string def/mat matrix def1 0 mat defaultmatrix dtransform exch atan/patang xdef/sscrn{currentscreen/proc xdef/ang xdef/freq xdef}bdef/rscrn{freq ang/proc load setscreen}bdef/macpat{apat copy pop 9.375 patang{1 add 4 mul cvi apat exch get exch 1 add 4 mul cvi 7 sub bitshift 1 and}setscreen setgray}bdef/d/setdash ldef/g{false/UseMacFill xdef/FillGray xdef}bdef/mg{true/UseMacFill xdef FillMac copy pop/FillGray xdef}bdef/G{false/UseMacStroke xdef/StrokeGray xdef}bdef/MG{true/UseMacStroke xdef StrokeMac copy pop/StrokeGray xdef}bdef/_i currentflat def/i{dup 0 eq{pop _i}if setflat}bdef/j/setlinejoin ldef/J/setlinecap ldef/rgb{/FillBlue xdef/FillGreen xdef/FillRed xdef}bdef/RGB{/StrokeBlue xdef/StrokeGreen xdef/StrokeRed xdef}bdef/M/setmiterlimit ldef/w/setlinewidth ldef/_R{.25 sub round .25 add}bdef/_r{transform _R exch _R exch itransform}bdef/m{_r moveto}bdef/L{_r lineto}bdef/c{_r curveto}bdef/_gf{FillGray 0 ne{dup 1 exch sub FillGray mul add}if}bdef/_gs{StrokeGray 0 ne{dup 1 exch sub StrokeGray mul add}if}bdef/sf{UseMacFill{FillRed FillGreen FillBlue setrgbcolor sscrn FillGray FillMac macpat}{FillGray setgray FillRed _gf FillGreen _gf FillBlue _gf setrgbcolor}ifelse}bdef/ss{UseMacStroke{StrokeRed StrokeGreen StrokeBlue setrgbcolor sscrn FillGray StrokeMac macpat}{StrokeGray setgray StrokeRed _gs StrokeGreen _gs StrokeBlue _gs setrgbcolor}ifelse}bdef/F{sf eofill UseMacFill{rscrn}if}bdef/f{closepath F}bdef/S{ss stroke UseMacStroke{rscrn}if}bdef/s{closepath S}bdef/B{gsave F grestore S}bdef/b{closepath B}bdef/N/newpath ldef/n/N ldef/sh{currentpoint 3 -1 roll show 3 -1 roll add moveto}bdef/vfc{gsave 1 setlinewidth clip/right xdef/bottom xdef/left xdef/top xdef/FillGray 0 deftop bottom sub abs/numsteps xdefdup/FillBlue xdef exch sub numsteps div/Bstep xdefdup/FillGreen xdef exch sub numsteps div/Gstep xdefdup/FillRed xdef exch sub numsteps div/Rstep xdeftop bottom lt{1}{-1}ifelse/step xdeftop step bottom{sf dup newpath left exch moveto right exch lineto strokeFillBlue Bstep sub/FillBlue xdef FillGreen Gstep sub/FillGreen xdef FillRed Rstep sub/FillRed xdef }for grestore}bdef/hfc{gsave 1 setlinewidth clip/right xdef/bottom xdef/left xdef/top xdef/FillGray 0 defleft right sub abs/numsteps xdefdup/FillBlue xdef exch sub numsteps div/Bstep xdefdup/FillGreen xdef exch sub numsteps div/Gstep xdefdup/FillRed xdef exch sub numsteps div/Rstep xdefleft right lt{1}{-1}ifelse/step xdefleft step right{sf dup newpath top moveto bottom lineto strokeFillBlue Bstep sub/FillBlue xdef FillGreen Gstep sub/FillGreen xdef FillRed Rstep sub/FillRed xdef }for grestore}bdef/ellipse{newpath/savematrix matrix currentmatrix deftranslate scale 0 0 1 5 -2 roll arc savematrix setmatrix}bdef/rfc{gsave clip/right xdef/bottom xdef/left xdef/top xdef/centery xdef/centerx xdef/rady xdef/radx xdef/FillGray 0 defleft right sub abs 2 div/numsteps xdefdup/FillBlue xdef exch sub numsteps div/Bstep xdefdup/FillGreen xdef exch sub numsteps div/Gstep xdefdup/FillRed xdef exch sub numsteps div/Rstep xdefnewpath left top moveto left bottom linetoright bottom lineto right top lineto left top linetosf fillradx rady lt{/xstep 1 def/ystep rady radx div def}{/ystep 1 def/xstep radx rady div def}ifelse/xval radx def/yval rady def{xval 0 le{exit}if0 360 xval yval centerx centery ellipseFillBlue Bstep sub/FillBlue xdef FillGreen Gstep sub/FillGreen xdef FillRed Rstep sub/FillRed xdef sf fill/xval xval xstep sub def/yval yval ystep sub def}loopgrestore}bdef/NewCodes 256 array defNewCodes 0StandardEncoding0 128 getintervalputintervalNewCodes 16#27/quotesingle put  NewCodes 16#60/grave put/Adieresis/Aring/Ccedilla/Eacute/Ntilde/Odieresis/Udieresis/aacute/agrave/acircumflex/adieresis/atilde/aring/ccedilla/eacute/egrave/ecircumflex/edieresis/iacute/igrave/icircumflex/idieresis/ntilde/oacute/ograve/ocircumflex/odieresis/otilde/uacute/ugrave/ucircumflex/udieresis/dagger/degree/cent/sterling/section/bullet/paragraph/germandbls/register/copyright/trademark/acute/dieresis/notequal/AE/Oslash/infinity/plusminus/lessequal/greaterequal/yen/mu/partialdiff/summation/product/pi/integral/ordfeminine/ordmasculine/Omega/ae/oslash /questiondown/exclamdown/logicalnot/radical/florin/approxequal/Delta/guillemotleft/guillemotright/ellipsis/nbspace/Agrave/Atilde/Otilde/OE/oe/endash/emdash/quotedblleft/quotedblright/quoteleft/quoteright/divide/lozenge/ydieresis/Ydieresis/fraction/currency/guilsinglleft/guilsinglright/fi/fl/daggerdbl/periodcentered/quotesinglbase/quotedblbase/perthousand/Acircumflex/Ecircumflex/Aacute/Edieresis/Egrave/Iacute/Icircumflex/Idieresis/Igrave/Oacute/Ocircumflex/apple/Ograve/Uacute/Ucircumflex/Ugrave/dotlessi/circumflex/tilde/macron/breve/dotaccent/ring/cedilla/hungarumlaut/ogonek/caronNewCodes 128 128 getinterval astore pop/cd{dup maxlength dict/NF exch def{1 index/FID ne{NF 3 1 roll put}{pop pop}ifelse}forall NF}bdef/rc{dup cvn/NewName exch def (|______) anchorsearch{pop findfont cd dup/Encoding NewCodes put NewName exch definefont}if pop}bdef/rfnt{dup FontDirectory exch known{pop}{rc}ifelse}bdef/sfnt{findfont exch scalefont setfont}bdef/mfnt{findfont exch makefont setfont}bdef/oshow{/str2 exch def .1 w 0 1 str2 length 1 sub{str2 exch 1 getinterval false charpath currentpoint stroke m}for}bdef/showsym {movetogsave/ch xdefcurrentpoint initmatrix translate 0 0 movetocurrentfont /FontName get /Courier eqch exch charpath flattenpath pathbbox/ury xdef /urx xdef /lly xdef /llx xdefurx llx sub -2 div llx sub ury lly sub -2 div lly subgrestorermoveto ch show} def/ps2mac{1 -1 scaleneg 0 exch translate} bdef/mac2ps{0 exch translate1 -1 scale} bdefend%%EndProcSet%%BeginSetupDeltaGraph begin 2 setmiterlimit n1 -1 scale 0 -728 translate%%EndSetup% Chart% Poly line0 0 0 RGB114.7148 179.1836 m299.7734 179.1836 LN114.7148 161.25 m299.7734 161.25 LN114.7148 143.3203 m299.7734 143.3203 LN114.7148 125.3867 m299.7734 125.3867 LN114.7148 107.457 m299.7734 107.457 LN114.7148 89.5234 m299.7734 89.5234 LN114.7148 71.5938 m299.7734 71.5938 LN% Poly line0 0 0 RGB114.7148 179.1836 m114.7148 71.5938 LN151.7266 179.1836 m151.7266 71.5938 LN188.7383 179.1836 m188.7383 71.5938 LN225.75 179.1836 m225.75 71.5938 LN262.7617 179.1836 m262.7617 71.5938 LN299.7734 179.1836 m299.7734 71.5938 LN% Poly line0.25 w0 G0 0 0 RGB114.7148 180.1836 m114.7148 179.1836 LS133.2188 180.1836 m133.2188 179.1836 LS151.7266 180.1836 m151.7266 179.1836 LS170.2305 180.1836 m170.2305 179.1836 LS188.7383 180.1836 m188.7383 179.1836 LS207.2422 180.1836 m207.2422 179.1836 LS225.75 180.1836 m225.75 179.1836 LS244.2539 180.1836 m244.2539 179.1836 LS262.7617 180.1836 m262.7617 179.1836 LS281.2656 180.1836 m281.2656 179.1836 LS299.7734 180.1836 m299.7734 179.1836 LS% Poly line0.5 w0 G0 0 0 RGB111.7148 179.1836 m117.7148 179.1836 LS111.7148 161.25 m117.7148 161.25 LS111.7148 143.3203 m117.7148 143.3203 LS111.7148 125.3867 m117.7148 125.3867 LS111.7148 107.457 m117.7148 107.457 LS111.7148 89.5234 m117.7148 89.5234 LS111.7148 71.5938 m117.7148 71.5938 LS% Poly line0.5 w0 G0 0 0 RGB114.7148 182.1836 m114.7148 179.1836 LS151.7266 182.1836 m151.7266 179.1836 LS188.7383 182.1836 m188.7383 179.1836 LS225.75 182.1836 m225.75 179.1836 LS262.7617 182.1836 m262.7617 179.1836 LS299.7734 182.1836 m299.7734 179.1836 LS% Rect0.25 w0 G0 g0.5 0.5 0.5 rgb0 0 0 RGB114.7148 170.2148 m147.8398 170.2148 L147.8398 175.3398 L114.7148 175.3398 L114.7148 170.2148 Lb% Rect0.25 w0 G0 g0.8 0.8 0.8 rgb0 0 0 RGB114.7148 165.0938 m148.9102 165.0938 L148.9102 170.2148 L114.7148 170.2148 L114.7148 165.0938 Lb% Rect0.25 w0 G0 g0.5 0.5 0.5 rgb0 0 0 RGB114.7148 152.2852 m236.4805 152.2852 L236.4805 157.4062 L114.7148 157.4062 L114.7148 152.2852 Lb% Rect0.25 w0 G0 g0.8 0.8 0.8 rgb0 0 0 RGB114.7148 147.1602 m250.1758 147.1602 L250.1758 152.2852 L114.7148 152.2852 L114.7148 147.1602 Lb% Rect0.25 w0 G0 g0.5 0.5 0.5 rgb0 0 0 RGB114.7148 134.3516 m290.7031 134.3516 L290.7031 139.4766 L114.7148 139.4766 L114.7148 134.3516 Lb% Rect0.25 w0 G0 g0.8 0.8 0.8 rgb0 0 0 RGB114.7148 129.2305 m295.1445 129.2305 L295.1445 134.3516 L114.7148 134.3516 L114.7148 129.2305 Lb% Rect0.25 w0 G0 g0.5 0.5 0.5 rgb0 0 0 RGB114.7148 116.4219 m293.4805 116.4219 L293.4805 121.543 L114.7148 121.543 L114.7148 116.4219 Lb% Rect0.25 w0 G0 g0.8 0.8 0.8 rgb0 0 0 RGB114.7148 111.2969 m299.7734 111.2969 L299.7734 116.4219 L114.7148 116.4219 L114.7148 111.2969 Lb% Rect0.25 w0 G0 g0.5 0.5 0.5 rgb0 0 0 RGB114.7148 98.4883 m260.168 98.4883 L260.168 103.6133 L114.7148 103.6133 L114.7148 98.4883 Lb% Rect0.25 w0 G0 g0.8 0.8 0.8 rgb0 0 0 RGB114.7148 93.3672 m279.6016 93.3672 L279.6016 98.4883 L114.7148 98.4883 L114.7148 93.3672 Lb% Rect0.25 w0 G0 g0.5 0.5 0.5 rgb0 0 0 RGB114.7148 80.5586 m240.1836 80.5586 L240.1836 85.6797 L114.7148 85.6797 L114.7148 80.5586 Lb% Rect0.25 w0 G0 g0.8 0.8 0.8 rgb0 0 0 RGB114.7148 75.4336 m258.5039 75.4336 L258.5039 80.5586 L114.7148 80.5586 L114.7148 75.4336 Lb% Line0 G0.25 w0 0 0 RGB114.7148 179.1836 m114.7148 71.5938 LS% Line0 G0.25 w0 0 0 RGB114.7148 179.1836 m299.7734 179.1836 LS0 0 0 setrgbcolor(|______Times-Roman) rfnt [9 0 0 -9 0 0] /|______Times-Roman mfntgsave[1 0 0 1 77.7148 164.7148 ] concat0.0039 8  m (PolyTest) showgrestore0 0 0 setrgbcolor(|______Times-Roman) rfnt [9 0 0 -9 0 0] /|______Times-Roman mfntgsave[1 0 0 1 77.7148 146.7852 ] concat0.0156 8  m (Richards) showgrestore0 0 0 setrgbcolor(|______Times-Roman) rfnt [9 0 0 -9 0 0] /|______Times-Roman mfntgsave[1 0 0 1 70.7148 128.8516 ] concat0.5156 8  m (PathCache) showgrestore0 0 0 setrgbcolor(|______Times-Roman) rfnt [9 0 0 -9 0 0] /|______Times-Roman mfntgsave[1 0 0 1 99.7148 110.9219 ] concat0.5078 8  m (UI) showgrestore0 0 0 setrgbcolor(|______Times-Roman) rfnt [9 0 0 -9 0 0] /|______Times-Roman mfntgsave[1 0 0 1 52.7148 92.9883 ] concat0.0234 8  m (PrimitiveMaker) showgrestore0 0 0 setrgbcolor(|______Times-Roman) rfnt [9 0 0 -9 0 0] /|______Times-Roman mfntgsave[1 0 0 1 86.7148 75.0586 ] concat0.5195 8  m (Parser) showgrestore0 0 0 setrgbcolor(|______Times-Roman) rfnt [9 0 0 -9 0 0] /|______Times-Roman mfntgsave[1 0 0 1 108.7148 184.1836 ] concat0.0039 8  m (0%) showgrestore0 0 0 setrgbcolor(|______Times-Roman) rfnt [9 0 0 -9 0 0] /|______Times-Roman mfntgsave[1 0 0 1 143.2266 184.1836 ] concat0.2539 8  m (20%) showgrestore0 0 0 setrgbcolor(|______Times-Roman) rfnt [9 0 0 -9 0 0] /|______Times-Roman mfntgsave[1 0 0 1 180.2383 184.1836 ] concat0.2539 8  m (40%) showgrestore0 0 0 setrgbcolor(|______Times-Roman) rfnt [9 0 0 -9 0 0] /|______Times-Roman mfntgsave[1 0 0 1 217.25 184.1836 ] concat0.2539 8  m (60%) showgrestore0 0 0 setrgbcolor(|______Times-Roman) rfnt [9 0 0 -9 0 0] /|______Times-Roman mfntgsave[1 0 0 1 254.2617 184.1836 ] concat0.2539 8  m (80%) showgrestore0 0 0 setrgbcolor(|______Times-Roman) rfnt [9 0 0 -9 0 0] /|______Times-Roman mfntgsave[1 0 0 1 289.2734 184.1836 ] concat0.0039 8  m (100%) showgrestore% Rect0.25 w0 G1 g1 1 1 rgb0 0 0 RGB309.7734 74 m424.7734 74 L424.7734 116 L309.7734 116 L309.7734 74 Lb% Rect0.25 w0 G0 g0.5 0.5 0.5 rgb0 0 0 RGB319.7734 101 m328.7734 101 L328.7734 110 L319.7734 110 L319.7734 101 Lb0 0 0 setrgbcolor(|______Times-Roman) rfnt [9 0 0 -9 0 0] /|______Times-Roman mfntgsave[1 0 0 1 338.7734 100 ] concat0 8  m (Recompiling System) showgrestore% Rect0.25 w0 G0 g0.8 0.8 0.8 rgb0 0 0 RGB319.7734 80 m328.7734 80 L328.7734 89 L319.7734 89 L319.7734 80 Lb0 0 0 setrgbcolor(|______Times-Roman) rfnt [9 0 0 -9 0 0] /|______Times-Roman mfntgsave[1 0 0 1 338.7734 79 ] concat0 8  m (PIC System) showgrestore% Rect1 w0 0 0 rgb0 0 0 RGB114.7031 195.6992 m314.7031 195.6992 L314.7031 210.5 L114.7031 210.5 L114.7031 195.6992 LN% Text0 0 0 setrgbcolor(|______Times-Roman) rfnt [9 0 0 -9 0 0] /|______Times-Roman mfntgsave[1 0 0 1 114.7031 195.6992 ] concat20.7969 9  m ( Execution time \050normalized to base system\051) showgrestore%%Trailerend
+%%EndDocument
+FMENDEPSF
+54 69.88 666 861.88 C
+117.84 169.83 581.82 404.96 C
+117.84 169.83 581.82 404.96 R
+7 X
+0 K
+V
+0 4 463 456 669 452.01 202.99 123.82 178.87 FMBEGINEPSF
+%%BeginDocument: <inline>
+%!PS-Adobe-2.0 EPSF-1.2%%Creator: DeltaGraph 1.1%%Title: send comparison%%Creation Date: 11/29/90 10:47 PM %%BoundingBox: 4 463 456 669%%DocumentProcSets: DeltaGraph 1.1%%DocumentSuppliedProcSets: DeltaGraph 1.1%%DocumentFonts: DeltaSymbol%%+Times-Roman%%EndComments%%BeginProcSet: DeltaGraph/DeltaGraph 100 dict def DeltaGraph begin/Version 1.1 def/Revision 0 def/bdef{bind def}bind def/ldef{load def}bdef/xdef{exch def}bdef/FillGray 0 def/FillRed 1 def/FillGreen 1 def/FillBlue 1 def/FillMac 8 string def/UseMacFill false def/StrokeGray 0 def/StrokeRed 1 def/StrokeGreen 1 def/StrokeBlue 1 def/StrokeMac 8 string def/UseMacStroke false def/apat 8 string def/mat matrix def1 0 mat defaultmatrix dtransform exch atan/patang xdef/sscrn{currentscreen/proc xdef/ang xdef/freq xdef}bdef/rscrn{freq ang/proc load setscreen}bdef/macpat{apat copy pop 9.375 patang{1 add 4 mul cvi apat exch get exch 1 add 4 mul cvi 7 sub bitshift 1 and}setscreen setgray}bdef/d/setdash ldef/g{false/UseMacFill xdef/FillGray xdef}bdef/mg{true/UseMacFill xdef FillMac copy pop/FillGray xdef}bdef/G{false/UseMacStroke xdef/StrokeGray xdef}bdef/MG{true/UseMacStroke xdef StrokeMac copy pop/StrokeGray xdef}bdef/_i currentflat def/i{dup 0 eq{pop _i}if setflat}bdef/j/setlinejoin ldef/J/setlinecap ldef/rgb{/FillBlue xdef/FillGreen xdef/FillRed xdef}bdef/RGB{/StrokeBlue xdef/StrokeGreen xdef/StrokeRed xdef}bdef/M/setmiterlimit ldef/w/setlinewidth ldef/_R{.25 sub round .25 add}bdef/_r{transform _R exch _R exch itransform}bdef/m{_r moveto}bdef/L{_r lineto}bdef/c{_r curveto}bdef/_gf{FillGray 0 ne{dup 1 exch sub FillGray mul add}if}bdef/_gs{StrokeGray 0 ne{dup 1 exch sub StrokeGray mul add}if}bdef/sf{UseMacFill{FillRed FillGreen FillBlue setrgbcolor sscrn FillGray FillMac macpat}{FillGray setgray FillRed _gf FillGreen _gf FillBlue _gf setrgbcolor}ifelse}bdef/ss{UseMacStroke{StrokeRed StrokeGreen StrokeBlue setrgbcolor sscrn FillGray StrokeMac macpat}{StrokeGray setgray StrokeRed _gs StrokeGreen _gs StrokeBlue _gs setrgbcolor}ifelse}bdef/F{sf eofill UseMacFill{rscrn}if}bdef/f{closepath F}bdef/S{ss stroke UseMacStroke{rscrn}if}bdef/s{closepath S}bdef/B{gsave F grestore S}bdef/b{closepath B}bdef/N/newpath ldef/n/N ldef/sh{currentpoint 3 -1 roll show 3 -1 roll add moveto}bdef/vfc{gsave 1 setlinewidth clip/right xdef/bottom xdef/left xdef/top xdef/FillGray 0 deftop bottom sub abs/numsteps xdefdup/FillBlue xdef exch sub numsteps div/Bstep xdefdup/FillGreen xdef exch sub numsteps div/Gstep xdefdup/FillRed xdef exch sub numsteps div/Rstep xdeftop bottom lt{1}{-1}ifelse/step xdeftop step bottom{sf dup newpath left exch moveto right exch lineto strokeFillBlue Bstep sub/FillBlue xdef FillGreen Gstep sub/FillGreen xdef FillRed Rstep sub/FillRed xdef }for grestore}bdef/hfc{gsave 1 setlinewidth clip/right xdef/bottom xdef/left xdef/top xdef/FillGray 0 defleft right sub abs/numsteps xdefdup/FillBlue xdef exch sub numsteps div/Bstep xdefdup/FillGreen xdef exch sub numsteps div/Gstep xdefdup/FillRed xdef exch sub numsteps div/Rstep xdefleft right lt{1}{-1}ifelse/step xdefleft step right{sf dup newpath top moveto bottom lineto strokeFillBlue Bstep sub/FillBlue xdef FillGreen Gstep sub/FillGreen xdef FillRed Rstep sub/FillRed xdef }for grestore}bdef/ellipse{newpath/savematrix matrix currentmatrix deftranslate scale 0 0 1 5 -2 roll arc savematrix setmatrix}bdef/rfc{gsave clip/right xdef/bottom xdef/left xdef/top xdef/centery xdef/centerx xdef/rady xdef/radx xdef/FillGray 0 defleft right sub abs 2 div/numsteps xdefdup/FillBlue xdef exch sub numsteps div/Bstep xdefdup/FillGreen xdef exch sub numsteps div/Gstep xdefdup/FillRed xdef exch sub numsteps div/Rstep xdefnewpath left top moveto left bottom linetoright bottom lineto right top lineto left top linetosf fillradx rady lt{/xstep 1 def/ystep rady radx div def}{/ystep 1 def/xstep radx rady div def}ifelse/xval radx def/yval rady def{xval 0 le{exit}if0 360 xval yval centerx centery ellipseFillBlue Bstep sub/FillBlue xdef FillGreen Gstep sub/FillGreen xdef FillRed Rstep sub/FillRed xdef sf fill/xval xval xstep sub def/yval yval ystep sub def}loopgrestore}bdef/NewCodes 256 array defNewCodes 0StandardEncoding0 128 getintervalputintervalNewCodes 16#27/quotesingle put  NewCodes 16#60/grave put/Adieresis/Aring/Ccedilla/Eacute/Ntilde/Odieresis/Udieresis/aacute/agrave/acircumflex/adieresis/atilde/aring/ccedilla/eacute/egrave/ecircumflex/edieresis/iacute/igrave/icircumflex/idieresis/ntilde/oacute/ograve/ocircumflex/odieresis/otilde/uacute/ugrave/ucircumflex/udieresis/dagger/degree/cent/sterling/section/bullet/paragraph/germandbls/register/copyright/trademark/acute/dieresis/notequal/AE/Oslash/infinity/plusminus/lessequal/greaterequal/yen/mu/partialdiff/summation/product/pi/integral/ordfeminine/ordmasculine/Omega/ae/oslash /questiondown/exclamdown/logicalnot/radical/florin/approxequal/Delta/guillemotleft/guillemotright/ellipsis/nbspace/Agrave/Atilde/Otilde/OE/oe/endash/emdash/quotedblleft/quotedblright/quoteleft/quoteright/divide/lozenge/ydieresis/Ydieresis/fraction/currency/guilsinglleft/guilsinglright/fi/fl/daggerdbl/periodcentered/quotesinglbase/quotedblbase/perthousand/Acircumflex/Ecircumflex/Aacute/Edieresis/Egrave/Iacute/Icircumflex/Idieresis/Igrave/Oacute/Ocircumflex/apple/Ograve/Uacute/Ucircumflex/Ugrave/dotlessi/circumflex/tilde/macron/breve/dotaccent/ring/cedilla/hungarumlaut/ogonek/caronNewCodes 128 128 getinterval astore pop/cd{dup maxlength dict/NF exch def{1 index/FID ne{NF 3 1 roll put}{pop pop}ifelse}forall NF}bdef/rc{dup cvn/NewName exch def (|______) anchorsearch{pop findfont cd dup/Encoding NewCodes put NewName exch definefont}if pop}bdef/rfnt{dup FontDirectory exch known{pop}{rc}ifelse}bdef/sfnt{findfont exch scalefont setfont}bdef/mfnt{findfont exch makefont setfont}bdef/oshow{/str2 exch def .1 w 0 1 str2 length 1 sub{str2 exch 1 getinterval false charpath currentpoint stroke m}for}bdef/showsym {movetogsave/ch xdefcurrentpoint initmatrix translate 0 0 movetocurrentfont /FontName get /Courier eqch exch charpath flattenpath pathbbox/ury xdef /urx xdef /lly xdef /llx xdefurx llx sub -2 div llx sub ury lly sub -2 div lly subgrestorermoveto ch show} def/ps2mac{1 -1 scaleneg 0 exch translate} bdef/mac2ps{0 exch translate1 -1 scale} bdefend%%EndProcSet%%BeginSetupDeltaGraph begin 2 setmiterlimit n1 -1 scale 0 -728 translate%%EndSetup% Rect1 w0 0 0 rgb0 0 0 RGB95 243.5 m295 243.5 L295 265.5 L95 265.5 L95 243.5 LN% Text0 0 0 setrgbcolor(|______Times-Roman) rfnt [9 0 0 -9 0 0] /|______Times-Roman mfntgsave[1 0 0 1 95 243.5 ] concat30.2969 9  m (Normalized Number of Message Sends) showgrestore% Chart% Poly line0 0 0 RGB65.8984 227.8398 m325.3008 227.8398 LN65.8984 195.918 m325.3008 195.918 LN65.8984 163.9961 m325.3008 163.9961 LN65.8984 132.0742 m325.3008 132.0742 LN65.8984 100.1523 m325.3008 100.1523 LN65.8984 68.2344 m325.3008 68.2344 LN% Poly line0 0 0 RGB65.8984 227.8398 m65.8984 68.2344 LN117.7773 227.8398 m117.7773 68.2344 LN169.6562 227.8398 m169.6562 68.2344 LN221.5391 227.8398 m221.5391 68.2344 LN273.418 227.8398 m273.418 68.2344 LN325.3008 227.8398 m325.3008 68.2344 LN% Poly line0.25 w0 G0 0 0 RGB65.8984 228.8398 m65.8984 227.8398 LS91.8359 228.8398 m91.8359 227.8398 LS117.7773 228.8398 m117.7773 227.8398 LS143.7188 228.8398 m143.7188 227.8398 LS169.6562 228.8398 m169.6562 227.8398 LS195.5977 228.8398 m195.5977 227.8398 LS221.5391 228.8398 m221.5391 227.8398 LS247.4766 228.8398 m247.4766 227.8398 LS273.418 228.8398 m273.418 227.8398 LS299.3594 228.8398 m299.3594 227.8398 LS325.3008 228.8398 m325.3008 227.8398 LS% Poly line0.25 w0 G0 0 0 RGB62.8984 227.8398 m68.8984 227.8398 LS62.8984 195.918 m68.8984 195.918 LS62.8984 163.9961 m68.8984 163.9961 LS62.8984 132.0742 m68.8984 132.0742 LS62.8984 100.1523 m68.8984 100.1523 LS62.8984 68.2344 m68.8984 68.2344 LS% Poly line0.25 w0 G0 0 0 RGB65.8984 230.8398 m65.8984 227.8398 LS117.7773 230.8398 m117.7773 227.8398 LS169.6562 230.8398 m169.6562 227.8398 LS221.5391 230.8398 m221.5391 227.8398 LS273.418 230.8398 m273.418 227.8398 LS325.3008 230.8398 m325.3008 227.8398 LS% Rect0.25 w0 G0 g0.5 0.5 0.5 rgb0 0 0 RGB65.8984 208.6836 m143.9492 208.6836 L143.9492 215.0703 L65.8984 215.0703 L65.8984 208.6836 Lb% Rect0.25 w0 G0 g0.9 0.9 0.9 rgb0 0 0 RGB143.9492 208.6836 m157.4648 208.6836 L157.4648 215.0703 L143.9492 215.0703 L143.9492 208.6836 Lb% Rect0.25 w0 G0 g0.5 0.5 0.5 rgb0 0 0 RGB65.8984 176.7656 m121.6406 176.7656 L121.6406 183.1484 L65.8984 183.1484 L65.8984 176.7656 Lb% Rect0.25 w0 G0 g0.9 0.9 0.9 rgb0 0 0 RGB121.6406 176.7656 m131.1094 176.7656 L131.1094 183.1484 L121.6406 183.1484 L121.6406 176.7656 Lb% Rect0.25 w0 G0 g0.3 0.3 0.3 rgb0 0 0 RGB65.8984 144.8438 m120.5273 144.8438 L120.5273 151.2266 L65.8984 151.2266 L65.8984 144.8438 Lb% Rect0.25 w0 G0 g0.5 0.5 0.5 rgb0 0 0 RGB120.5273 144.8438 m162.082 144.8438 L162.082 151.2266 L120.5273 151.2266 L120.5273 144.8438 Lb% Rect0.25 w0 G0 g0.9 0.9 0.9 rgb0 0 0 RGB162.082 144.8438 m200.1875 144.8438 L200.1875 151.2266 L162.082 151.2266 L162.082 144.8438 Lb% Rect0.25 w0 G0 g0.3 0.3 0.3 rgb0 0 0 RGB65.8984 112.9219 m166.5703 112.9219 L166.5703 119.3047 L65.8984 119.3047 L65.8984 112.9219 Lb% Rect0.25 w0 G0 g0.5 0.5 0.5 rgb0 0 0 RGB166.5703 112.9219 m201.5117 112.9219 L201.5117 119.3047 L166.5703 119.3047 L166.5703 112.9219 Lb% Rect0.25 w0 G0 g0.9 0.9 0.9 rgb0 0 0 RGB201.5117 112.9219 m215.832 112.9219 L215.832 119.3047 L201.5117 119.3047 L201.5117 112.9219 Lb% Rect0.25 w0 G0 g0.3 0.3 0.3 rgb0 0 0 RGB65.8984 81 m160.7344 81 L160.7344 87.3867 L65.8984 87.3867 L65.8984 81 Lb% Rect0.25 w0 G0 g0.5 0.5 0.5 rgb0 0 0 RGB160.7344 81 m203.8477 81 L203.8477 87.3867 L160.7344 87.3867 L160.7344 81 Lb% Rect0.25 w0 G0 g0.9 0.9 0.9 rgb0 0 0 RGB203.8477 81 m206.0781 81 L206.0781 87.3867 L203.8477 87.3867 L203.8477 81 Lb% Line0 G0.25 w0 0 0 RGB65.8984 227.8398 m65.8984 68.2344 LS% Line0 G0.25 w0 0 0 RGB65.8984 227.8398 m325.3008 227.8398 LS0 0 0 setrgbcolor(|______Times-Roman) rfnt [9 0 0 -9 0 0] /|______Times-Roman mfntgsave[1 0 0 1 28.8984 206.3789 ] concat0.0156 8  m (Richards) showgrestore0 0 0 setrgbcolor(|______Times-Roman) rfnt [9 0 0 -9 0 0] /|______Times-Roman mfntgsave[1 0 0 1 21.8984 174.457 ] concat0.5156 8  m (PathCache) showgrestore0 0 0 setrgbcolor(|______Times-Roman) rfnt [9 0 0 -9 0 0] /|______Times-Roman mfntgsave[1 0 0 1 50.8984 142.5352 ] concat0.5078 8  m (UI) showgrestore0 0 0 setrgbcolor(|______Times-Roman) rfnt [9 0 0 -9 0 0] /|______Times-Roman mfntgsave[1 0 0 1 3.8984 110.6133 ] concat0.0234 8  m (PrimitiveMaker) showgrestore0 0 0 setrgbcolor(|______Times-Roman) rfnt [9 0 0 -9 0 0] /|______Times-Roman mfntgsave[1 0 0 1 37.8984 78.6914 ] concat0.5195 8  m (Parser) showgrestore0 0 0 setrgbcolor(|______Times-Roman) rfnt [9 0 0 -9 0 0] /|______Times-Roman mfntgsave[1 0 0 1 59.8984 232.8398 ] concat0.0039 8  m (0%) showgrestore0 0 0 setrgbcolor(|______Times-Roman) rfnt [9 0 0 -9 0 0] /|______Times-Roman mfntgsave[1 0 0 1 109.2773 232.8398 ] concat0.2539 8  m (20%) showgrestore0 0 0 setrgbcolor(|______Times-Roman) rfnt [9 0 0 -9 0 0] /|______Times-Roman mfntgsave[1 0 0 1 161.1562 232.8398 ] concat0.2539 8  m (40%) showgrestore0 0 0 setrgbcolor(|______Times-Roman) rfnt [9 0 0 -9 0 0] /|______Times-Roman mfntgsave[1 0 0 1 213.0391 232.8398 ] concat0.2539 8  m (60%) showgrestore0 0 0 setrgbcolor(|______Times-Roman) rfnt [9 0 0 -9 0 0] /|______Times-Roman mfntgsave[1 0 0 1 264.918 232.8398 ] concat0.2539 8  m (80%) showgrestore0 0 0 setrgbcolor(|______Times-Roman) rfnt [9 0 0 -9 0 0] /|______Times-Roman mfntgsave[1 0 0 1 314.8008 232.8398 ] concat0.0039 8  m (100%) showgrestore% Rect0.25 w0 G1 g1 1 1 rgb0 0 0 RGB343.3945 159.1016 m456.0586 159.1016 L456.0586 225.1016 L343.3945 225.1016 L343.3945 159.1016 Lb% Rect0.25 w0 G0 g0.3 0.3 0.3 rgb0 0 0 RGB358.7266 165.6016 m367.7266 165.6016 L367.7266 174.6016 L358.7266 174.6016 L358.7266 165.6016 Lb0 0 0 setrgbcolor(|______Times-Roman) rfnt [9 0 0 -9 0 0] /|______Times-Roman mfntgsave[1 0 0 1 377.7266 164.6016 ] concat0 8  m (DI methods) showgrestore% Rect0.25 w0 G0 g0.5 0.5 0.5 rgb0 0 0 RGB358.7266 187.6016 m367.7266 187.6016 L367.7266 196.6016 L358.7266 196.6016 L358.7266 187.6016 Lb0 0 0 setrgbcolor(|______Times-Roman) rfnt [9 0 0 -9 0 0] /|______Times-Roman mfntgsave[1 0 0 1 377.7266 186.6016 ] concat0 8  m (Normal  methods) showgrestore% Rect0.25 w0 G0 g0.9 0.9 0.9 rgb0 0 0 RGB358.7266 209.6016 m367.7266 209.6016 L367.7266 218.6016 L358.7266 218.6016 L358.7266 209.6016 Lb0 0 0 setrgbcolor(|______Times-Roman) rfnt [9 0 0 -9 0 0] /|______Times-Roman mfntgsave[1 0 0 1 377.7266 208.6016 ] concat0 8  m (Access methods) showgrestore% Chart% Rect0.25 w0 G0 g0.5 0.5 0.5 rgb0 0 0 RGB65.8984 199.4492 m188.957 199.4492 L188.957 205.832 L65.8984 205.832 L65.8984 199.4492 Lb% Rect0.25 w0 G0 g0.9 0.9 0.9 rgb0 0 0 RGB188.957 199.4492 m325.3008 199.4492 L325.3008 205.832 L188.957 205.832 L188.957 199.4492 Lb% Rect0.25 w0 G0 g0.5 0.5 0.5 rgb0 0 0 RGB65.8984 167.5273 m287.0352 167.5273 L287.0352 173.9102 L65.8984 173.9102 L65.8984 167.5273 Lb% Rect0.25 w0 G0 g0.9 0.9 0.9 rgb0 0 0 RGB287.0352 167.5273 m325.3008 167.5273 L325.3008 173.9102 L287.0352 173.9102 L287.0352 167.5273 Lb% Rect0.25 w0 G0 g0.3 0.3 0.3 rgb0 0 0 RGB65.8984 135.6055 m120.5273 135.6055 L120.5273 141.9922 L65.8984 141.9922 L65.8984 135.6055 Lb% Rect0.25 w0 G0 g0.5 0.5 0.5 rgb0 0 0 RGB120.5273 135.6055 m194.4297 135.6055 L194.4297 141.9922 L120.5273 141.9922 L120.5273 135.6055 Lb% Rect0.25 w0 G0 g0.9 0.9 0.9 rgb0 0 0 RGB194.4297 135.6055 m325.3008 135.6055 L325.3008 141.9922 L194.4297 141.9922 L194.4297 135.6055 Lb% Rect0.25 w0 G0 g0.3 0.3 0.3 rgb0 0 0 RGB65.8984 103.6875 m166.5703 103.6875 L166.5703 110.0703 L65.8984 110.0703 L65.8984 103.6875 Lb% Rect0.25 w0 G0 g0.5 0.5 0.5 rgb0 0 0 RGB166.5703 103.6875 m272.5625 103.6875 L272.5625 110.0703 L166.5703 110.0703 L166.5703 103.6875 Lb% Rect0.25 w0 G0 g0.9 0.9 0.9 rgb0 0 0 RGB272.5625 103.6875 m325.2734 103.6875 L325.2734 110.0703 L272.5625 110.0703 L272.5625 103.6875 Lb% Rect0.25 w0 G0 g0.3 0.3 0.3 rgb0 0 0 RGB65.8984 71.7656 m160.6562 71.7656 L160.6562 78.1523 L65.8984 78.1523 L65.8984 71.7656 Lb% Rect0.25 w0 G0 g0.5 0.5 0.5 rgb0 0 0 RGB160.6562 71.7656 m280.2656 71.7656 L280.2656 78.1523 L160.6562 78.1523 L160.6562 71.7656 Lb% Rect0.25 w0 G0 g0.9 0.9 0.9 rgb0 0 0 RGB280.2656 71.7656 m325.2734 71.7656 L325.2734 78.1523 L280.2656 78.1523 L280.2656 71.7656 Lb% Chart% Rect0.25 w0 G0 g0.5 0.5 0.5 rgb0 0 0 RGB65.8984 217.9219 m143.9492 217.9219 L143.9492 224.3086 L65.8984 224.3086 L65.8984 217.9219 Lb% Rect0.25 w0 G0 g0.5 0.5 0.5 rgb0 0 0 RGB65.8984 186 m112.5352 186 L112.5352 192.3828 L65.8984 192.3828 L65.8984 186 Lb% Rect0.25 w0 G0 g0.3 0.3 0.3 rgb0 0 0 RGB65.8984 154.0781 m120.5273 154.0781 L120.5273 160.4609 L65.8984 160.4609 L65.8984 154.0781 Lb% Rect0.25 w0 G0 g0.5 0.5 0.5 rgb0 0 0 RGB120.5273 154.0781 m147.0898 154.0781 L147.0898 160.4609 L120.5273 160.4609 L120.5273 154.0781 Lb% Rect0.25 w0 G0 g0.9 0.9 0.9 rgb0 0 0 RGB147.0898 154.0781 m159.4102 154.0781 L159.4102 160.4609 L147.0898 160.4609 L147.0898 154.0781 Lb% Rect0.25 w0 G0 g0.3 0.3 0.3 rgb0 0 0 RGB65.8984 122.1562 m166.5703 122.1562 L166.5703 128.5391 L65.8984 128.5391 L65.8984 122.1562 Lb% Rect0.25 w0 G0 g0.5 0.5 0.5 rgb0 0 0 RGB166.5703 122.1562 m182.6016 122.1562 L182.6016 128.5391 L166.5703 128.5391 L166.5703 122.1562 Lb% Rect0.25 w0 G0 g0.9 0.9 0.9 rgb0 0 0 RGB182.6016 122.1562 m192.0977 122.1562 L192.0977 128.5391 L182.6016 128.5391 L182.6016 122.1562 Lb% Rect0.25 w0 G0 g0.3 0.3 0.3 rgb0 0 0 RGB65.8984 90.2305 m160.7344 90.2305 L160.7344 96.6172 L65.8984 96.6172 L65.8984 90.2305 Lb% Rect0.25 w0 G0 g0.5 0.5 0.5 rgb0 0 0 RGB160.7344 90.2305 m182.9922 90.2305 L182.9922 96.6172 L160.7344 96.6172 L160.7344 90.2305 Lb% Group% Group% Arrow% Polygon0.25 w0 G1 g0 0 0 rgb0 0 0 RGB196.4961 95 m196.4961 91 L188.5 93 L196.4961 95 Lb% Line0 G0.25 w0 0 0 RGB196.4961 93 m356 93 LS% Rect1 w0 0 0 rgb0 0 0 RGB358.5 86.9961 m430.5 86.9961 L430.5 99 L358.5 99 L358.5 86.9961 LN% Text0 0 0 setrgbcolor(|______Times-Roman) rfnt [9 0 0 -9 0 0] /|______Times-Roman mfntgsave[1 0 0 1 358.5 86.9961 ] concat1 9  m (Steady state) showgrestore% Group% Arrow% Polygon0.25 w0 G1 g0 0 0 rgb0 0 0 RGB220.75 86.25 m220.75 82.25 L212.75 84.25 L220.75 86.25 Lb% Line0 G0.25 w0 0 0 RGB220.75 84.25 m355.75 84.25 LS% Rect1 w0 0 0 rgb0 0 0 RGB357.5 78.25 m429.5 78.25 L429.5 90.25 L357.5 90.25 L357.5 78.25 LN% Text0 0 0 setrgbcolor(|______Times-Roman) rfnt [9 0 0 -9 0 0] /|______Times-Roman mfntgsave[1 0 0 1 357.5 78.25 ] concat1 9  m (One recompilation) showgrestore% Group% Arrow% Polygon0.25 w0 G1 g0 0 0 rgb0 0 0 RGB337.7812 77.3438 m337.7109 73.3516 L329.75 75.5 L337.7812 77.3438 Lb% Line0 G0.25 w0 0 0 RGB337.7461 75.3477 m355.75 75 LS% Rect1 w0 0 0 rgb0 0 0 RGB357.5 69.25 m429.5 69.25 L429.5 81.2461 L357.5 81.2461 L357.5 69.25 LN% Text0 0 0 setrgbcolor(|______Times-Roman) rfnt [9 0 0 -9 0 0] /|______Times-Roman mfntgsave[1 0 0 1 357.5 69.25 ] concat1 9  m (Base system) showgrestore%%Trailerend
+%%EndDocument
+FMENDEPSF
+54 69.88 666 861.88 C
+FMENDPAGE
+%%EndPage: "11" 10
+%%Page: "10" 10
+612 792 0 FMBEGINPAGE
+91.99 73.9 604.97 85.89 R
+7 X
+0 K
+V
+0 F
+0 X
+(10) 342.48 77.89 T
+94.71 91.7 604.94 842.88 R
+7 X
+V
+0 X
+0.5 (to infer anything about an expression\325) 94.71 834.88 P
+0.5 (s type \050e.g. the type of an instance variable\051; in this case, the infor-) 278.74 834.88 P
+1.28 (mation provided by PICs is more precise because it includes speci\336c types in addition to the unknown) 94.71 820.88 P
+(type. ) 94.71 806.88 T
+1 (The presence of PIC-based type information fundamentally alters the nature of optimization of dynami-) 94.71 787.88 P
+1.35 (cally-typed object-oriented languages. In \322traditional\323 systems such as the current S) 94.71 773.88 P
+4 F
+1.24 (ELF) 510.91 773.88 P
+0 F
+1.35 ( compiler) 530.44 773.88 P
+1.35 (, type) 576.95 773.88 P
+0.19 (information is scarce, and consequently the compiler is designed to make the best possible use of the type) 94.71 759.88 P
+1.13 (information. This ef) 94.71 745.88 P
+1.13 (fort is expensive both in terms of compile time and compiled code space, since the) 193.03 745.88 P
+-0.17 (heuristics in the compiler are tuned to spend time and space if it helps extract or preserve type information.) 94.71 731.88 P
+-0.05 (In contrast, a PIC-based recompiling system has a veritable wealth of type information: ) 94.71 717.88 P
+8 F
+-0.05 (every) 516.46 717.88 P
+0 F
+-0.05 ( message has) 542.42 717.88 P
+0.43 (a set of likely receiver types associated with it derived from the previously compiled version\325s PICs. The) 94.71 703.88 P
+0.79 (compiler\325s heuristics and perhaps even its fundamental design should be reconsidered once the informa-) 94.71 689.88 P
+(tion in PICs becomes available; section 6 outlines such a system architecture designed with PICs in mind.) 94.71 675.88 T
+10 F
+(5.4.) 94.71 650.55 T
+(PIC-Based Type Information and Type Declarations) 121.69 650.55 T
+0 F
+1.28 (The type information present in PICs could be used in a programming environment. For every method) 94.71 631.88 P
+0.11 (which exists in compiled form, the system knows all receiver types that have occurred in practice. Thus, a) 94.71 617.88 P
+1.8 (browser could answer questions like \322what kinds of objects does this parameter typically denote?\323 or) 94.71 603.88 P
+1.51 (\322what kinds of objects is this message sent to?\323) 94.71 589.88 P
+6 F
+1.26 (\240) 334.67 594.68 P
+0 F
+1.51 ( Such querying facilities could help a programmer to) 339.67 589.88 P
+1.41 (better understand programs written by other people and to verify her assumptions about the types of a) 94.71 575.88 P
+0.5 (parameter or local variable. Similarly, the system\325s type information could be used as a starting point for) 94.71 561.88 P
+-0.03 (type checking in a system where type declarations are optional. Once an untyped program becomes stable,) 94.71 547.88 P
+-0.26 (the system could automatically type-annotate all variables, and could quickly reject type declarations made) 94.71 533.88 P
+(by the user if they exclude types known to be used in practice.) 94.71 519.88 T
+0.37 (In this scenario, type information would flow from the system to the user, in contrast to other approaches) 94.71 500.88 P
+1.49 (where type information flows from the user to the compiler [Suz81, BI82, JGZ88]. In our system, the) 94.71 486.88 P
+-0.17 (programmer benefits from type information even for programs which do not contain any type declarations,) 94.71 472.88 P
+1.03 (and the declarations are not needed to obtain good performance. In fact, it is likely that our system can) 94.71 458.88 P
+1.15 (generate ) 94.71 444.88 P
+8 F
+1.15 (better) 139.48 444.88 P
+0 F
+1.15 ( code than existing systems based on user-specified type declarations since PICs contain) 167.46 444.88 P
+-0.03 (only those types that are used in practice, whereas static type declarations must include types that theoreti-) 94.71 430.88 P
+-0.16 (cally might occur but rarely do so in practice. Thus PICs include useful information about the relative like-) 94.71 416.88 P
+(lihood of the possible receiver types that is not present in traditional type declarations.) 94.71 402.88 T
+10 F
+(5.5.) 94.71 377.55 T
+(Implementation) 121.69 377.55 T
+0 F
+1.12 (W) 94.71 358.88 P
+1.12 (e have built an experimental version of a recompiling system on top of the current S) 105.07 358.88 P
+4 F
+1.02 (ELF) 525.21 358.88 P
+0 F
+1.12 ( compiler in) 544.75 358.88 P
+0.54 (order to prove the feasibility of PIC-based adaptive recompilation and to estimate the quality of the code) 94.71 344.88 P
+-0.26 (which could be produced using the type information contained in the PICs. In our experimental system, the) 94.71 330.88 P
+-0.22 (current S) 94.71 316.88 P
+4 F
+-0.21 (ELF) 138.12 316.88 P
+0 F
+-0.22 ( compiler was augmented by a \322type oracle\323 which provides the PICs\325 type information to the) 157.65 316.88 P
+-0.09 (compiler) 94.71 302.88 P
+-0.09 (. The compiler itself was not changed fundamentally) 136.69 302.88 P
+-0.09 (, and it does not use dynamic type prediction.) 387.78 302.88 P
+1.82 (Each benchmark was run once to produce the \336rst version of compiled methods and to \336ll the inline) 94.71 288.88 P
+1.33 (caches. Then a system \337ag was set and the benchmark was run again, which caused all methods to be) 94.71 274.88 P
+2.64 (recompiled using the type information contained in the inline caches. The second version was then) 94.71 260.88 P
+(measured to determine the improvement over the base system.) 94.71 246.88 T
+1.03 (W) 94.71 227.88 P
+1.03 (e measured the same benchmarks that were used in section 3. Figure 8 shows the performance of the) 105.07 227.88 P
+(experimental system and the system with PICs \050described in section 3.3\051, normalized to the base system.) 94.71 213.88 T
+94.71 113.7 604.94 128.67 C
+94.71 113.7 604.94 128.67 R
+7 X
+0 K
+V
+94.71 119.6 247.72 119.6 2 L
+V
+0.5 H
+2 Z
+0 X
+N
+54 69.88 666 861.88 C
+3 F
+0 X
+0 K
+(\240) 94.71 111.04 T
+6 F
+-0.61 (Most of the mechanisms needed to find the appropriate compiled method\050s\051 from the source method are already present in order) 103.78 107.04 P
+(to invalidate compiled code when a source method is changed. ) 94.71 97.04 T
+FMENDPAGE
+%%EndPage: "10" 9
+12 10 /Symbol FMDEFINEFONT
+%%Page: "9" 9
+612 792 0 FMBEGINPAGE
+91.99 73.9 604.97 85.89 R
+7 X
+0 K
+V
+0 F
+0 X
+(9) 345.48 77.89 T
+94.71 91.7 604.94 842.88 R
+7 X
+V
+0 X
+2.53 (Unfortunately) 94.71 834.88 P
+2.53 (, the information present in a method\325) 161.21 834.88 P
+2.53 (s PICs is not available when the method is \336rst) 357.29 834.88 P
+1.89 (compiled, but only after it has been executing for a while. T) 94.71 820.88 P
+1.89 (o take advantage of the information, the) 402.1 820.88 P
+0.09 (method must be ) 94.71 806.88 P
+8 F
+0.09 (r) 174.59 806.88 P
+0.09 (ecompiled) 178.81 806.88 P
+0 F
+0.09 (. T) 228.1 806.88 P
+0.09 (he rest of this section describes and evaluates the optimizations that may be) 241.51 806.88 P
+0.02 (performed when PIC-based type information from a previously compiled version of a method is available.) 94.71 792.88 P
+(Section 6 describes an extension to the recompilation scheme that leads to an adaptive system.) 94.71 778.88 T
+10 F
+(5.1.) 94.71 753.55 T
+(PIC-Based Type Casing) 121.69 753.55 T
+0 F
+1.07 (T) 94.71 734.88 P
+1.07 (ype casing may be extended naturally in a system that recompiles methods based on PIC information.) 101.2 734.88 P
+-0.14 (When the compiler encounters a send which it did not inline in the previous compiled version of a method,) 94.71 720.88 P
+-0.28 (it can consult the corresponding PIC to obtain a list of likely receiver types for this send. The compiler then) 94.71 706.88 P
+0.58 (knows that the receiver type is the union of the types in the PIC, plus an unlikely unknown type \050since a) 94.71 692.88 P
+(new receiver type might, but probably won\325) 94.71 678.88 T
+(t, be encountered in the future\051.) 305.34 678.88 T
+1.16 (The compiler can then take advantage of the new type information by inserting run-time type tests and) 94.71 659.88 P
+0.41 (inlining the cases. For example, sending the ) 94.71 645.88 P
+2 F
+0.98 (x) 311.09 645.88 P
+0 F
+0.41 ( message to a receiver that was either a cartesian point or a) 318.29 645.88 P
+(polar point in the previous version\325) 94.71 631.88 T
+(s PIC would be compiled into the following code: ) 262.94 631.88 T
+9 F
+(Figure 7.) 260.7 522.88 T
+(Inlining with type casing) 312.67 522.88 T
+10 F
+(5.2.) 94.71 492.55 T
+(Dynamic Type Prediction) 121.69 492.55 T
+0 F
+2.75 (PICs support better type prediction by replacing the ) 94.71 473.89 P
+8 F
+2.75 (static) 367.89 473.89 P
+0 F
+2.75 ( type prediction of existing systems with) 393.88 473.89 P
+8 F
+0.8 (dynamic) 94.71 459.89 P
+0 F
+0.8 ( type prediction. Current systems hard-wire the set of predictions into the compiler and have no) 135.34 459.89 P
+0.01 (means to adapt if a particular application does not exhibit the predicted behavior) 94.71 445.89 P
+0.01 (. For example, if an appli-) 479.96 445.89 P
+2.65 (cation makes heavy use of \337oating point arithmetic, then predicting solely integer receivers for \324) 94.71 431.89 P
+2 F
+6.35 (+) 593.76 431.89 P
+0 F
+2.65 (\325) 600.95 431.89 P
+(messages penalizes the performance of \337oating point arithmetic.) 94.71 417.89 T
+0.2 (Even worse, if an application makes heavy use of messages that are not recognized by the compiler) 94.71 398.89 P
+0.2 (, these) 574.1 398.89 P
+-0.04 (messages may run much slower than expected since the compiler is not using type prediction on them. For) 94.71 384.89 P
+1.27 (example, the initial S) 94.71 370.89 P
+4 F
+1.16 (ELF) 200.47 370.89 P
+0 F
+1.27 ( system de\336ned a ) 220 370.89 P
+2 F
+3.05 (predecessor) 311.03 370.89 P
+0 F
+1.27 ( method for integers, and this message was) 390.19 370.89 P
+1.59 (type-predicted by the compiler) 94.71 356.89 P
+1.59 (. Later) 246.38 356.89 P
+1.59 (, programmers de\336ned a ) 278.79 356.89 P
+2 F
+3.82 (pred) 404.73 356.89 P
+0 F
+1.59 ( method as a shorthand version of) 433.51 356.89 P
+2 F
+2.11 (predecessor) 94.71 342.89 P
+0 F
+0.88 (, but since this wasn\325) 173.39 342.89 P
+0.88 (t included in the compiler) 277.62 342.89 P
+0.88 (\325) 404.83 342.89 P
+0.88 (s static type prediction table, the perfor-) 408.16 342.89 P
+(mance of programs using ) 94.71 328.89 T
+2 F
+(pred) 219.29 328.89 T
+0 F
+( was signi\336cantly worse than programs using ) 248.07 328.89 T
+2 F
+(predecessor) 467.6 328.89 T
+0 F
+(.) 546.09 328.89 T
+-0.22 (These problems could be avoided by a system with PICs. The system would periodically examine all PICs,) 94.71 309.89 P
+0.73 (looking for messages with very skewed receiver type distributions. Those messages that clearly are only) 94.71 295.89 P
+0.39 (used with one or two receiver types should be type predicted. The compiler would augment or replace its) 94.71 281.89 P
+2.3 (built-in initial type prediction table with one derived from the actual usage patterns. As these usage) 94.71 267.89 P
+(patterns changed, type prediction would naturally adapt.) 94.71 253.89 T
+2.2 (W) 94.71 234.89 P
+2.2 (ith PICs and recompilation, type prediction theoretically could be eliminated, since the recompiled) 105.55 234.89 P
+0.4 (version will obtain the bene\336ts of type prediction via type casing. However) 94.71 220.89 P
+0.4 (, since type prediction usually) 459.76 220.89 P
+0.17 (works very well for a few messages like \324+\325 and ) 94.71 206.89 P
+2 F
+0.41 (ifTrue:) 330.32 206.89 P
+0 F
+0.17 (, it is doubtful that the relatively minor simpli-) 380.7 206.89 P
+-0.28 (\336cation of the system is worth the expected loss of performance in the initial version of the compiled code. ) 94.71 192.89 P
+10 F
+(5.3.) 94.71 167.55 T
+(PIC-Based Type Information and Type Analysis) 121.69 167.55 T
+0 F
+0.12 (The type information provided by PICs is neither strictly more nor strictly less precise than that computed) 94.71 148.89 P
+0.03 (using type analysis. It can be less precise because the analysis may be able to prove that an expression can) 94.71 134.89 P
+1.63 (have only a certain set of types at run-time. If this set is a singleton set, then the compiler can inline) 94.71 120.89 P
+-0 (messages without needing a run-time type test to verify the type. On the other hand, type analysis may fail) 94.71 106.89 P
+140.45 537.88 559.21 627.88 C
+140.45 537.88 559.21 627.88 R
+7 X
+0 K
+V
+6 F
+0 X
+(if type = cartesian point) 211.74 608.32 T
+(inlined ) 433.07 572.24 T
+11 F
+(x) 463.33 572.24 T
+6 F
+( method for ) 469.33 572.24 T
+(polar points) 433.07 562.23 T
+(inlined ) 433.07 597.44 T
+11 F
+(x) 463.33 597.44 T
+6 F
+( method for ) 469.33 597.44 T
+(cartesian points) 433.07 587.43 T
+312.12 597.17 303.47 599.65 312.12 602.13 312.12 599.65 4 Y
+V
+311.12 599.65 425.87 599.65 2 L
+0.1 H
+2 Z
+N
+404.7 571.77 396.05 574.25 404.7 576.73 404.7 574.25 4 Y
+V
+403.7 574.25 425.87 574.25 2 L
+N
+140.45 529.18 559.21 637.61 R
+7 X
+V
+0 X
+(if type = cartesian point) 211.74 603.08 T
+(result ) 225.06 591.08 T
+12 F
+(\254) 249.77 591.08 T
+6 F
+( receiver) 259.63 591.08 T
+(.x) 293.76 591.08 T
+(else if type = polar point) 211.74 579.08 T
+(result ) 225.06 567.08 T
+12 F
+(\254) 249.77 567.08 T
+6 F
+( ) 259.63 567.08 T
+(receiver) 262.13 567.08 T
+(.rho * ) 293.76 567.08 T
+(cos\050receiver) 319.58 567.08 T
+(.theta\051) 367.86 567.08 T
+(else call lookup) 211.74 555.08 T
+220.95 587.38 301.96 599.65 R
+0 Z
+4 X
+N
+0 X
+(inlined ) 433.07 566.97 T
+11 F
+(x) 463.33 566.97 T
+6 F
+( method for ) 469.33 566.97 T
+(polar points) 433.07 556.96 T
+(inlined ) 433.07 592.17 T
+11 F
+(x) 463.33 592.17 T
+6 F
+( method for ) 469.33 592.17 T
+(cartesian points) 433.07 582.16 T
+312.12 591.93 303.47 594.41 312.12 596.89 312.12 594.41 4 Y
+V
+311.12 594.41 425.87 594.41 2 L
+2 Z
+N
+406.65 566.5 398 568.98 406.65 571.46 406.65 568.98 4 Y
+V
+405.65 568.98 425.87 568.98 2 L
+N
+220.95 562.89 396.95 575.16 R
+0 Z
+4 X
+N
+54 69.88 666 861.88 C
+FMENDPAGE
+%%EndPage: "9" 8
+%%Page: "8" 8
+612 792 0 FMBEGINPAGE
+91.99 73.9 604.97 85.89 R
+7 X
+0 K
+V
+0 F
+0 X
+(8) 345.48 77.89 T
+94.71 91.7 604.94 842.88 R
+7 X
+V
+0 X
+1.08 (message send to test for the expected receiver type. Along the branch where the type test succeeds, the) 94.71 834.88 P
+-0 (compiler has precise information about the type of the receiver and can statically bind and inline a copy of) 94.71 820.88 P
+0.32 (the message. For example, existing S) 94.71 806.88 P
+4 F
+0.29 (ELF) 274.54 806.88 P
+0 F
+0.32 ( and Smalltalk systems predict that \324) 294.08 806.88 P
+2 F
+0.77 (+) 470.57 806.88 P
+0 F
+0.32 (\325 will be sent to an integer) 477.77 806.88 P
+0.21 ([UP82, GR83, DS84], since measurements indicate that this occurs 90% of the time [UP87]. T) 94.71 792.88 P
+0.21 (ype predic-) 550.46 792.88 P
+(tion improves performance if the cost of the test is low and the likelihood of a successful outcome is high.) 94.71 778.88 T
+10 F
+(4.2.) 94.71 753.55 T
+(Customization) 121.69 753.55 T
+8 F
+1.8 (Customization) 94.71 734.88 P
+0 F
+1.8 ( is another technique for determining the types of many message receivers in a method) 164.02 734.88 P
+-0.01 ([CUL89]. Customization extends dynamic compilation by exploiting the fact that many messages within a) 94.71 720.88 P
+0.34 (method are sent to ) 94.71 706.88 P
+2 F
+0.82 (self) 187.35 706.88 P
+0 F
+0.34 (. The compiler creates a separate compiled version of a given source method for) 216.13 706.88 P
+0.26 (each receiver type. This duplication allows the compiler to ) 94.71 692.88 P
+8 F
+0.26 (customize) 381.54 692.88 P
+0 F
+0.26 ( each version to the speci\336c receiver) 428.85 692.88 P
+0.48 (type. In particular) 94.71 678.88 P
+0.48 (, knowing the type of ) 180.78 678.88 P
+2 F
+1.14 (self) 288.42 678.88 P
+0 F
+0.48 ( at compile time allows all self sends to be inlined, without) 317.21 678.88 P
+0.55 (inserting type tests at every message send. Customization is especially important in S) 94.71 664.88 P
+4 F
+0.51 (ELF) 510.76 664.88 P
+0 F
+0.55 (, since so many) 529.34 664.88 P
+-0.08 (messages are sent to ) 94.71 650.88 P
+2 F
+-0.2 (self) 194.96 650.88 P
+0 F
+-0.08 (, including instance variable accesses, global variable accesses, and many kinds) 223.75 650.88 P
+(of user) 94.71 636.88 T
+(-de\336ned control structures.) 127.44 636.88 T
+10 F
+(4.3.) 94.71 611.55 T
+(Type Analysis and Splitting) 121.69 611.55 T
+8 F
+1.55 (T) 94.71 592.88 P
+1.55 (ype analysis ) 100.49 592.88 P
+0 F
+1.55 (tries to get the most out of the available type information by propagating it through the) 165.56 592.88 P
+0.56 (control \337ow graph and by performing \337ow-sensitive analysis [CU90, CU91]. The compiler uses the type) 94.71 578.88 P
+1.48 (information obtained through the analysis to inline additional message sends and to reduce the cost of) 94.71 564.88 P
+0.28 (primitives \050either by constant-folding the primitive or by avoiding run-time type checks of the primitive\325) 94.71 550.88 P
+0.28 (s) 600.28 550.88 P
+(ar) 94.71 536.88 T
+(guments\051.) 103.81 536.88 T
+0.51 (Often the compiler can infer only that the type of the receiver of a message is one of a small set of types) 94.71 517.88 P
+1.29 (\050such as either an integer or a \337oating point number\051. This union type information does not enable the) 94.71 503.88 P
+(message to be inlined, since each possible receiver type could invoke a dif) 94.71 489.88 T
+(ferent method.) 451.23 489.88 T
+0.33 (One approach to solving this problem is to insert type tests before the message send and create a separate) 94.71 470.88 P
+0.5 (branch for each of the possible types. This technique, ) 94.71 456.88 P
+8 F
+0.5 (type casing) 357.97 456.88 P
+0 F
+0.5 (, is similar to type prediction and to the) 412.76 456.88 P
+(case analysis technique implemented as part of the T) 94.71 442.88 T
+(yped Smalltalk system [JGZ88].) 347.02 442.88 T
+6 F
+(\240) 502.26 447.68 T
+8 F
+0.92 (Splitting) 94.71 423.88 P
+0 F
+0.92 ( is another way to turn a polymorphic message into several separate monomorphic messages. It) 135.37 423.88 P
+-0.09 (avoids type tests by copying parts of the control \337ow graph [CUL89, CU90, CU91]. For example, suppose) 94.71 409.88 P
+0.54 (that an object is known to be an integer in one branch of an ) 94.71 395.88 P
+2 F
+1.3 (if) 389.42 395.88 P
+0 F
+0.54 ( statement and a \337oating-point number in) 403.81 395.88 P
+0.31 (the other branch. If this object is the receiver of a message send following the ) 94.71 381.88 P
+2 F
+0.74 (if) 474.37 381.88 P
+0 F
+0.31 ( statement, the compiler) 488.77 381.88 P
+1.92 (can copy the send into the two branches. Since the exact receiver type is known in each branch, the) 94.71 367.88 P
+(compiler can then inline both copies of the send. ) 94.71 353.88 T
+-0.08 (T) 94.71 334.88 P
+-0.08 (ype analysis and splitting provide a signi\336cant amount of additional type information that may be used to) 101.2 334.88 P
+0.46 (optimize object-oriented programs. These techniques work especially well for inferring the types of local) 94.71 320.88 P
+0.96 (variables and optimizing user) 94.71 306.88 P
+0.96 (-de\336ned control structures. Nevertheless, there are classes of variables and) 238.92 306.88 P
+0.05 (expressions that type analysis cannot analyze well. One such class is the types of ar) 94.71 292.88 P
+0.05 (guments to the method) 495.2 292.88 P
+1.73 (\050our S) 94.71 278.88 P
+4 F
+1.58 (ELF) 126.09 278.88 P
+0 F
+1.73 ( system customizes on the type of the receiver) 145.62 278.88 P
+1.73 (, but not on the type of ar) 380.14 278.88 P
+1.73 (guments\051. Another) 513.28 278.88 P
+0.78 (important class is the types of instance variables and array elements \050actually) 94.71 264.88 P
+0.78 (, any assignable heap cell\051.) 472.59 264.88 P
+0.31 (These weaknesses of type analysis can be quite damaging to the overall performance of the system, espe-) 94.71 250.88 P
+(cially for typical object-oriented programs.) 94.71 236.88 T
+1 F
+(5.) 94.71 205.22 T
+(PICs as Type Sources) 121.69 205.22 T
+0 F
+-0.19 (PICs have a valuable property that can be used to inline many more message sends than with existing tech-) 94.71 184.89 P
+0.52 (niques. A PIC can be viewed as a ) 94.71 170.89 P
+8 F
+0.52 (call-speci\336c type database) 262.43 170.89 P
+0 F
+0.52 (: the PIC contains a list of all receiver types) 390.72 170.89 P
+0.68 (seen in practice at that call site. If the compiler can take advantage of this type information, it should be) 94.71 156.89 P
+(able to produce much more ef) 94.71 142.89 T
+(\336cient code.) 238.04 142.89 T
+94.71 113.7 604.94 128.67 C
+94.71 113.7 604.94 128.67 R
+7 X
+0 K
+V
+94.71 119.6 247.72 119.6 2 L
+V
+0.5 H
+2 Z
+0 X
+N
+54 69.88 666 861.88 C
+3 F
+0 X
+0 K
+(\240) 94.71 111.04 T
+6 F
+-0.36 (The type information in Typed Smalltalk is provided by the programmer in the form of type declarations, while a dynamically-) 103.78 107.04 P
+(typed system would rely on type analysis to determine the set of possible receiver types.) 94.71 97.04 T
+FMENDPAGE
+%%EndPage: "8" 7
+%%Page: "7" 7
+612 792 0 FMBEGINPAGE
+91.99 73.9 604.97 85.89 R
+7 X
+0 K
+V
+0 F
+0 X
+(7) 345.48 77.89 T
+94.71 91.7 604.94 842.88 R
+7 X
+V
+0 X
+0 (miss handler) 94.71 635.18 P
+0 (, and thus it is more than \336ve times faster with PICs. Overall, the performance impact of PICs) 155.2 635.18 P
+(is relatively small since the S) 94.71 621.18 T
+4 F
+(ELF) 234.96 621.18 T
+0 F
+( compiler is able to inline many sends. ) 254.49 621.18 T
+0.09 (Interestingly) 94.71 602.18 P
+0.09 (, there is no direct correlation between cache misses and the number of polymorphic call sites) 154.56 602.18 P
+0.4 (\050Figure 6\051. For example, more than 73% of the messages sent in ) 94.71 588.18 P
+2 F
+0.97 (PathCache) 410 588.18 P
+0 F
+0.4 ( are from polymorphic call) 474.76 588.18 P
+-0.19 (sites, but the inline cache miss ratio is only 5.6%, much lower than ) 94.71 574.18 P
+2 F
+-0.46 (Parser) 416.03 574.18 P
+0 F
+-0.19 (\325) 459.65 574.18 P
+-0.19 (s miss ratio despite the higher) 462.98 574.18 P
+1.77 (percentage of polymorphic sends. This suggests that one receiver type dominates at most call sites in) 94.71 560.18 P
+2 F
+1.14 (PathCache) 94.71 546.18 P
+0 F
+0.47 (, whereas the receiver type frequently changes in ) 159.47 546.18 P
+2 F
+1.14 (Parser) 400.73 546.18 P
+0 F
+0.47 (\325) 444.35 546.18 P
+0.47 (s inline caches. Thus, ordering a) 447.69 546.18 P
+0.09 (PIC\325) 94.71 532.18 P
+0.09 (s type tests by frequency of occurrence \050as suggested in section 3.2\051 might be a win for programs like) 116.71 532.18 P
+2 F
+(PathCache) 94.71 518.18 T
+0 F
+(.) 159.47 518.18 T
+0.79 (The space overhead of PICs is very low) 94.71 499.18 P
+0.79 (, typically less than 2% of the compiled code \050see Appendix) 290.29 499.18 P
+0.79 (A\051.) 589.29 499.18 P
+1 (This low overhead is also observed in our daily use of the ) 94.71 485.18 P
+1 (S) 386.53 485.18 P
+4 F
+0.92 (ELF) 393.2 485.18 P
+0 F
+1 ( system, where the space used by PICs) 412.73 485.18 P
+(usually does not exceed 50Kbytes in a system which contains about 2 Mbytes of compiled code. ) 94.71 471.18 T
+1 F
+(4.) 94.71 439.52 T
+(Background on Inlining and Type Information) 121.69 439.52 T
+0 F
+0.65 (The techniques described so far strive to reduce the cost of sending a message to that of calling a proce-) 94.71 419.18 P
+0.9 (dure. But even if these techniques were completely successful, the extremely high call frequency would) 94.71 405.18 P
+1.1 (still impose a severe limit on the performance of dynamically-typed object-oriented programs: even the) 94.71 391.18 P
+1.4 (fastest procedure call is too slow) 94.71 377.18 P
+1.4 (. For example, the Sun-4/260 on which our measurements were made) 257.83 377.18 P
+1.35 (executes about 10 million native instructions per second. The optimal calling sequence consists of two) 94.71 363.18 P
+0.16 (instructions per call. This would seem to limit S) 94.71 349.18 P
+4 F
+0.15 (ELF) 326.24 349.18 P
+0 F
+0.16 ( programs to signi\336cantly less than 5 million message) 345.77 349.18 P
+0.7 (sends per second \050MiMS; see [CUL89]\051 even if every send was implemented optimally) 94.71 335.18 P
+0.7 (. However) 521.42 335.18 P
+0.7 (, many) 571.59 335.18 P
+0.41 (programs execute at 5 MiMS in our current system, and some benchmarks exceed 20 MiMS. How is this) 94.71 321.18 P
+(possible?) 94.71 307.18 T
+0.15 (The best way to signi\336cantly speed up a call is by not executing it at all, i.e. by ) 94.71 288.18 P
+8 F
+0.15 (inlining) 478.89 288.18 P
+0 F
+0.15 ( the called method) 516.22 288.18 P
+0.09 (into the caller) 94.71 274.18 P
+0.09 (, thus eliminating the calling overhead entirely) 160.36 274.18 P
+0.09 (. In addition, inlining introduces opportunities) 383.62 274.18 P
+-0.29 (for other optimizations like constant folding, common subexpression elimination, and better global register) 94.71 260.18 P
+2.13 (allocation. The bene\336ts obtained through these optimizations often overshadow the savings from just) 94.71 246.18 P
+(removing the call/return overhead and are essential in order to optimize user) 94.71 232.18 T
+(-de\336ned control structures.) 460.52 232.18 T
+-0.3 (Therefore, the ) 94.71 213.18 P
+-0.3 (S) 165.04 213.18 P
+4 F
+-0.27 (ELF) 171.71 213.18 P
+0 F
+-0.3 ( compiler tries to inline as many message sends as possible. However) 191.24 213.18 P
+-0.3 (, inlining requires) 520.59 213.18 P
+0.24 (that the type of the tar) 94.71 199.18 P
+0.24 (get of a message send be known at compile time so that its de\336nition can be looked) 201.3 199.18 P
+1.35 (up and inlined. Hence, many optimization techniques have focused on ways to obtain and exploit type) 94.71 185.18 P
+0.51 (information [Joh87]. The remainder of this section describes existing techniques to extract, preserve, and) 94.71 171.18 P
+(exploit this precious type information.) 94.71 157.18 T
+10 F
+(4.1.) 94.71 131.85 T
+(Type Prediction) 121.69 131.85 T
+0 F
+0.04 (Certain messages are almost exclusively sent to particular receiver types. For such messages, the compiler) 94.71 113.18 P
+0.57 (can ) 94.71 99.18 P
+8 F
+0.57 (pr) 114.92 99.18 P
+0.57 (edict) 125.14 99.18 P
+0 F
+0.57 ( the type of the receiver based on the message name and insert a run-time type test before the) 148.45 99.18 P
+94.71 91.7 604.94 842.88 C
+94.71 643.18 604.94 842.88 C
+94.71 673.15 337.35 842.88 C
+94.34 673.15 337.36 849.15 R
+7 X
+0 K
+V
+96.35 677.14 332.37 839.14 C
+96.35 677.14 332.37 839.14 R
+7 X
+0 K
+V
+0 36 508 279 658 243 150 84.36 684.15 FMBEGINEPSF
+%%BeginDocument: <inline>
+%!PS-Adobe-2.0 EPSF-1.2
+%%Creator: DeltaGraph 1.1
+%%Title: PIC results
+%%Creation Date: 4/8/91 10:34 AM 
+%%BoundingBox: 36 508 279 658
+%%DocumentProcSets: DeltaGraph 1.1
+%%DocumentSuppliedProcSets: DeltaGraph 1.1
+%%DocumentFonts: DeltaSymbol
+%%+Times-Roman
+%%EndComments
+%%BeginProcSet: DeltaGraph
+/DeltaGraph 100 dict def DeltaGraph begin
+/Version 1.1 def
+/Revision 0 def
+/bdef{bind def}bind def
+/ldef{load def}bdef
+/xdef{exch def}bdef
+/FillGray 0 def/FillRed 1 def/FillGreen 1 def/FillBlue 1 def/FillMac 8 string def/UseMacFill false def
+/StrokeGray 0 def/StrokeRed 1 def/StrokeGreen 1 def/StrokeBlue 1 def/StrokeMac 8 string def
+/UseMacStroke false def
+/apat 8 string def/mat matrix def
+1 0 mat defaultmatrix dtransform exch atan/patang xdef
+/sscrn{currentscreen/proc xdef/ang xdef/freq xdef}bdef
+/rscrn{freq ang/proc load setscreen}bdef
+/macpat{apat copy pop 9.375 patang{1 add 4 mul cvi apat exch get exch 1 add 4 mul cvi 7 sub bitshift 1 and}setscreen setgray}bdef
+/d/setdash ldef
+/g{false/UseMacFill xdef/FillGray xdef}bdef
+/mg{true/UseMacFill xdef FillMac copy pop/FillGray xdef}bdef
+/G{false/UseMacStroke xdef/StrokeGray xdef}bdef
+/MG{true/UseMacStroke xdef StrokeMac copy pop/StrokeGray xdef}bdef
+/_i currentflat def
+/i{dup 0 eq{pop _i}if setflat}bdef
+/j/setlinejoin ldef
+/J/setlinecap ldef
+/rgb{/FillBlue xdef/FillGreen xdef/FillRed xdef}bdef
+/RGB{/StrokeBlue xdef/StrokeGreen xdef/StrokeRed xdef}bdef
+/M/setmiterlimit ldef
+/w/setlinewidth ldef
+/_R{.25 sub round .25 add}bdef
+/_r{transform _R exch _R exch itransform}bdef
+/m{_r moveto}bdef
+/L{_r lineto}bdef
+/c{_r curveto}bdef
+/_gf{FillGray 0 ne{dup 1 exch sub FillGray mul add}if}bdef
+/_gs{StrokeGray 0 ne{dup 1 exch sub StrokeGray mul add}if}bdef
+/sf{UseMacFill{FillRed FillGreen FillBlue setrgbcolor sscrn FillGray FillMac macpat}{FillGray setgray FillRed _gf FillGreen _gf FillBlue _gf setrgbcolor}ifelse}bdef
+/ss{UseMacStroke{StrokeRed StrokeGreen StrokeBlue setrgbcolor sscrn FillGray StrokeMac macpat}{StrokeGray setgray StrokeRed _gs StrokeGreen _gs StrokeBlue _gs setrgbcolor}ifelse}bdef
+/F{sf eofill UseMacFill{rscrn}if}bdef
+/f{closepath F}bdef
+/S{ss stroke UseMacStroke{rscrn}if}bdef
+/s{closepath S}bdef
+/B{gsave F grestore S}bdef
+/b{closepath B}bdef
+/N/newpath ldef
+/n/N ldef
+/sh{currentpoint 3 -1 roll show 3 -1 roll add moveto}bdef
+/vfc{gsave 1 setlinewidth clip
+/right xdef/bottom xdef/left xdef/top xdef/FillGray 0 def
+top bottom sub abs/numsteps xdef
+dup/FillBlue xdef exch sub numsteps div/Bstep xdef
+dup/FillGreen xdef exch sub numsteps div/Gstep xdef
+dup/FillRed xdef exch sub numsteps div/Rstep xdef
+top bottom lt{1}{-1}ifelse/step xdef
+top step bottom{sf dup newpath left exch moveto right exch lineto stroke
+FillBlue Bstep sub/FillBlue xdef 
+FillGreen Gstep sub/FillGreen xdef 
+FillRed Rstep sub/FillRed xdef }for 
+grestore}bdef
+/hfc{gsave 1 setlinewidth clip
+/right xdef/bottom xdef/left xdef/top xdef
+/FillGray 0 def
+left right sub abs/numsteps xdef
+dup/FillBlue xdef exch sub numsteps div/Bstep xdef
+dup/FillGreen xdef exch sub numsteps div/Gstep xdef
+dup/FillRed xdef exch sub numsteps div/Rstep xdef
+left right lt{1}{-1}ifelse/step xdef
+left step right{sf dup newpath top moveto bottom lineto stroke
+FillBlue Bstep sub/FillBlue xdef 
+FillGreen Gstep sub/FillGreen xdef 
+FillRed Rstep sub/FillRed xdef }for 
+grestore}bdef
+/ellipse{newpath/savematrix matrix currentmatrix def
+translate scale 0 0 1 5 -2 roll arc savematrix setmatrix}bdef
+/rfc{gsave clip
+/right xdef/bottom xdef/left xdef/top xdef
+/centery xdef/centerx xdef/rady xdef/radx xdef/FillGray 0 def
+left right sub abs 2 div/numsteps xdef
+dup/FillBlue xdef exch sub numsteps div/Bstep xdef
+dup/FillGreen xdef exch sub numsteps div/Gstep xdef
+dup/FillRed xdef exch sub numsteps div/Rstep xdef
+newpath left top moveto left bottom lineto
+right bottom lineto right top lineto left top lineto
+sf fill
+radx rady lt{/xstep 1 def/ystep rady radx div def}{/ystep 1 def/xstep radx rady div def}ifelse
+/xval radx def
+/yval rady def{xval 0 le{exit}if
+0 360 xval yval centerx centery ellipse
+FillBlue Bstep sub/FillBlue xdef 
+FillGreen Gstep sub/FillGreen xdef 
+FillRed Rstep sub/FillRed xdef 
+sf fill
+/xval xval xstep sub def
+/yval yval ystep sub def}loop
+grestore}bdef
+/NewCodes 256 array def
+NewCodes 0
+StandardEncoding
+0 128 getinterval
+putinterval
+NewCodes 16#27/quotesingle put  
+NewCodes 16#60/grave put
+/Adieresis/Aring/Ccedilla/Eacute/Ntilde/Odieresis/Udieresis/aacute
+/agrave/acircumflex/adieresis/atilde/aring/ccedilla/eacute/egrave
+/ecircumflex/edieresis/iacute/igrave/icircumflex/idieresis/ntilde/oacute
+/ograve/ocircumflex/odieresis/otilde/uacute/ugrave/ucircumflex/udieresis
+/dagger/degree/cent/sterling/section/bullet/paragraph/germandbls
+/register/copyright/trademark/acute/dieresis/notequal/AE/Oslash
+/infinity/plusminus/lessequal/greaterequal/yen/mu/partialdiff/summation
+/product/pi/integral/ordfeminine/ordmasculine/Omega/ae/oslash 
+/questiondown/exclamdown/logicalnot/radical/florin/approxequal/Delta/guillemotleft
+/guillemotright/ellipsis/nbspace/Agrave/Atilde/Otilde/OE/oe
+/endash/emdash/quotedblleft/quotedblright/quoteleft/quoteright/divide/lozenge
+/ydieresis/Ydieresis/fraction/currency/guilsinglleft/guilsinglright/fi/fl
+/daggerdbl/periodcentered/quotesinglbase/quotedblbase/perthousand/Acircumflex/Ecircumflex/Aacute
+/Edieresis/Egrave/Iacute/Icircumflex/Idieresis/Igrave/Oacute/Ocircumflex
+/apple/Ograve/Uacute/Ucircumflex/Ugrave/dotlessi/circumflex/tilde
+/macron/breve/dotaccent/ring/cedilla/hungarumlaut/ogonek/caron
+NewCodes 128 128 getinterval astore pop
+/cd{dup maxlength dict/NF exch def{1 index/FID ne{NF 3 1 roll put}{pop pop}ifelse}forall NF}bdef
+/rc{dup cvn/NewName exch def (|______) anchorsearch{pop findfont cd dup/Encoding NewCodes put NewName exch definefont}if pop}bdef
+/rfnt{dup FontDirectory exch known{pop}{rc}ifelse}bdef
+/sfnt{findfont exch scalefont setfont}bdef
+/mfnt{findfont exch makefont setfont}bdef
+/oshow{/str2 exch def .1 w 0 1 str2 length 1 sub{str2 exch 1 getinterval false charpath currentpoint stroke m}for}bdef
+/showsym {moveto
+gsave
+/ch xdef
+currentpoint initmatrix translate 0 0 moveto
+currentfont /FontName get /Courier eq
+ch exch charpath flattenpath pathbbox
+/ury xdef /urx xdef /lly xdef /llx xdef
+urx llx sub -2 div llx sub 
+ury lly sub -2 div lly sub
+grestore
+rmoveto ch show} def
+/ps2mac{1 -1 scale
+neg 0 exch translate} bdef
+/mac2ps{0 exch translate
+1 -1 scale} bdef
+end
+%%EndProcSet
+%%BeginSetup
+DeltaGraph begin 2 setmiterlimit n
+1 -1 scale 0 -728 translate
+%%EndSetup
+% Group
+% Chart
+% Poly line
+0 0 0 RGB
+105.5625 188.5781 m
+266.0586 188.5781 L
+N
+105.5625 169.125 m
+266.0586 169.125 L
+N
+105.5625 149.6758 m
+266.0586 149.6758 L
+N
+105.5625 130.2227 m
+266.0586 130.2227 L
+N
+105.5625 110.7734 m
+266.0586 110.7734 L
+N
+105.5625 91.3203 m
+266.0586 91.3203 L
+N
+105.5625 71.8711 m
+266.0586 71.8711 L
+N
+% Poly line
+0 0 0 RGB
+105.5625 188.5781 m
+105.5625 71.8711 L
+N
+137.6602 188.5781 m
+137.6602 71.8711 L
+N
+169.7578 188.5781 m
+169.7578 71.8711 L
+N
+201.8594 188.5781 m
+201.8594 71.8711 L
+N
+233.957 188.5781 m
+233.957 71.8711 L
+N
+266.0586 188.5781 m
+266.0586 71.8711 L
+N
+% Poly line
+0.25 w
+0 G
+0 0 0 RGB
+105.5625 189.5781 m
+105.5625 188.5781 L
+S
+121.6094 189.5781 m
+121.6094 188.5781 L
+S
+137.6602 189.5781 m
+137.6602 188.5781 L
+S
+153.7109 189.5781 m
+153.7109 188.5781 L
+S
+169.7578 189.5781 m
+169.7578 188.5781 L
+S
+185.8086 189.5781 m
+185.8086 188.5781 L
+S
+201.8594 189.5781 m
+201.8594 188.5781 L
+S
+217.9062 189.5781 m
+217.9062 188.5781 L
+S
+233.957 189.5781 m
+233.957 188.5781 L
+S
+250.0078 189.5781 m
+250.0078 188.5781 L
+S
+266.0586 189.5781 m
+266.0586 188.5781 L
+S
+% Poly line
+0.5 w
+0 G
+0 0 0 RGB
+102.5625 188.5781 m
+108.5625 188.5781 L
+S
+102.5625 169.125 m
+108.5625 169.125 L
+S
+102.5625 149.6758 m
+108.5625 149.6758 L
+S
+102.5625 130.2227 m
+108.5625 130.2227 L
+S
+102.5625 110.7734 m
+108.5625 110.7734 L
+S
+102.5625 91.3203 m
+108.5625 91.3203 L
+S
+102.5625 71.8711 m
+108.5625 71.8711 L
+S
+% Poly line
+0.5 w
+0 G
+0 0 0 RGB
+105.5625 191.5781 m
+105.5625 188.5781 L
+S
+137.6602 191.5781 m
+137.6602 188.5781 L
+S
+169.7578 191.5781 m
+169.7578 188.5781 L
+S
+201.8594 191.5781 m
+201.8594 188.5781 L
+S
+233.957 191.5781 m
+233.957 188.5781 L
+S
+266.0586 191.5781 m
+266.0586 188.5781 L
+S
+% Rect
+0.25 w
+0 G
+0 g
+0.6 0.6 0.6 rgb
+0 0 0 RGB
+105.5625 173.9883 m
+135.2188 173.9883 L
+135.2188 183.7148 L
+105.5625 183.7148 L
+105.5625 173.9883 L
+b
+% Rect
+0.25 w
+0 G
+0 g
+0.6 0.6 0.6 rgb
+0 0 0 RGB
+105.5625 154.5352 m
+223.043 154.5352 L
+223.043 164.2617 L
+105.5625 164.2617 L
+105.5625 154.5352 L
+b
+% Rect
+0.25 w
+0 G
+0 g
+0.6 0.6 0.6 rgb
+0 0 0 RGB
+105.5625 135.0859 m
+262.043 135.0859 L
+262.043 144.8125 L
+105.5625 144.8125 L
+105.5625 135.0859 L
+b
+% Rect
+0.25 w
+0 G
+0 g
+0.6 0.6 0.6 rgb
+0 0 0 RGB
+105.5625 115.6328 m
+266.0586 115.6328 L
+266.0586 125.3594 L
+105.5625 125.3594 L
+105.5625 115.6328 L
+b
+% Rect
+0.25 w
+0 G
+0 g
+0.6 0.6 0.6 rgb
+0 0 0 RGB
+105.5625 96.1836 m
+248.5625 96.1836 L
+248.5625 105.9102 L
+105.5625 105.9102 L
+105.5625 96.1836 L
+b
+% Rect
+0.25 w
+0 G
+0 g
+0.6 0.6 0.6 rgb
+0 0 0 RGB
+105.5625 76.7305 m
+230.2656 76.7305 L
+230.2656 86.457 L
+105.5625 86.457 L
+105.5625 76.7305 L
+b
+% Line
+0 G
+0.25 w
+0 0 0 RGB
+105.5625 188.5781 m
+105.5625 71.8711 L
+S
+% Line
+0 G
+0.25 w
+0 0 0 RGB
+105.5625 188.5781 m
+266.0586 188.5781 L
+S
+0 0 0 setrgbcolor
+(|______Times-Roman) rfnt [10 0 0 -10 0 0] /|______Times-Roman mfnt
+gsave
+[1 0 0 1 64.5625 173.3516 ] concat
+0.4492 9  m (PolyTest) show
+grestore
+0 0 0 setrgbcolor
+(|______Times-Roman) rfnt [10 0 0 -10 0 0] /|______Times-Roman mfnt
+gsave
+[1 0 0 1 64.5625 153.8984 ] concat
+0.4609 9  m (Richards) show
+grestore
+0 0 0 setrgbcolor
+(|______Times-Roman) rfnt [10 0 0 -10 0 0] /|______Times-Roman mfnt
+gsave
+[1 0 0 1 57.5625 134.4492 ] concat
+0.2422 9  m (PathCache) show
+grestore
+0 0 0 setrgbcolor
+(|______Times-Roman) rfnt [10 0 0 -10 0 0] /|______Times-Roman mfnt
+gsave
+[1 0 0 1 89.5625 114.9961 ] concat
+0.4531 9  m (UI) show
+grestore
+0 0 0 setrgbcolor
+(|______Times-Roman) rfnt [10 0 0 -10 0 0] /|______Times-Roman mfnt
+gsave
+[1 0 0 1 54.5625 95.5469 ] concat
+0.4648 9  m (PrimMaker) show
+grestore
+0 0 0 setrgbcolor
+(|______Times-Roman) rfnt [10 0 0 -10 0 0] /|______Times-Roman mfnt
+gsave
+[1 0 0 1 75.5625 76.0938 ] concat
+0.0195 9  m (Parser) show
+grestore
+0 0 0 setrgbcolor
+(|______Times-Roman) rfnt [10 0 0 -10 0 0] /|______Times-Roman mfnt
+gsave
+[1 0 0 1 98.5625 193.5781 ] concat
+0.3359 9  m (0%) show
+grestore
+0 0 0 setrgbcolor
+(|______Times-Roman) rfnt [10 0 0 -10 0 0] /|______Times-Roman mfnt
+gsave
+[1 0 0 1 128.1602 193.5781 ] concat
+0.3359 9  m (20%) show
+grestore
+0 0 0 setrgbcolor
+(|______Times-Roman) rfnt [10 0 0 -10 0 0] /|______Times-Roman mfnt
+gsave
+[1 0 0 1 160.2578 193.5781 ] concat
+0.3359 9  m (40%) show
+grestore
+0 0 0 setrgbcolor
+(|______Times-Roman) rfnt [10 0 0 -10 0 0] /|______Times-Roman mfnt
+gsave
+[1 0 0 1 192.3594 193.5781 ] concat
+0.3359 9  m (60%) show
+grestore
+0 0 0 setrgbcolor
+(|______Times-Roman) rfnt [10 0 0 -10 0 0] /|______Times-Roman mfnt
+gsave
+[1 0 0 1 224.457 193.5781 ] concat
+0.3359 9  m (80%) show
+grestore
+0 0 0 setrgbcolor
+(|______Times-Roman) rfnt [10 0 0 -10 0 0] /|______Times-Roman mfnt
+gsave
+[1 0 0 1 254.0586 193.5781 ] concat
+0.3359 9  m (100%) show
+grestore
+% Rect
+1 w
+0 0 0 rgb
+0 0 0 RGB
+93.5977 207.0742 m
+279.1992 207.0742 L
+279.1992 220.0039 L
+93.5977 220.0039 L
+93.5977 207.0742 L
+N
+% Text
+0 0 0 setrgbcolor
+(|______Times-Roman) rfnt [10 0 0 -10 0 0] /|______Times-Roman mfnt
+gsave
+[1 0 0 1 93.5977 207.0742 ] concat
+5.9375 10  m (Execution time \050normalized to base system\051) show
+grestore
+%%Trailer
+end
+
+%%EndDocument
+FMENDEPSF
+94.71 673.15 337.35 842.88 C
+94.71 643.18 604.94 842.88 C
+0 64 465 266 618 202 153.01 392.35 682.16 FMBEGINEPSF
+%%BeginDocument: <inline>
+%!PS-Adobe-2.0 EPSF-1.2%%Creator: DeltaGraph 1.1%%Title: polymorphism vs misses%%Creation Date: 4/8/91 8:14 PM %%BoundingBox: 64 465 266 618%%DocumentProcSets: DeltaGraph 1.1%%DocumentSuppliedProcSets: DeltaGraph 1.1%%DocumentFonts: DeltaSymbol%%+Times-Roman%%EndComments%%BeginProcSet: DeltaGraph/DeltaGraph 100 dict def DeltaGraph begin/Version 1.1 def/Revision 0 def/bdef{bind def}bind def/ldef{load def}bdef/xdef{exch def}bdef/FillGray 0 def/FillRed 1 def/FillGreen 1 def/FillBlue 1 def/FillMac 8 string def/UseMacFill false def/StrokeGray 0 def/StrokeRed 1 def/StrokeGreen 1 def/StrokeBlue 1 def/StrokeMac 8 string def/UseMacStroke false def/apat 8 string def/mat matrix def1 0 mat defaultmatrix dtransform exch atan/patang xdef/sscrn{currentscreen/proc xdef/ang xdef/freq xdef}bdef/rscrn{freq ang/proc load setscreen}bdef/macpat{apat copy pop 9.375 patang{1 add 4 mul cvi apat exch get exch 1 add 4 mul cvi 7 sub bitshift 1 and}setscreen setgray}bdef/d/setdash ldef/g{false/UseMacFill xdef/FillGray xdef}bdef/mg{true/UseMacFill xdef FillMac copy pop/FillGray xdef}bdef/G{false/UseMacStroke xdef/StrokeGray xdef}bdef/MG{true/UseMacStroke xdef StrokeMac copy pop/StrokeGray xdef}bdef/_i currentflat def/i{dup 0 eq{pop _i}if setflat}bdef/j/setlinejoin ldef/J/setlinecap ldef/rgb{/FillBlue xdef/FillGreen xdef/FillRed xdef}bdef/RGB{/StrokeBlue xdef/StrokeGreen xdef/StrokeRed xdef}bdef/M/setmiterlimit ldef/w/setlinewidth ldef/_R{.25 sub round .25 add}bdef/_r{transform _R exch _R exch itransform}bdef/m{_r moveto}bdef/L{_r lineto}bdef/c{_r curveto}bdef/_gf{FillGray 0 ne{dup 1 exch sub FillGray mul add}if}bdef/_gs{StrokeGray 0 ne{dup 1 exch sub StrokeGray mul add}if}bdef/sf{UseMacFill{FillRed FillGreen FillBlue setrgbcolor sscrn FillGray FillMac macpat}{FillGray setgray FillRed _gf FillGreen _gf FillBlue _gf setrgbcolor}ifelse}bdef/ss{UseMacStroke{StrokeRed StrokeGreen StrokeBlue setrgbcolor sscrn FillGray StrokeMac macpat}{StrokeGray setgray StrokeRed _gs StrokeGreen _gs StrokeBlue _gs setrgbcolor}ifelse}bdef/F{sf eofill UseMacFill{rscrn}if}bdef/f{closepath F}bdef/S{ss stroke UseMacStroke{rscrn}if}bdef/s{closepath S}bdef/B{gsave F grestore S}bdef/b{closepath B}bdef/N/newpath ldef/n/N ldef/sh{currentpoint 3 -1 roll show 3 -1 roll add moveto}bdef/vfc{gsave 1 setlinewidth clip/right xdef/bottom xdef/left xdef/top xdef/FillGray 0 deftop bottom sub abs/numsteps xdefdup/FillBlue xdef exch sub numsteps div/Bstep xdefdup/FillGreen xdef exch sub numsteps div/Gstep xdefdup/FillRed xdef exch sub numsteps div/Rstep xdeftop bottom lt{1}{-1}ifelse/step xdeftop step bottom{sf dup newpath left exch moveto right exch lineto strokeFillBlue Bstep sub/FillBlue xdef FillGreen Gstep sub/FillGreen xdef FillRed Rstep sub/FillRed xdef }for grestore}bdef/hfc{gsave 1 setlinewidth clip/right xdef/bottom xdef/left xdef/top xdef/FillGray 0 defleft right sub abs/numsteps xdefdup/FillBlue xdef exch sub numsteps div/Bstep xdefdup/FillGreen xdef exch sub numsteps div/Gstep xdefdup/FillRed xdef exch sub numsteps div/Rstep xdefleft right lt{1}{-1}ifelse/step xdefleft step right{sf dup newpath top moveto bottom lineto strokeFillBlue Bstep sub/FillBlue xdef FillGreen Gstep sub/FillGreen xdef FillRed Rstep sub/FillRed xdef }for grestore}bdef/ellipse{newpath/savematrix matrix currentmatrix deftranslate scale 0 0 1 5 -2 roll arc savematrix setmatrix}bdef/rfc{gsave clip/right xdef/bottom xdef/left xdef/top xdef/centery xdef/centerx xdef/rady xdef/radx xdef/FillGray 0 defleft right sub abs 2 div/numsteps xdefdup/FillBlue xdef exch sub numsteps div/Bstep xdefdup/FillGreen xdef exch sub numsteps div/Gstep xdefdup/FillRed xdef exch sub numsteps div/Rstep xdefnewpath left top moveto left bottom linetoright bottom lineto right top lineto left top linetosf fillradx rady lt{/xstep 1 def/ystep rady radx div def}{/ystep 1 def/xstep radx rady div def}ifelse/xval radx def/yval rady def{xval 0 le{exit}if0 360 xval yval centerx centery ellipseFillBlue Bstep sub/FillBlue xdef FillGreen Gstep sub/FillGreen xdef FillRed Rstep sub/FillRed xdef sf fill/xval xval xstep sub def/yval yval ystep sub def}loopgrestore}bdef/NewCodes 256 array defNewCodes 0StandardEncoding0 128 getintervalputintervalNewCodes 16#27/quotesingle put  NewCodes 16#60/grave put/Adieresis/Aring/Ccedilla/Eacute/Ntilde/Odieresis/Udieresis/aacute/agrave/acircumflex/adieresis/atilde/aring/ccedilla/eacute/egrave/ecircumflex/edieresis/iacute/igrave/icircumflex/idieresis/ntilde/oacute/ograve/ocircumflex/odieresis/otilde/uacute/ugrave/ucircumflex/udieresis/dagger/degree/cent/sterling/section/bullet/paragraph/germandbls/register/copyright/trademark/acute/dieresis/notequal/AE/Oslash/infinity/plusminus/lessequal/greaterequal/yen/mu/partialdiff/summation/product/pi/integral/ordfeminine/ordmasculine/Omega/ae/oslash /questiondown/exclamdown/logicalnot/radical/florin/approxequal/Delta/guillemotleft/guillemotright/ellipsis/nbspace/Agrave/Atilde/Otilde/OE/oe/endash/emdash/quotedblleft/quotedblright/quoteleft/quoteright/divide/lozenge/ydieresis/Ydieresis/fraction/currency/guilsinglleft/guilsinglright/fi/fl/daggerdbl/periodcentered/quotesinglbase/quotedblbase/perthousand/Acircumflex/Ecircumflex/Aacute/Edieresis/Egrave/Iacute/Icircumflex/Idieresis/Igrave/Oacute/Ocircumflex/apple/Ograve/Uacute/Ucircumflex/Ugrave/dotlessi/circumflex/tilde/macron/breve/dotaccent/ring/cedilla/hungarumlaut/ogonek/caronNewCodes 128 128 getinterval astore pop/cd{dup maxlength dict/NF exch def{1 index/FID ne{NF 3 1 roll put}{pop pop}ifelse}forall NF}bdef/rc{dup cvn/NewName exch def (|______) anchorsearch{pop findfont cd dup/Encoding NewCodes put NewName exch definefont}if pop}bdef/rfnt{dup FontDirectory exch known{pop}{rc}ifelse}bdef/sfnt{findfont exch scalefont setfont}bdef/mfnt{findfont exch makefont setfont}bdef/oshow{/str2 exch def .1 w 0 1 str2 length 1 sub{str2 exch 1 getinterval false charpath currentpoint stroke m}for}bdef/showsym {movetogsave/ch xdefcurrentpoint initmatrix translate 0 0 movetocurrentfont /FontName get /Courier eqch exch charpath flattenpath pathbbox/ury xdef /urx xdef /lly xdef /llx xdefurx llx sub -2 div llx sub ury lly sub -2 div lly subgrestorermoveto ch show} def/ps2mac{1 -1 scaleneg 0 exch translate} bdef/mac2ps{0 exch translate1 -1 scale} bdefend%%EndProcSet%%BeginSetupDeltaGraph begin 2 setmiterlimit n1 -1 scale 0 -728 translate%%EndSetup% Chart% Rect1 g1 1 1 rgb0 0 0 RGB105.0742 115.8242 m229.2422 115.8242 L229.2422 232.6523 L105.0742 232.6523 L105.0742 115.8242 Lf% Poly line0.25 w0 G0 0 0 RGB102.0742 232.6523 m105.0742 232.6523 LS102.0742 213.1797 m105.0742 213.1797 LS102.0742 193.707 m105.0742 193.707 LS102.0742 174.2383 m105.0742 174.2383 LS102.0742 154.7656 m105.0742 154.7656 LS102.0742 135.293 m105.0742 135.293 LS102.0742 115.8203 m105.0742 115.8203 LS% Poly line0.25 w0 G0 0 0 RGB105.0742 235.6523 m105.0742 232.6523 LS136.1133 235.6523 m136.1133 232.6523 LS167.1562 235.6523 m167.1562 232.6523 LS198.1992 235.6523 m198.1992 232.6523 LS229.2422 235.6523 m229.2422 232.6523 LS% Poly line0.25 w0 G0 0 0 RGB102.0742 232.6523 m105.0742 232.6523 LS102.0742 213.1797 m105.0742 213.1797 LS102.0742 193.707 m105.0742 193.707 LS102.0742 174.2383 m105.0742 174.2383 LS102.0742 154.7656 m105.0742 154.7656 LS102.0742 135.293 m105.0742 135.293 LS102.0742 115.8203 m105.0742 115.8203 LS% Poly line0.25 w0 G0 0 0 RGB105.0742 235.6523 m105.0742 232.6523 LS136.1133 235.6523 m136.1133 232.6523 LS167.1562 235.6523 m167.1562 232.6523 LS198.1992 235.6523 m198.1992 232.6523 LS229.2422 235.6523 m229.2422 232.6523 LS% Line0 G0.25 w0 0 0 RGB105.0742 232.6523 m105.0742 115.8242 LS% Line0 G0.25 w0 0 0 RGB105.0742 232.6523 m229.2422 232.6523 LS0 0 0 setrgbcolor(|______Times-Roman) rfnt [9 0 0 -9 0 0] /|______Times-Roman mfntgsave[1 0 0 1 117.8008 189.5195 ] concat(o) 0 0  showsymgrestore0 0 0 setrgbcolor(|______Times-Roman) rfnt [9 0 0 -9 0 0] /|______Times-Roman mfntgsave[1 0 0 1 218.4219 176.5742 ] concat(o) 0 0  showsymgrestore0 0 0 setrgbcolor(|______Times-Roman) rfnt [9 0 0 -9 0 0] /|______Times-Roman mfntgsave[1 0 0 1 121.6641 225.0547 ] concat(o) 0 0  showsymgrestore0 0 0 setrgbcolor(|______Times-Roman) rfnt [9 0 0 -9 0 0] /|______Times-Roman mfntgsave[1 0 0 1 155.8242 126.7266 ] concat(o) 0 0  showsymgrestore0 0 0 setrgbcolor(|______Times-Roman) rfnt [9 0 0 -9 0 0] /|______Times-Roman mfntgsave[1 0 0 1 163.2461 137.9219 ] concat(o) 0 0  showsymgrestore0 0 0 setrgbcolor(|______Times-Roman) rfnt [10 0 0 -10 0 0] /|______Times-Roman mfntgsave[1 0 0 1 119.8008 184.0195 ] concat0 9  m ( Richards) showgrestore0 0 0 setrgbcolor(|______Times-Roman) rfnt [10 0 0 -10 0 0] /|______Times-Roman mfntgsave[1 0 0 1 220.4219 171.0742 ] concat0 9  m ( PathCache) showgrestore0 0 0 setrgbcolor(|______Times-Roman) rfnt [10 0 0 -10 0 0] /|______Times-Roman mfntgsave[1 0 0 1 123.6641 219.5547 ] concat0 9  m ( UI) showgrestore0 0 0 setrgbcolor(|______Times-Roman) rfnt [10 0 0 -10 0 0] /|______Times-Roman mfntgsave[1 0 0 1 157.8242 121.2266 ] concat0 9  m ( PrimitiveMaker) showgrestore0 0 0 setrgbcolor(|______Times-Roman) rfnt [10 0 0 -10 0 0] /|______Times-Roman mfntgsave[1 0 0 1 165.2461 132.4219 ] concat0 9  m ( Parser) showgrestore0 0 0 setrgbcolor(|______Times-Roman) rfnt [10 0 0 -10 0 0] /|______Times-Roman mfntgsave[1 0 0 1 82.0742 227.1523 ] concat0.6758 9  m (0%) showgrestore0 0 0 setrgbcolor(|______Times-Roman) rfnt [10 0 0 -10 0 0] /|______Times-Roman mfntgsave[1 0 0 1 82.0742 207.6797 ] concat0.6758 9  m (2%) showgrestore0 0 0 setrgbcolor(|______Times-Roman) rfnt [10 0 0 -10 0 0] /|______Times-Roman mfntgsave[1 0 0 1 82.0742 188.207 ] concat0.6758 9  m (4%) showgrestore0 0 0 setrgbcolor(|______Times-Roman) rfnt [10 0 0 -10 0 0] /|______Times-Roman mfntgsave[1 0 0 1 82.0742 168.7383 ] concat0.6758 9  m (6%) showgrestore0 0 0 setrgbcolor(|______Times-Roman) rfnt [10 0 0 -10 0 0] /|______Times-Roman mfntgsave[1 0 0 1 82.0742 149.2656 ] concat0.6758 9  m (8%) showgrestore0 0 0 setrgbcolor(|______Times-Roman) rfnt [10 0 0 -10 0 0] /|______Times-Roman mfntgsave[1 0 0 1 77.0742 129.793 ] concat0.6758 9  m (10%) showgrestore0 0 0 setrgbcolor(|______Times-Roman) rfnt [10 0 0 -10 0 0] /|______Times-Roman mfntgsave[1 0 0 1 77.0742 110.3203 ] concat0.6758 9  m (12%) showgrestore0 0 0 setrgbcolor(|______Times-Roman) rfnt [10 0 0 -10 0 0] /|______Times-Roman mfntgsave[1 0 0 1 99.0742 239.6523 ] concat0.3359 9  m (0%) showgrestore0 0 0 setrgbcolor(|______Times-Roman) rfnt [10 0 0 -10 0 0] /|______Times-Roman mfntgsave[1 0 0 1 127.6133 239.6523 ] concat0.3359 9  m (20%) showgrestore0 0 0 setrgbcolor(|______Times-Roman) rfnt [10 0 0 -10 0 0] /|______Times-Roman mfntgsave[1 0 0 1 158.6562 239.6523 ] concat0.3359 9  m (40%) showgrestore0 0 0 setrgbcolor(|______Times-Roman) rfnt [10 0 0 -10 0 0] /|______Times-Roman mfntgsave[1 0 0 1 189.6992 239.6523 ] concat0.3359 9  m (60%) showgrestore0 0 0 setrgbcolor(|______Times-Roman) rfnt [10 0 0 -10 0 0] /|______Times-Roman mfntgsave[1 0 0 1 220.7422 239.6523 ] concat0.3359 9  m (80%) showgrestore0 0 0 setrgbcolor(|______Times-Roman) rfnt [10 0 0 -10 0 0] /|______Times-Roman mfntgsave[0 -1 1 0 64.0742 219.7344 ] concat0.3828 9  m (Inline cache miss ratio) showgrestore0 0 0 setrgbcolor(|______Times-Roman) rfnt [10 0 0 -10 0 0] /|______Times-Roman mfntgsave[1 0 0 1 130.9062 252.6523 ] concat0.3125 9  m (Polymorphic sends) showgrestore%%Trailerend
+%%EndDocument
+FMENDEPSF
+9 F
+0 X
+0 K
+(Figure 5.) 109.24 660.16 T
+(Impact of PICs on performance) 161.21 660.16 T
+(Figure 6.) 415.73 660.16 T
+(Inline cache miss ratios) 467.69 660.16 T
+94.71 91.7 604.94 842.88 C
+54 69.88 666 861.88 C
+FMENDPAGE
+%%EndPage: "7" 6
+%%Page: "6" 6
+612 792 0 FMBEGINPAGE
+91.99 73.9 604.97 85.89 R
+7 X
+0 K
+V
+0 F
+0 X
+(6) 345.48 77.89 T
+94.71 91.7 604.94 842.88 R
+7 X
+V
+10 F
+0 X
+(3.3.) 94.71 833.55 T
+(Implementation and Results) 121.69 833.55 T
+0 F
+1.09 (W) 94.71 814.88 P
+1.09 (e implemented PICs for the S) 105.07 814.88 P
+4 F
+1 (ELF) 252.11 814.88 P
+0 F
+1.09 ( system, an ef) 271.65 814.88 P
+1.09 (\336cient implementation of a dynamically-typed object-) 340.66 814.88 P
+1.35 (oriented language [CUL89, CU90, CU91]. All measurements were done on a lightly-loaded Sun-4/260) 94.71 800.88 P
+2.54 (with 48 MB of memory) 94.71 786.88 P
+2.54 (. The base system used for comparison was the current S) 218.01 786.88 P
+4 F
+2.32 (ELF) 515.51 786.88 P
+0 F
+2.54 ( system as of) 535.04 786.88 P
+1.33 (September 1990. It uses inline caching; a send takes 8 instructions \0509 cycles\051 until the method-speci\336c) 94.71 772.88 P
+0.8 (code is reached \050see Appendix) 94.71 758.88 P
+0.8 (B\051. An inline cache miss takes about 15 microseconds \050250 cycles\051. This) 247.43 758.88 P
+0.29 (time could be reduced by some optimizations and by recoding critical parts in assembly) 94.71 744.88 P
+0.29 (. W) 518.43 744.88 P
+0.29 (e estimate that) 535.08 744.88 P
+0.04 (such optimizations could reduce the miss overhead by about a factor of two. Thus, our measurements may) 94.71 730.88 P
+0.12 (overstate the direct performance advantage of PICs by about the same factor) 94.71 716.88 P
+0.12 (. On the other hand, measure-) 462.11 716.88 P
+0.54 (ments of the ParcPlace Smalltalk-80 system indicate that it also takes about 15 microseconds to handle a) 94.71 702.88 P
+(miss \050see Appendix) 94.71 688.88 T
+(A\051, and thus our current implementation does not seem to be unreasonably slow) 192.31 688.88 T
+(.) 574.94 688.88 T
+0.7 (Monomorphic sends in our experimental system use the same inline caching scheme as the base system.) 94.71 669.88 P
+1.81 (For polymorphic sends, a stub is constructed which tests the receiver type and branches to the corre-) 94.71 655.88 P
+0.51 (sponding method. The stub has a \336xed overhead of 8 cycles \050to load the receiver type and to jump to the) 94.71 641.88 P
+0.46 (tar) 94.71 627.88 P
+0.46 (get method\051, and every type test takes 4 cycles. The PICs are implemented as described in section 3.1.) 107.15 627.88 P
+1.41 (None of the optimizations mentioned in the previous section are implemented except that a call site is) 94.71 613.88 P
+0.82 (treated as megamorphic if it has more than ten receiver types \050but such calls do not occur in our bench-) 94.71 599.88 P
+(marks\051. Appendix) 94.71 585.88 T
+(B contains an example of a PIC stub generated by our implementation.) 184.31 585.88 T
+3.06 (In order to evaluate the ef) 94.71 566.88 P
+3.06 (fectiveness of polymorphic inline caches, we measured a suite of S) 233.36 566.88 P
+4 F
+2.81 (ELF) 585.41 566.88 P
+0 F
+2.23 (programs. The programs \050with the exception of ) 94.71 552.88 P
+2 F
+5.35 (PolyTest) 340.15 552.88 P
+0 F
+2.23 (\051 can be considered fairly typical object-) 397.72 552.88 P
+0.09 (oriented programs and cover a variety of programming styles. More detailed data about the benchmarks is) 94.71 538.88 P
+(given in Appendix) 94.71 524.88 T
+(A.) 186.99 524.88 T
+2 F
+(Parser) 108.26 505.88 T
+0 F
+(. A recursive-descent parser for an earlier version of the S) 150.78 505.88 T
+4 F
+(ELF) 428.2 505.88 T
+0 F
+( syntax \050550 lines\051.) 447.73 505.88 T
+2 F
+1.68 (PrimitiveMaker) 108.26 487.88 P
+0 F
+0.7 (. A program generating C++ and S) 208.34 487.88 P
+4 F
+0.64 (ELF) 378.97 487.88 P
+0 F
+0.7 ( stub routines from a description of primi-) 398.5 487.88 P
+(tives \050850 lines\051.) 108.26 473.88 T
+2 F
+0.33 (UI) 108.26 455.88 P
+0 F
+0.14 (. The S) 122.65 455.88 P
+4 F
+0.13 (ELF) 157.24 455.88 P
+0 F
+0.14 ( user interface prototype \0503000 lines\051 running a short interactive session. Since the Sun-4) 176.77 455.88 P
+0.43 (used for our measurements has no special graphics hardware, runtime is dominated by graphics primi-) 108.26 441.88 P
+0.14 (tives \050e.g. polygon \336lling and full-screen bitmap copies\051. For our tests, the three most expensive graph-) 108.26 427.88 P
+1.33 (ics primitives were turned into no-ops; the remaining primitives still account for about 30% of total) 108.26 413.88 P
+(execution time.) 108.26 399.88 T
+2 F
+2.65 (PathCache) 108.26 381.88 P
+0 F
+1.1 (. A part of the S) 173.02 381.88 P
+4 F
+1.01 (ELF) 255.15 381.88 P
+0 F
+1.1 ( system which computes the names of all global objects and stores) 274.69 381.88 P
+-0.23 (them in compressed form \050150 lines\051. Most of the time is spent in a loop which iterates through a collec-) 108.26 367.88 P
+(tion.) 108.26 353.88 T
+2 F
+-0.51 (Richards) 108.26 335.88 P
+0 F
+-0.21 (. An operating system simulation benchmark \050400 lines\051. The benchmark schedules the exe-) 165.83 335.88 P
+0.04 (cution of four dif) 108.26 321.88 P
+0.04 (ferent kinds of tasks. It contains a frequently executed polymorphic send \050the schedul-) 190.44 321.88 P
+(er sends the ) 108.26 307.88 T
+2 F
+(runTask) 167.88 307.88 T
+0 F
+( message to the next task\051.) 218.25 307.88 T
+2 F
+3.7 (PolyTest) 108.26 289.88 P
+0 F
+1.54 (. An arti\336cial benchmark \05020 lines\051 designed to show the highest possible speedup with) 165.83 289.88 P
+0.24 (PICs. ) 108.26 275.88 P
+2 F
+0.58 (PolyTest) 137.82 275.88 P
+0 F
+0.24 ( consists of a loop containing a polymorphic send of degree 5; the send is executed a) 195.39 275.88 P
+-0.25 (million times. Normal inline caches have a 100% miss rate in this benchmark \050no two consecutive sends) 108.26 261.88 P
+1.03 (have the same receiver type\051. Since ) 108.26 247.88 P
+2 F
+2.46 (PolyTest) 287.27 247.88 P
+0 F
+1.03 ( is a short, arti\336cial benchmark, we do not include it) 344.84 247.88 P
+(when computing averages for the entire set of benchmarks.) 108.26 233.88 T
+-0.14 (The benchmarks were run 10 times and the average CPU time was computed; this process was repeated 10) 94.71 215.88 P
+-0.02 (times, and the best average was chosen. A garbage collection was performed before every measurement in) 94.71 201.88 P
+-0.18 (order to reduce inaccuracies. Figure 5 shows the benchmark results normalized to the base system\325) 94.71 187.88 P
+-0.18 (s execu-) 565.5 187.88 P
+1.02 (tion time \050see Appendix) 94.71 173.88 P
+1.02 (A for raw execution times\051. For comparison, the execution times for ParcPlace) 216.36 173.88 P
+0.17 (Smalltalk-80 V2.4 are 262% for ) 94.71 159.88 P
+2 F
+0.41 (Richards) 252.8 159.88 P
+0 F
+0.17 ( and 93% for ) 310.36 159.88 P
+2 F
+0.41 (PolyTest) 376.34 159.88 P
+0 F
+0.17 ( \050i.e. in Smalltalk, ) 433.9 159.88 P
+2 F
+0.41 (Richards) 523.55 159.88 P
+0 F
+0.17 ( runs) 581.12 159.88 P
+(slower and ) 94.71 145.88 T
+2 F
+(PolyTest) 150 145.88 T
+0 F
+( slightly faster than the base S) 207.57 145.88 T
+4 F
+(ELF) 351.48 145.88 T
+0 F
+( system\051.) 371.01 145.88 T
+0.47 (W) 94.71 126.88 P
+0.47 (ith PICs, the median speedup for the benchmarks \050without ) 105.55 126.88 P
+2 F
+1.13 (PolyTest) 392.26 126.88 P
+0 F
+0.47 (\051 is 1) 449.83 126.88 P
+0.47 (1%. The speedup observed) 474.31 126.88 P
+0.66 (for the individual benchmarks corresponds to the time required to handle inline cache misses in the base) 94.71 112.88 P
+0.78 (system. For example, in the base system ) 94.71 98.88 P
+2 F
+1.87 (PolyTest) 296.39 98.88 P
+0 F
+0.78 ( spends more than 80% of its execution time in the) 353.96 98.88 P
+FMENDPAGE
+%%EndPage: "6" 5
+11 9 /Courier FMDEFINEFONT
+%%Page: "5" 5
+612 792 0 FMBEGINPAGE
+91.99 73.9 604.97 85.89 R
+7 X
+0 K
+V
+0 F
+0 X
+(5) 345.48 77.89 T
+94.71 91.7 604.94 842.88 R
+7 X
+V
+10 F
+0 X
+(3.2.) 94.71 833.55 T
+(Variations) 121.69 833.55 T
+0 F
+-0.2 (The PIC scheme described above works well in most cases and reduces the cost of a polymorphic send to a) 94.71 814.88 P
+(few machine cycles. This section discusses some remaining problems and possible solutions.) 94.71 800.88 T
+8 F
+0.46 (Handling megamorphic sends.) 94.71 781.88 P
+0 F
+0.46 ( Some send sites may send a message to a very lar) 242.53 781.88 P
+0.46 (ge number of types. For) 488.19 781.88 P
+0.57 (example, a method might send the ) 94.71 767.88 P
+2 F
+1.38 (writeSnapshot) 265.71 767.88 P
+0 F
+0.57 ( message to every object in the system. Building a) 359.26 767.88 P
+1.68 (lar) 94.71 753.88 P
+1.68 (ge PIC for such a send wastes time and space) 107.15 753.88 P
+1.68 (. Therefore, the inline cache miss handler should not) 339.73 753.88 P
+0.49 (extend the PIC beyond a certain number of type cases; rather, it should mark the call site as being mega-) 94.71 739.88 P
+-0.39 (morphic and adopt a fall-back strategy, possibly just the traditional monomorphic inline cache mechanism. ) 94.71 725.88 P
+8 F
+0.22 (Impr) 94.71 706.88 P
+0.22 (oving linear sear) 117.58 706.88 P
+0.22 (ch. ) 199.53 706.88 P
+0 F
+0.22 (If the dynamic usage frequency of each type were available, PICs could be reor-) 217.07 706.88 P
+1.93 (dered periodically in order to move the most frequently occurring types to the beginning of the PIC,) 94.71 692.88 P
+0.09 (reducing the average number of type tests executed. If linear search is not ef) 94.71 678.88 P
+0.09 (\336cient enough, more sophisti-) 461.41 678.88 P
+1.29 (cated algorithms like binary search or some form of hashing could be used for cases with many types.) 94.71 664.88 P
+0.55 (However) 94.71 650.88 P
+0.55 (, the number of types is likely to be small on average so this optimization may not be worth the) 138.19 650.88 P
+0.85 (ef) 94.71 636.88 P
+0.85 (fort:) 103.81 636.88 P
+0.85 ( ) 124.46 636.88 P
+0.85 (a ) 128.31 636.88 P
+0.85 (PIC with linear search is probably faster than other methods for most situations which occur in) 137.49 636.88 P
+(practice.) 94.71 622.88 T
+8 F
+0.53 (Inlining short methods. ) 94.71 603.88 P
+0 F
+0.53 (Many methods are short: for example, it is very common to have methods which) 210.92 603.88 P
+0.53 (just return one of the receiver) 94.71 589.88 P
+0.53 (\325) 239.36 589.88 P
+0.53 (s instance variables. In S) 242.7 589.88 P
+4 F
+0.49 (ELF) 363.74 589.88 P
+0 F
+0.53 (, many of these sends are inlined away by the) 382.32 589.88 P
+0.15 (compiler) 94.71 575.88 P
+0.15 (, but non-inlined access methods still represent about 10%-20% of total runtime \05030%-50% of all) 136.87 575.88 P
+0.56 (non-inlined sends\051 in typical programs. At polymorphic call sites, short methods could be integrated into) 94.71 561.88 P
+1.18 (the PIC instead of being called by it. For example, suppose the lookup routine \336nds a method that just) 94.71 547.88 P
+0.31 (loads the receiver) 94.71 533.88 P
+0.31 (\325) 180.37 533.88 P
+0.31 (s ) 183.7 533.88 P
+2 F
+0.75 (x) 191.68 533.88 P
+0 F
+0.31 ( \336eld. Instead of calling this method from the stub, its code could be copied into the) 198.87 533.88 P
+(stub, eliminating the call / return overhead.) 94.71 519.88 T
+6 F
+(\240) 301.24 524.68 T
+9 F
+(Figure 4. ) 230.22 299.85 T
+(Inlining a small method into the PIC) 282.18 299.85 T
+8 F
+0.76 (Impr) 94.71 270.85 P
+0.76 (oving space ef\336ciency) 117.58 270.85 P
+0 F
+0.76 (. PICs are lar) 223.56 270.85 P
+0.76 (ger than normal inline caches because of the stub routine associ-) 288.25 270.85 P
+0.05 (ated with every polymorphic call site. If space is tight, call sites with identical message names could share) 94.71 256.85 P
+0.45 (a common PIC to reduce the space overhead. In such a scenario, PICs would act as fast message-speci\336c) 94.71 242.85 P
+0.81 (lookup caches. The average cost of a polymorphic send is likely to be higher than with call-site-speci\336c) 94.71 228.85 P
+1.56 (PICs because the number of types per PIC will increase due to the loss of locality \050a shared PIC will) 94.71 214.85 P
+0.84 (contain all receiver types for the particular message name, whereas a call-speci\336c PIC only contains the) 94.71 200.85 P
+-0.12 (types which actually occur at that call site\051. If the number of types is lar) 94.71 186.85 P
+-0.12 (ge, a shared PIC implemented with) 436.96 186.85 P
+0.26 (a hash table should be faster than the global lookup cache because the message name need not be veri\336ed) 94.71 172.85 P
+(and because the hit ratio will approach 100%. ) 94.71 158.85 T
+94.71 123.7 604.94 138.67 C
+94.71 123.7 604.94 138.67 R
+7 X
+0 K
+V
+94.71 129.6 247.72 129.6 2 L
+V
+0.5 H
+2 Z
+0 X
+N
+54 69.88 666 861.88 C
+3 F
+0 X
+0 K
+(\240) 94.71 121.04 T
+6 F
+1.76 (The CLOS implementation described in [KiRo89] uses a similar technique to speed up access methods \050called \322reader) 103.78 117.04 P
+-0.23 (methods\323 in CLOS\051. The authors report that access methods represent 69% of the dynamically executed method calls for a set of) 94.71 107.04 P
+(large CLOS applications.) 94.71 97.04 T
+94.71 91.7 604.94 842.88 C
+124.97 314.85 574.69 515.88 C
+124.97 314.85 574.69 515.88 R
+7 X
+0 K
+V
+326.43 420.73 467.45 475.63 2 L
+V
+0.1 H
+2 Z
+4 X
+N
+326.43 422.17 401.46 430.96 R
+7 X
+V
+133.96 403.15 245.56 442.1 R
+V
+6 F
+0 X
+(receiver = list element) 141.15 435.43 T
+(call ) 141.15 423.43 T
+(PIC stub) 160.58 423.43 T
+(calling code) 160.37 385.94 T
+133.96 432.09 245.55 432.09 2 L
+7 X
+V
+4 X
+N
+133.96 444.11 245.55 444.11 2 L
+7 X
+V
+4 X
+N
+133.96 419.68 245.55 419.68 2 L
+7 X
+V
+4 X
+N
+11 F
+0 X
+(...) 181.01 409.81 T
+(...) 180.22 451.91 T
+401.66 408.23 542.46 463.13 2 L
+7 X
+V
+4 X
+N
+448.2 439.38 563.94 449.13 R
+7 X
+V
+6 F
+0 X
+(if type = cartesian point) 317.13 423.9 T
+(return receiver) 330.45 411.9 T
+(.x) 388.45 411.9 T
+(if type = polar point) 317.13 399.9 T
+(jump to method) 330.45 387.9 T
+(call lookup) 317.13 375.9 T
+308.94 362.9 414.84 436.91 R
+0.5 H
+0 Z
+N
+(check receiver type) 471.14 490.37 T
+(return receiver) 471.14 466.37 T
+(.x) 529.13 466.37 T
+467.48 462.91 542.51 476.37 R
+0.1 H
+3 X
+N
+326.43 407.88 401.46 420.64 R
+4 X
+N
+300.29 428.37 308.94 425.88 300.29 423.4 300.29 425.88 4 Y
+0 X
+V
+240.45 425.88 301.29 425.88 2 L
+0.5 H
+2 Z
+N
+460.68 455.11 555.52 505.88 R
+0 Z
+N
+460.7 483.26 555.52 483.26 2 L
+0.1 H
+2 Z
+N
+(PIC stub) 338.45 349.86 T
+460.19 343.94 551.92 397.94 R
+7 X
+V
+0 X
+(check receiver type) 467.39 391.27 T
+(compute x from rho) 467.39 367.27 T
+(and theta) 467.39 355.27 T
+460.19 343.94 551.92 406.95 R
+0.5 H
+0 Z
+N
+460.19 383.99 551.92 383.99 2 L
+0.1 H
+2 Z
+N
+(x method for polar points) 457.76 328.97 T
+453.07 375.23 460.3 369.87 451.33 370.58 452.2 372.91 4 Y
+V
+405.12 390.4 453.14 372.55 2 L
+0.5 H
+N
+(x method for cartesian points) 450.47 441.87 T
+133.96 399.44 245.56 461.12 R
+0 Z
+N
+94.71 91.7 604.94 842.88 C
+54 69.88 666 861.88 C
+FMENDPAGE
+%%EndPage: "5" 4
+%%Page: "4" 4
+612 792 0 FMBEGINPAGE
+91.99 73.9 604.97 85.89 R
+7 X
+0 K
+V
+0 F
+0 X
+(4) 345.48 77.89 T
+94.71 91.7 604.94 842.88 R
+7 X
+V
+0 X
+1.36 (receiver types\051, or ) 94.71 834.88 P
+8 F
+1.36 (megamorphic) 188.69 834.88 P
+0 F
+1.36 ( \050very many receiver types\051. This observation suggests that the perfor-) 254.64 834.88 P
+0.18 (mance of polymorphic calls can be improved with a more \337exible form of caching. This section describes) 94.71 820.88 P
+0.79 (a new technique to optimize polymorphic sends and presents performance measurements to estimate the) 94.71 806.88 P
+(bene\336ts of this optimization.) 94.71 792.88 T
+10 F
+(3.1.) 94.71 767.55 T
+(Polymorphic Inline Caches) 121.69 767.55 T
+0 F
+1.21 (The ) 94.71 748.88 P
+8 F
+1.21 (polymorphic inline cache) 117.57 748.88 P
+0 F
+1.21 ( \050PIC\051 extends inline caching to handle polymorphic call sites. I) 241.89 748.88 P
+1.21 (nstead of) 560.1 748.88 P
+0.42 (merely caching the last lookup result, PICs cache ) 94.71 734.88 P
+8 F
+0.42 (all) 337.57 734.88 P
+0 F
+0.42 ( lookup results for a given polymorphic call site in a) 350.23 734.88 P
+(specially-generated stub routine. An example will illustrate this.) 94.71 720.88 T
+0.73 (Suppose that a method is sending the ) 94.71 701.88 P
+2 F
+1.75 (display) 280.72 701.88 P
+0 F
+0.73 ( message to all elements in a list, and that so far) 331.09 701.88 P
+0.73 (, all list) 567.83 701.88 P
+0.44 (elements have been rectangles. \050In other words, the ) 94.71 687.88 P
+2 F
+1.04 (display) 347.32 687.88 P
+0 F
+0.44 ( message has been sent monomorphically) 397.69 687.88 P
+0.44 (.\051) 597.95 687.88 P
+(At this point, the situation is identical to normal inline caching:) 94.71 673.88 T
+9 F
+(Figure 2. Inline cache after first send) 255.39 547.28 T
+0 F
+0.1 (Now suppose that the next list element is a circle. The inline cache calls the ) 94.71 519.28 P
+2 F
+0.25 (display) 462.01 519.28 P
+0 F
+0.1 ( method for rectan-) 512.38 519.28 P
+0.98 (gles which detects the cache miss and calls the lookup routine. W) 94.71 505.28 P
+0.98 (ith normal inline caching, this routine) 419.47 505.28 P
+1.03 (would rebind the call to the ) 94.71 491.28 P
+2 F
+2.47 (display) 235.48 491.28 P
+0 F
+1.03 ( method for circles. This rebinding would happen every time the) 285.85 491.28 P
+(receiver type changed.) 94.71 477.28 T
+1.75 (W) 94.71 458.28 P
+1.75 (ith PICs, however) 105.55 458.28 P
+1.75 (, the miss handler constructs a short stub routine and rebinds the call to this stub) 194.86 458.28 P
+0.46 (routine. The stub checks if the receiver is either a rectangle or a circle and branches to the corresponding) 94.71 444.28 P
+-0.01 (method. The stub can branch directly to the method\325) 94.71 430.28 P
+-0.01 (s body \050skipping the type test in the method prologue\051) 345.49 430.28 P
+-0.2 (because the receiver type has already been veri\336ed. Methods still need a type test in their prologue because) 94.71 416.28 P
+(they can also be called from monomorphic call sites which have a standard inline cache.) 94.71 402.28 T
+9 F
+(Figure 3.) 257.71 180.49 T
+( Polymorphic inline cache) 309.68 180.49 T
+0 F
+0.42 (If the cache misses again \050i.e. the receiver is neither a rectangle nor a circle\051, the stub routine will simply) 94.71 152.49 P
+0.5 (be extended to handle the new case. Eventually) 94.71 138.49 P
+0.5 (, the stub will contain all cases seen in practice, and there) 324.61 138.49 P
+0.66 (will be no more cache misses or lookups. Thus, a PIC isn\325) 94.71 124.49 P
+0.66 (t a \336xed-size cache similar to a hardware data) 380.55 124.49 P
+1.56 (cache; rather) 94.71 110.49 P
+1.56 (, it should be viewed as an extensible cache in which no cache item is ever displaced by) 157.39 110.49 P
+(another \050newer\051 item.) 94.71 96.49 T
+94.71 91.7 604.94 842.88 C
+94.71 562.28 604.94 669.88 C
+93.86 562.28 605.8 669.88 R
+7 X
+0 K
+V
+6 F
+0 X
+(receiver = list element) 152.34 624.58 T
+(call \322display\323 method ) 152.34 612.58 T
+145.14 621.24 256.74 621.24 2 L
+0.1 H
+2 Z
+4 X
+N
+145.14 633.77 256.74 633.77 2 L
+N
+145.14 609.31 256.74 609.31 2 L
+N
+145.14 588.59 256.74 650.27 R
+0.5 H
+0 Z
+0 X
+N
+(calling code) 171.56 575.12 T
+11 F
+(...) 192.79 598.96 T
+(...) 191.99 641.06 T
+421.94 587.85 515.94 641.85 R
+7 X
+V
+6 F
+0 X
+(check receiver type) 429.14 635.18 T
+(code to display) 429.14 611.18 T
+(a rectangle) 429.14 599.18 T
+421.94 587.82 515.94 650.84 R
+N
+421.94 627.82 515.94 627.82 2 L
+0.1 H
+2 Z
+N
+(rectangle display method) 418.23 573.82 T
+412.13 643.76 421.06 642.67 412.9 638.86 412.52 641.31 4 Y
+V
+250.08 615.71 413.51 641.47 2 L
+0.5 H
+N
+522.26 650.72 524.22 650.72 524.22 639.7 525.21 639.7 524.22 639.7 524.22 628.7 522.26 628.7 7 L
+0.1 H
+N
+522.26 625.86 524.22 625.86 524.22 607.35 525.21 607.35 524.22 607.35 524.22 588.76 522.26 588.76 7 L
+N
+(method prologue) 536.86 637.63 T
+(method body) 536.94 606.36 T
+94.71 91.7 604.94 842.88 C
+54 69.88 666 861.88 C
+94.71 91.7 604.94 842.88 C
+110.13 195.49 589.52 398.28 C
+110.13 195.49 589.52 398.28 R
+7 X
+0 K
+V
+120.93 272.65 233.32 310.27 R
+V
+6 F
+0 X
+(receiver = list element) 128.13 303.6 T
+(call ) 128.13 291.6 T
+(PIC stub) 147.56 291.6 T
+(calling code) 147.52 255.95 T
+120.93 300.6 233.32 300.6 2 L
+7 X
+V
+0.1 H
+2 Z
+4 X
+N
+120.93 312.45 233.32 312.45 2 L
+7 X
+V
+4 X
+N
+120.93 288.35 233.32 288.35 2 L
+7 X
+V
+4 X
+N
+11 F
+0 X
+(...) 168.1 279 T
+(...) 167.3 319.68 T
+285.82 296.31 294.47 293.83 285.82 291.34 285.82 293.83 4 Y
+V
+226.8 293.83 286.82 293.83 2 L
+7 X
+V
+0.5 H
+0 X
+N
+461.17 323.84 560.89 376 R
+7 X
+V
+6 F
+0 X
+(check receiver type) 468.37 369.33 T
+(code to display) 468.37 345.33 T
+(a rectangle) 468.37 333.33 T
+294.47 233.33 423.95 294.25 R
+7 X
+V
+0 X
+(if type = rectangle) 301.67 287.58 T
+(jump to method) 314.99 275.58 T
+(if type = circle) 301.67 263.58 T
+(jump to method) 314.99 251.58 T
+(call lookup) 301.67 239.58 T
+294.47 233.33 385.83 302.53 R
+0 Z
+N
+461.17 323.82 560.89 384.68 R
+N
+461.17 362.42 560.92 362.42 2 L
+0.1 H
+2 Z
+N
+461.17 218.51 560.89 270.67 R
+7 X
+V
+0 X
+(check receiver type) 468.37 264 T
+(code to display) 468.37 240 T
+(a circle) 468.37 228 T
+461.17 218.51 560.89 279.37 R
+0.5 H
+0 Z
+N
+461.17 257.12 560.92 257.12 2 L
+0.1 H
+2 Z
+N
+(PIC stub) 326.87 221.4 T
+(rectangle display method) 462.51 310.15 T
+(circle display method) 469.51 203.88 T
+453.04 344.12 461.19 347.94 456.3 340.39 454.67 342.25 4 Y
+V
+381.75 278.86 455.43 342.91 2 L
+0.5 H
+N
+453.01 247.01 461.19 243.26 452.27 242.11 452.64 244.56 4 Y
+V
+382.23 255.16 453.64 244.4 2 L
+N
+120.93 269.05 233.32 328.63 R
+0 Z
+N
+94.71 91.7 604.94 842.88 C
+54 69.88 666 861.88 C
+FMENDPAGE
+%%EndPage: "4" 3
+%%Page: "3" 3
+612 792 0 FMBEGINPAGE
+91.99 73.9 604.97 85.89 R
+7 X
+0 K
+V
+0 F
+0 X
+(3) 345.48 77.89 T
+94.71 91.7 604.94 842.88 R
+7 X
+V
+10 F
+0 X
+(2.3.) 94.71 833.55 T
+(Inline Caches) 121.69 833.55 T
+0 F
+0.52 (Even with a lookup cache, sending a message still takes considerably longer than calling a simple proce-) 94.71 814.88 P
+0.21 (dure because the cache must be probed for every message sent. However) 94.71 800.88 P
+0.21 (, sends can be sped up further by) 446.25 800.88 P
+0.24 (observing that the type of the receiver at a given call site rarely varies; if a message is sent to an object of) 94.71 786.88 P
+0.81 (type ) 94.71 772.88 P
+8 F
+0.81 (X) 119.17 772.88 P
+0 F
+0.81 ( at a particular call site, it is very likely that the next time the send is executed it will also have a) 126.5 772.88 P
+(receiver of type ) 94.71 758.88 T
+8 F
+(X) 172.97 758.88 T
+0 F
+(. ) 180.29 758.88 T
+0.35 (This locality of type usage can be exploited by caching the looked-up method address at the call site, e.g.) 94.71 739.88 P
+1.11 (by overwriting the call instruction. Subsequent executions of the send code jump directly to the cached) 94.71 725.88 P
+0.54 (method, completely avoiding any lookup. Of course, the type of the receiver could have changed, and so) 94.71 711.88 P
+0.03 (the prologue of the called method must verify that the receiver) 94.71 697.88 P
+0.03 (\325) 395.19 697.88 P
+0.03 (s type is correct and call the lookup code if) 398.53 697.88 P
+-0.21 (the type test fails. This form of caching is called ) 94.71 683.88 P
+8 F
+-0.21 (inline caching) 326.79 683.88 P
+0 F
+-0.21 ( since the tar) 394.87 683.88 P
+-0.21 (get address is stored at the send) 454.98 683.88 P
+(point, i.e. in the caller) 94.71 669.88 T
+(\325) 200.08 669.88 T
+(s code [DS84]. ) 203.42 669.88 T
+9 F
+(Figure 1.) 286.02 401.89 T
+( ) 331.99 401.89 T
+(Inline Caching) 337.99 401.89 T
+0 F
+0.42 (Inline caching is surprisingly ef) 94.71 372.89 P
+0.42 (fective, with a hit ratio of 95% for Smalltalk code [DS84, Ung86, UP87].) 248.09 372.89 P
+0.94 (SOAR \050a Smalltalk implementation for a RISC processor\051 would be 33% slower without inline caching) 94.71 358.89 P
+0.8 ([Ung86]. All compiled implementations of Smalltalk that we know of incorporate inline caches, as does) 94.71 344.89 P
+(our S) 94.71 330.89 T
+4 F
+(ELF) 120.36 330.89 T
+0 F
+( system [CUL89].) 139.9 330.89 T
+1 F
+(3.) 94.71 299.22 T
+(Handling Polymorphic Sends) 121.69 299.22 T
+0 F
+0.24 (Inline caches are ef) 94.71 278.89 P
+0.24 (fective only if the receiver type \050and thus the call tar) 188.12 278.89 P
+0.24 (get\051 remains relatively constant at) 441.44 278.89 P
+0.19 (a call site. Although inline caching works very well for the majority of sends, it does not speed up a poly-) 94.71 264.89 P
+0.3 (morphic call site with several equally likely receiver types because the call tar) 94.71 250.89 P
+0.3 (get switches back and forth) 472.5 250.89 P
+0.48 (between dif) 94.71 236.89 P
+0.48 (ferent methods.) 151.26 236.89 P
+6 F
+0.4 (\240) 226.34 241.69 P
+0 F
+0.48 ( W) 231.34 236.89 P
+0.48 (orse, inline caching may even slow down these sends because of the extra) 245.18 236.89 P
+1.28 (overhead associated with inline cache misses. The performance impact of inline cache misses becomes) 94.71 222.89 P
+-0.14 (more severe in highly ef) 94.71 208.89 P
+-0.14 (\336cient systems, where it can no longer be ignored. For example, measurements for) 210.53 208.89 P
+-0.08 (the S) 94.71 194.89 P
+4 F
+-0.07 (ELF) 118.95 194.89 P
+0 F
+-0.08 ( system show that the ) 138.49 194.89 P
+2 F
+-0.19 (Richards) 244.37 194.89 P
+0 F
+-0.08 ( benchmark spends about 25% of its time handling inline cache) 301.94 194.89 P
+(misses [CUL89]. ) 94.71 180.89 T
+1.64 (An informal examination of polymorphic call sites in the S) 94.71 161.89 P
+4 F
+1.51 (ELF) 392.34 161.89 P
+0 F
+1.64 ( system showed that in most cases the) 411.88 161.89 P
+0.58 (degree of polymorphism is small, typically less than ten. The degree of polymorphism of sends seems to) 94.71 147.89 P
+0.64 (have a trimodal distribution: sends are either ) 94.71 133.89 P
+8 F
+0.64 (monomorphic) 316.04 133.89 P
+0 F
+0.64 ( \050only one receiver type\051, ) 382.66 133.89 P
+8 F
+0.64 (polymorphic) 509.75 133.89 P
+0 F
+0.64 ( \050a few) 570.37 133.89 P
+94.71 113.7 604.94 128.67 C
+94.71 113.7 604.94 128.67 R
+7 X
+0 K
+V
+94.71 119.6 247.72 119.6 2 L
+V
+0.5 H
+2 Z
+0 X
+N
+54 69.88 666 861.88 C
+3 F
+0 X
+0 K
+(\240) 94.71 111.04 T
+6 F
+2.42 (We will use the term \322polymorphic\323 for call sites where polymorphism is ) 103.78 107.04 P
+7 F
+2.42 (actually ) 429.32 107.04 P
+6 F
+2.42 (used. Consequently, we will use) 466.45 107.04 P
+(\322mono) 94.71 97.04 T
+(morphic\323 for call sites which do not actually use polymorphism even though they might ) 121.91 97.04 T
+7 F
+(potentially) 476.14 97.04 T
+6 F
+( be polymorphic.) 518.9 97.04 T
+99.09 416.89 600.57 665.88 C
+99.09 416.89 600.57 665.88 R
+7 X
+0 K
+V
+6 F
+0 X
+(receiver = 3@4) 195.3 496.42 T
+(call) 195.3 484.42 T
+( ) 209.73 484.42 T
+(\322display\323) 214.73 484.42 T
+188.89 617.21 277.08 617.21 2 L
+0.1 H
+2 Z
+4 X
+N
+188.89 629.43 277.08 629.43 2 L
+N
+188.89 604.94 277.08 604.94 2 L
+N
+188.1 492.83 276.28 492.83 2 L
+N
+188.1 505.05 276.28 505.05 2 L
+N
+188.1 480.56 276.28 480.56 2 L
+N
+129.14 604 187.59 614.38 R
+7 X
+V
+0 X
+(inline cache) 129.14 607.71 T
+360.47 476.36 462.77 500.74 R
+7 X
+V
+0.5 H
+0 Z
+0 X
+N
+360.9 630.82 433.41 656.64 R
+7 X
+V
+0 X
+N
+(check receiver type) 367.47 485.88 T
+(code to display a point) 367.47 461.88 T
+(system lookup ) 369.8 647.26 T
+(routine) 369.8 635.26 T
+(display method for points) 360.67 433.5 T
+184.89 617.84 182.51 617.84 182.51 609.87 181.38 609.87 182.51 609.87 182.51 601.94 184.89 601.94 7 L
+0.1 H
+2 Z
+N
+472.3 499.63 474.25 499.63 474.25 488.61 475.25 488.61 474.25 488.61 474.25 477.61 472.3 477.61 7 L
+N
+472.3 474.77 474.25 474.77 474.25 463.77 475.25 463.77 474.25 463.77 474.25 452.75 472.3 452.75 7 L
+N
+(method prologue) 486.9 486.54 T
+(method body) 486.98 462.24 T
+(receiver = 3@4) 196.09 620.55 T
+(call) 196.09 608.55 T
+( lookup routine) 210.52 608.55 T
+188.89 583.54 277.1 649.19 R
+0.5 H
+0 Z
+N
+11 F
+(...) 224.07 595.87 T
+(...) 225.74 638.39 T
+6 F
+(calling method) 202.64 568.71 T
+352.04 645.04 361 645.9 353.86 640.42 352.95 642.73 4 Y
+V
+273.31 611.57 353.89 643.1 2 L
+2 Z
+N
+360.47 451.13 462.8 476.33 R
+0 Z
+N
+113.26 553.35 566.8 553.35 2 L
+1 H
+2 Z
+N
+0 F
+(B) 526.07 562.9 T
+6 F
+(EFORE) 534.07 562.9 T
+0 F
+(A) 526.07 538.5 T
+6 F
+(FTER) 534.73 538.5 T
+188.1 459.41 276.31 525.06 R
+0.5 H
+0 Z
+N
+11 F
+(...) 224.12 471.74 T
+(...) 224.12 514.26 T
+6 F
+(calling method) 201.85 444.58 T
+352.05 489.92 360.7 487.44 352.05 484.96 352.05 487.44 4 Y
+V
+272.51 487.44 353.05 487.44 2 L
+2 Z
+N
+360.9 516.1 433.41 541.93 R
+7 X
+V
+0 Z
+0 X
+N
+(system lookup ) 369.8 532.54 T
+(routine) 369.8 520.54 T
+54 69.88 666 861.88 C
+FMENDPAGE
+%%EndPage: "3" 2
+%%Page: "2" 2
+612 792 0 FMBEGINPAGE
+91.99 73.9 604.97 85.89 R
+7 X
+0 K
+V
+0 F
+0 X
+(2) 345.48 77.89 T
+94.71 91.7 604.94 842.88 R
+7 X
+V
+0 X
+0.3 (W) 94.71 834.88 P
+0.3 (e propose a new approach to the optimization of dynamically-typed object-oriented languages based on) 105.07 834.88 P
+8 F
+0.7 (polymorphic inline caches) 94.71 820.88 P
+0 F
+0.7 ( \050PICs\051. As an immediate bene\336t, PICs improve the ef) 222.69 820.88 P
+0.7 (\336ciency of polymorphic) 488.29 820.88 P
+1.27 (message sends. More importantly) 94.71 806.88 P
+1.27 (, they collect type information which may be used by the compiler to) 258.96 806.88 P
+0.66 (produce more ef) 94.71 792.88 P
+0.66 (\336cient code, especially for programs written in an object-oriented style where type anal-) 174.4 792.88 P
+0.29 (ysis often fails to extract useful type information. In addition, the new wealth of type information enables) 94.71 778.88 P
+(design trade-of) 94.71 764.88 T
+(fs which may lead to faster compilation.) 166.77 764.88 T
+0.53 (The \336rst part of the paper describes polymorphic inline caches, explains how they speed up polymorphic) 94.71 745.88 P
+1.07 (message sends, and evaluates their impact on the execution time of some medium-sized object-oriented) 94.71 731.88 P
+(programs. W) 94.71 717.88 T
+(ith PICs, the ) 156.85 717.88 T
+2 F
+(Richards) 219.49 717.88 T
+0 F
+( benchmark in S) 277.06 717.88 T
+4 F
+(ELF) 355.34 717.88 T
+0 F
+( runs 52% faster than without them.) 374.87 717.88 T
+6 F
+(\240) 546.43 722.68 T
+0 F
+( ) 551.42 717.88 T
+1.62 (The second part explains how the type information accumulated in the PICs can be used to guide the) 94.71 698.88 P
+-0.16 (compilation of programs and evaluates the impact of these techniques using an experimental version of the) 94.71 684.88 P
+0.88 (S) 94.71 670.88 P
+4 F
+0.81 (ELF) 101.38 670.88 P
+0 F
+0.88 ( compiler) 120.91 670.88 P
+0.88 (. For a set of typical object-oriented programs, the experimental system obtains a median) 166.77 670.88 P
+2.03 (speedup of 27% over the current S) 94.71 656.88 P
+4 F
+1.86 (ELF) 272.74 656.88 P
+0 F
+2.03 ( compiler and signi\336cantly reduces the number of non-inlined) 292.27 656.88 P
+(message sends.) 94.71 642.88 T
+1.44 (The third part outlines a framework for ef) 94.71 623.88 P
+1.44 (\336cient implementations of dynamically-typed object-oriented) 304.72 623.88 P
+1.72 (languages based on ) 94.71 609.88 P
+8 F
+1.72 (adaptive compilation) 196.14 609.88 P
+0 F
+1.72 (. This framework of) 299.47 609.88 P
+1.72 (fers a wide variety of trade-of) 400.34 609.88 P
+1.72 (fs between) 551.6 609.88 P
+0.11 (compile time and execution ef) 94.71 595.88 P
+0.11 (\336ciency and promises to produce systems which are simpler) 240.15 595.88 P
+0.11 (, more ef) 529 595.88 P
+0.11 (\336cient,) 571.96 595.88 P
+(and less susceptible to performance variations than existing systems.) 94.71 581.88 T
+1 F
+(2.) 94.71 550.22 T
+(Background) 121.69 550.22 T
+0 F
+-0.02 (T) 94.71 529.88 P
+-0.02 (o present PICs in context, we \336rst review existing well-known techniques for improving the ef) 101.2 529.88 P
+-0.02 (\336ciency of) 554.01 529.88 P
+1.48 (dynamically-typed object-oriented languages. All of these techniques have been used by Smalltalk-80) 94.71 515.88 P
+6 F
+1.23 (\340) 599.95 520.68 P
+0 F
+(implementations.) 94.71 501.88 T
+10 F
+(2.1.) 94.71 476.55 T
+(Dynamic Compilation) 121.69 476.55 T
+0 F
+3.16 (Early implementations of Smalltalk interpreted the byte codes produced by the Smalltalk compiler) 94.71 457.88 P
+1.42 ([GR83]. The interpretation overhead was signi\336cant, so later implementations doubled performance by) 94.71 443.88 P
+0.4 (dynamically compiling and caching machine code [DS84]. This technique is known as ) 94.71 429.88 P
+8 F
+0.4 (dynamic compila-) 518.27 429.88 P
+(tion) 94.71 415.88 T
+0 F
+( \050called \322dynamic translation\323 in [DS84]\051.) 113.37 415.88 T
+0.06 (T) 94.71 396.88 P
+0.06 (ranslation to native code is the basis for ef) 101.62 396.88 P
+0.06 (\336cient implementations; most of the techniques described here) 304.4 396.88 P
+-0.15 (would not make sense in an interpreted system. W) 94.71 382.88 P
+-0.15 (e therefore assume for the rest of this paper that methods) 334.02 382.88 P
+0.47 (are always translated to machine code before they are executed, and that this translation can occur at any) 94.71 368.88 P
+0.77 (time, i.e. may be interleaved with normal program execution. This means that the entire source program) 94.71 354.88 P
+(must be accessible at all times so that any part of it can be compiled at any time.) 94.71 340.88 T
+10 F
+(2.2.) 94.71 315.55 T
+(Lookup Caches) 121.69 315.55 T
+0 F
+0.33 (Sending a dynamically-bound message takes longer than calling a statically-bound procedure because the) 94.71 296.89 P
+0.11 (program must \336nd the correct tar) 94.71 282.89 P
+0.11 (get method according to the run-time type of the receiver and the inherit-) 253.25 282.89 P
+0.73 (ance rules of the language. Although early Smalltalk systems had simple inheritance rules and relatively) 94.71 268.89 P
+0.92 (slow interpreters, method lookup \050also known as message lookup\051 was still responsible for a substantial) 94.71 254.89 P
+(portion of execution time. ) 94.71 240.89 T
+8 F
+3.13 (Lookup caches) 94.71 221.89 P
+0 F
+3.13 ( reduce the overhead of dynamically-bound message passing. A lookup cache maps) 169.46 221.89 P
+0.24 (\050receiver type, message name\051 pairs to methods and holds the most recently used lookup results. Message) 94.71 207.89 P
+0.39 (sends \336rst consult the cache; if the cache probe fails, they call the normal \050expensive\051 lookup routine and) 94.71 193.89 P
+0.03 (store the result in the cache, possibly replacing an older lookup result. Lookup caches are very ef) 94.71 179.89 P
+0.03 (fective in) 559.95 179.89 P
+0.73 (reducing the lookup overhead. Berkeley Smalltalk, for example, would have been 37% slower without a) 94.71 165.89 P
+(cache [UP83].) 94.71 151.89 T
+94.71 125.7 604.94 140.67 C
+94.71 125.7 604.94 140.67 R
+7 X
+0 K
+V
+94.71 131.6 247.72 131.6 2 L
+V
+0.5 H
+2 Z
+0 X
+N
+54 69.88 666 861.88 C
+3 F
+0 X
+0 K
+(\240) 94.71 123.04 T
+6 F
+0.18 (In this paper, we will consistently use speedups when comparing performance; for instance, \322X is 52% faster than Y\323 means) 103.78 119.04 P
+(that Y\325s execution time is 1.52 times X\325s execution time.) 94.71 109.04 T
+3 F
+(\340) 94.71 101.04 T
+6 F
+(Smalltalk-80 is a trademark of ParcPlace Systems, Inc.) 103.78 97.04 T
+FMENDPAGE
+%%EndPage: "2" 1
+7 18 /Times-Bold FMDEFINEFONT
+10 7 /Times-Roman FMDEFINEFONT
+%%Page: "1" 1
+612 792 0 FMBEGINPAGE
+91.99 73.9 604.97 85.89 R
+7 X
+0 K
+V
+0 F
+0 X
+(1) 345.48 77.89 T
+94.71 128.7 604.94 842.88 R
+7 X
+V
+7 F
+0 X
+(Optimizing ) 306.35 810.88 T
+(Dynamically-Typed Object-Oriented Languages) 164.43 790.88 T
+(With) 225.51 770.88 T
+10 F
+( ) 264.5 770.88 T
+7 F
+(Polymorphic Inline Caches) 266.25 770.88 T
+0 F
+(Urs H\232lzle) 323.68 744.88 T
+(Craig Chambers) 310.69 730.88 T
+(David Ungar) 316.19 716.88 T
+6 F
+(\240) 378.47 721.68 T
+0 F
+(Computer Systems Laboratory, Stanford University, Stanford, CA 94305) 174.27 692.88 T
+({urs,craig,ungar}@self.stanford.edu) 262.61 678.88 T
+9 F
+0.95 (Abstract:) 94.71 611.88 P
+0 F
+0.95 ( ) 143.33 611.88 P
+8 F
+0.95 (Polymorphic inline caches) 147.28 611.88 P
+0 F
+0.95 ( \050PICs\051 provide a new way to reduce the overhead of polymorphic) 277.09 611.88 P
+0.23 (message sends by extending inline caches to include more than one cached lookup result per call site. For) 94.71 597.88 P
+(a set of typical object-oriented S) 94.71 583.88 T
+4 F
+(ELF) 250.26 583.88 T
+0 F
+( programs, PICs achieve a median speedup of 1) 269.8 583.88 T
+(1%.) 497.52 583.88 T
+-0.74 (As an important side ef) 94.71 564.88 P
+-0.74 (fect, PICs collect type information by recording all of the receiver types actually used) 203.48 564.88 P
+-0.45 (at a given call site. The compiler can exploit this type infor) 94.71 550.88 P
+-0.45 (mation to generate better code when ) 372.92 550.88 P
+8 F
+-0.45 (r) 547.42 550.88 P
+-0.45 (ecompiling) 551.65 550.88 P
+0 F
+-0.37 (a method. An experimental version of such a system achieves a median speedup of 27% for our set of S) 94.71 536.88 P
+4 F
+-0.33 (ELF) 585.41 536.88 P
+0 F
+(programs, reducing the number of non-inlined message sends by a factor of two.) 94.71 522.88 T
+0.1 (Implementations of dynamically-typed object-oriented languages have been limited by the paucity of type) 94.71 503.88 P
+0.04 (information available to the compiler) 94.71 489.88 P
+0.04 (. The abundance of the type information provided by PICs suggests a) 272.75 489.88 P
+1.88 (new compilation approach for these languages, ) 94.71 475.88 P
+8 F
+1.88 (adaptive compilation.) 334.82 475.88 P
+0 F
+1.88 ( ) 441.31 475.88 P
+1.88 (Such) 446.19 475.88 P
+1.88 ( ) 470.18 475.88 P
+1.88 (compilers ) 475.06 475.88 P
+1.88 (may succeed in) 527.24 475.88 P
+3.06 (generating very ef) 94.71 461.88 P
+3.06 (\336cient code for the time-critical parts of a program without incurring distracting) 187.87 461.88 P
+(compilation pauses.) 94.71 447.88 T
+1 F
+(1.) 94.71 397.22 T
+(Introduction) 121.69 397.22 T
+0 F
+2.45 (Historically) 94.71 376.88 P
+2.45 (, dynamically-typed object-oriented languages have run much slower than statically-typed) 150.56 376.88 P
+2.98 (languages. This disparity in performance stemmed lar) 94.71 362.88 P
+2.98 (gely from the relatively slow speed and high) 370.54 362.88 P
+0.41 (frequency of message passing and from the lack of type information which could be used to reduce these) 94.71 348.88 P
+0.16 (costs. Recently) 94.71 334.88 P
+0.16 (, techniques such as type analysis, customization, and splitting have been shown to be very) 166.71 334.88 P
+0.7 (ef) 94.71 320.88 P
+0.7 (fective in reducing this disparity: for example, these techniques applied to the S) 103.81 320.88 P
+4 F
+0.65 (ELF) 494.35 320.88 P
+0 F
+0.7 ( language bring its) 513.89 320.88 P
+1.66 (performance to within a factor of two of optimized C for small C-like programs such as the Stanford) 94.71 306.88 P
+0.81 (integer benchmarks [CU90, CU91, Cha91]. However) 94.71 292.88 P
+0.81 (, lar) 354.08 292.88 P
+0.81 (ger) 373.33 292.88 P
+0.81 (, object-oriented S) 388.16 292.88 P
+4 F
+0.74 (ELF) 478.05 292.88 P
+0 F
+0.81 ( programs bene\336t less) 497.59 292.88 P
+0.51 (from these techniques.) 94.71 278.88 P
+6 F
+0.42 (\340) 203.97 283.68 P
+0 F
+0.51 ( For example, the ) 208.97 278.88 P
+2 F
+1.21 (Richards) 297.93 278.88 P
+0 F
+0.51 ( operating system benchmark in S) 355.5 278.88 P
+4 F
+0.46 (ELF) 520.93 278.88 P
+0 F
+0.51 ( is four times) 540.46 278.88 P
+(slower than optimized C. ) 94.71 264.88 T
+0.8 (In addition, techniques like type analysis lengthen compile time. In an interactive environment based on) 94.71 245.88 P
+0.46 (dynamic compilation, compilations occur frequently) 94.71 231.88 P
+0.46 (, and a slow compiler may lead to distracting pauses.) 347.28 231.88 P
+0.86 (Thus, although techniques such as type analysis can improve code quality signi\336cantly) 94.71 217.88 P
+0.86 (, they may some-) 519.76 217.88 P
+(times degrade overall system performance.) 94.71 203.88 T
+94.71 182.7 604.94 197.66 C
+94.71 182.7 604.94 197.66 R
+7 X
+0 K
+V
+94.71 188.59 247.72 188.59 2 L
+V
+0.5 H
+2 Z
+0 X
+N
+54 69.88 666 861.88 C
+3 F
+0 X
+0 K
+(\240) 94.71 180.03 T
+6 F
+1.64 (Current address: David Ungar, Sun Labs, Sun Microsystems, Mail Stop MTV 10-21, 2500 Garcia St., Mountain View,) 103.78 176.03 P
+(CA) 94.71 166.03 T
+(94043.) 111.09 166.03 T
+3 F
+(\340) 94.71 158.03 T
+6 F
+0.37 (By \322C-like\323 we mean programs that operate on relatively simple data structures like integers and arrays; but unlike in C, all) 103.78 154.03 P
+1.12 (primitive operations are safe, e.g. there are checks for out-of-bounds accesses and overflow. By \322object-oriented\323 we mean) 94.71 144.03 P
+(programs which manipulate many user-defined data structures \050types\051 and exploit polymorphism and dynamic typing.) 94.71 134.03 T
+94.99 92.87 605.99 114.86 R
+7 X
+V
+0 X
+1.25 (This work has been supported in part by the Swiss National Science Foundation \050Nationalfonds\051, an IBM graduate student) 94.99 108.2 P
+(fellowship, NSF Presidential Young Investigator Grant # CCR-8657631 and by Sun, IBM, Apple, Cray, Tandem, TI, and DEC.) 94.99 98.2 T
+94 844.93 606.99 858.9 R
+7 X
+V
+5 F
+0 X
+(Published in ECOOP \32491 pr) 113.49 851.57 T
+(oceedings, Springer V) 237.59 851.57 T
+(erlag Lectur) 333.71 851.57 T
+(e Notes in Computer Science 512, July) 387.93 851.57 T
+(, 1991.) 557.28 851.57 T
+FMENDPAGE
+%%EndPage: "1" 0
+%%Trailer
+%%BoundingBox: 0 0 720 931.76
+%%Pages: 18 -1
+%%DocumentFonts: Times-Roman
+%%+ Times-Bold
+%%+ Courier
+%%+ Times-Italic
+%%+ Symbol
