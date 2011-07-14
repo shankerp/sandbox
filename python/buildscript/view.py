@@ -19,10 +19,14 @@ def printOptions():
 def notify(message, icon):
     title_string = 'Build Output'
     
-    if pynotify.init('Make Monitor'):
-        n = pynotify.Notification(title_string, message, icon)
-        n.set_urgency(pynotify.URGENCY_CRITICAL)
-        n.show()
+    if not pynotify.init("Make Monitor"):
+        sys.exit(1)
+
+    n = pynotify.Notification(title_string, message, icon)
+
+    if not n.show():
+        print "Failed to send notification"
+        sys.exit(1)
 
 def getPackageDetails():
     """
