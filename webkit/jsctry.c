@@ -30,6 +30,7 @@ static JSValueRef myclass_mymethod(JSContextRef context,
                        JSValueRef *exception)
 {
 JSStringRef string = JSStringCreateWithUTF8CString("mystring");
+return JSValueMakeNull(context);
 return JSValueMakeString(context, string);
 }
 
@@ -125,7 +126,7 @@ gtk_box_pack_start(GTK_BOX(vbox), create_browser (), TRUE, TRUE, 0);
 main_window = create_window();
 gtk_container_add(GTK_CONTAINER (main_window), vbox);
 
-gchar* uri = (gchar*) "file://simple.html";
+gchar* uri = (gchar*) "file:///home/bharath/workspace/sandbox/webkit/simple.html";
 webkit_web_view_open(web_view, uri);                      
 
 gtk_widget_grab_focus (GTK_WIDGET (web_view));

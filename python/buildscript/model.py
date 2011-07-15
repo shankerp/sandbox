@@ -4,6 +4,8 @@ import ConfigParser
 import subprocess
 import os
 import re
+from types import StringType
+from collections import OrderedDict
 
 class ConfigError(Exception):
     pass
@@ -19,19 +21,26 @@ def executeCommand(script, envvars):
     else:
         return -1
 
-class ConfigDict(dict):
-    def __init__(self):
-
-    def handleBackTicks(value):
+class ConfigDict(OrderedDict):
+    def handleBackTicks(self, value):
         pattern = re.compile('`(.*)`')
         try:
             out = pattern.search(value).groups()
             proc = subprocess.Popen(out[0], stdout=subprocess.PIPE, shell=True)
             (out, err) = proc.communicate()
-            print "program output:", repr(out)
+            pattern = re.compile('(.*)\n')
+            try:
+                out = pattern.search(out).groups()[0]
+            except:
+                pass
         except AttributeError:
             out = value
         return out
+
+    def __setitem__(self, key, val):
+        if type(val) is StringType:
+            val = self.handleBackTicks(val)
+        OrderedDict.__setitem__(self, key, val)
 
 class ConfigFileHandler(object):
     """Ini File Handler
@@ -40,7 +49,7 @@ class ConfigFileHandler(object):
     """
     def __init__(self):
         self.filename = ""
-        self.cfg = ConfigParser.RawConfigParser()
+        self.cfg = ConfigParser.ConfigParser(dict_type=ConfigDict)
         self.cfg.optionxform = str
 
     def parseConfigFile(self, filename):
@@ -50,11 +59,12 @@ class ConfigFileHandler(object):
         except ConfigParser.Error, exc:
             raise ConfigError("Error reading config file %r : %s" %
                     (filename, str(exc)))
-        print self.cfg.sections()
+        """
         for i in self.cfg.sections():
             print "Section name %s" % i
             for name, value in self.cfg.items(i):
                 print "name is %s Value is %s" % (name, value)
+        """
 
     def getSections(self):
         return self.cfg.sections()

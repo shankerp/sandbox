@@ -4,7 +4,10 @@
 
 <script type="text/javascript">
 document.write("<h1>String from JS:");
-document.write(myclass.mymethod());
+if (myclass.mymethod() == null)
+    alert("returned null");
+alert(myclass.mymethod());
+//document.write(myclass.mymethod());
 document.write("</h1>");
 </script>
 

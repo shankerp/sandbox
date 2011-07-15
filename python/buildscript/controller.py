@@ -18,7 +18,7 @@ def main(configfile):
     view.printListWithBullets(sections)
     items = handle.getItemsForSection(sections[0])
     print items
-    rv = model.executeCommand("echo $MODII_TARGET_ARCH", items)
+    rv = model.executeCommand("$MODII_TARGET_ARCH", items)
     if rv == 1:
         view.notify("Yay! Success :)", "emblem-favorite")
     else:

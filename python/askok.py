@@ -11,3 +11,6 @@ def ask_ok(prompt, retries=4, complaint='Yes or no, please!'):
         if retries < 0:
             raise IOError('refusenik user')
         print complaint
+
+if __name__ == "__main__":
+    ask_ok('Is it ok huh?! ')
