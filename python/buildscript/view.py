@@ -8,6 +8,9 @@ except:
     print "Make sure 'pynotify' is installed."
     exit()
 
+def printQuit():
+    print 'I quit'
+
 def printOptions():
     print 'Following options are available'
     print '1. Build all packages'
