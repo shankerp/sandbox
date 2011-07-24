@@ -71,7 +71,7 @@ def executeCommand(envvars):
         p = subprocess.Popen("%s" % (cmd), shell=True, executable = "/bin/bash", env=buildenv)
         sts = os.waitpid(p.pid, 0)[1]
         if ((sts/256) != 0):
-            return -1
+            return 0
     return 1
 
 def filesWithExtension(directory, extension):

@@ -10,9 +10,10 @@ class Main(object):
         self.controller = controller.Controller()
         self.controller.prepare(configfile)
         try:
-            self.controller.getPackagesToBuild()
+            packages = self.controller.getPackagesToBuild()
         except:
             print 'What man! you made him quit!'
+        self.controller.buildPackages(packages)
     
     def parse_args(self, args=None):
         parser = argparse.ArgumentParser(

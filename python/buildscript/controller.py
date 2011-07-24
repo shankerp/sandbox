@@ -26,11 +26,19 @@ class Controller(object):
     def __init__(self):
         self.handle = None
         self.__sections = None
+        self.globalcfg = None
+        self.globalcmd = None
 
     def prepare(self, configfile):
         self.handle = model.ConfigFileHandler()
         self.handle.parseConfigFile(configfile)
         self.__sections = self.handle.sections()
+        try:
+            self.globalcfg = self.handle.items('GLOBALS')
+            self.globalcmd = self.handle.get('GLOBALS', 'COMMAND', True)
+            self.__sections.remove('GLOBALS')
+        except:
+            print 'WARNING! No \'GLOBALS\' section found in config file'
 
     def getSections(self):
         return self.__sections
@@ -42,24 +50,32 @@ class Controller(object):
         except:
             view.printQuit()
             raise ValueError('I Quit!')
-        print option
+        return option
+
+    def buildPackages(self, packages):
+        for count in packages:
+            section = self.__sections[count]
+            try:
+                self.handle.get(section, 'COMMAND')
+            except:
+                self.handle.set(section, 'COMMAND', self.globalcmd)
+            envvars = self.globalcfg[:]
+            items = self.handle.items(section)
+            envvars.extend(items)
+            rv = model.executeCommand(envvars)
+            if rv:
+                view.notify("Yay! Success :)", "emblem-favorite")
+            else:
+                view.notify("Booo.. Failure :(", "dialog-warning")
 
     def run(self):
         view.printListWithBullets(self.__sections)
-        try:
-            globalcfg = self.handle.items('GLOBALS')
-            globalcmd = self.handle.get('GLOBALS', 'COMMAND', True)
-            self.__sections.remove('GLOBALS')
-        except:
-            print 'WARNING! No \'GLOBALS\' section found in config file'
-            globalcfg = None
-            globalcmd = None
         for section in self.__sections:
             try:
                 self.handle.get(section, 'COMMAND')
             except:
-                self.handle.set(section, 'COMMAND', globalcmd)
-            envvars = globalcfg[:]
+                self.handle.set(section, 'COMMAND', self.globalcmd)
+            envvars = self.globalcfg[:]
             items = self.handle.items(section)
             envvars.extend(items)
             rv = model.executeCommand(envvars)
