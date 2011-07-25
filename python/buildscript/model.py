@@ -59,18 +59,17 @@ def executeCommand(envvars):
     env = OrderedDict()
     for name, value in envvars:
         if name == 'COMMAND':
-            commands = value.split(';')
+            #commands = value.split(';')
+            commands = value;
         else:
             env[name] = value
     handleDollarValues(env)
     for key, value in env.items():
         buildenv[key] = value
-    for cmd in commands:
-        print 'executing cmd %s' % cmd
-        p = subprocess.Popen("%s" % (cmd), shell=True, executable = "/bin/bash", env=buildenv)
-        sts = os.waitpid(p.pid, 0)[1]
-        if ((sts/256) != 0):
-            return 0
+    p = subprocess.Popen("%s" % (commands), shell=True, executable = "/bin/sh", env=buildenv)
+    sts = os.waitpid(p.pid, 0)[1]
+    if ((sts/256) != 0):
+        return 0
     return 1
 
 def filesWithExtension(directory, extension):

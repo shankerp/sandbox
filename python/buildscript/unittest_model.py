@@ -32,6 +32,7 @@ __license__ = "LGPL"
                     ("-1--5", )
                     ("-2-3", )
                     ("0,1-3", )
+                    ("10-")
                     """
 class TestMultipleOptions(unittest.TestCase):
     knownValues = ( ("2-3",   [1, 2]),

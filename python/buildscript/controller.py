@@ -63,10 +63,10 @@ class Controller(object):
             items = self.handle.items(section)
             envvars.extend(items)
             rv = model.executeCommand(envvars)
-            if rv:
-                view.notify("Yay! Success :)", "emblem-favorite")
-            else:
+            if not rv:
                 view.notify("Booo.. Failure :(", "dialog-warning")
+        else:
+            view.notify("Yay! Success :)", "emblem-favorite")
 
     def run(self):
         view.printListWithBullets(self.__sections)
