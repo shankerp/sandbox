@@ -25,7 +25,6 @@ def parseMultipleOptions(string):
         if len(j) is 1:
             result.append(int(i) - 1)
         elif len(j) is 2:
-            print 'range'
             result.extend(range(int(j[0]) - 1, int(j[1])))
         else:
             raise IOError('refusenik user')
