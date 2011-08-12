@@ -4,6 +4,11 @@
 <head>
     <title>WebKit Visual Effects</title>
     <style type="text/css">
+    a, p{
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
     .box {
         margin:10px 10px 10px 10px;
         padding: 10px;
@@ -14,22 +19,119 @@
         -webkit-background-origin: padding; -webkit-background-clip:content;
         display: inline-block;
     }
+    /*
+     radial:
+    -webkit-gradient(radial, x y center point of start inner circle, radius of start inner circle,
+                    x y center point of end outer circle, radius of end outer circle, from color,
+                    to color, color-stop)
+    -webkit-gradient(<type>, <point> [, <radius>]?, <point> [, <radius>]? [, <stop>]*)
+    color-stop
+    */
     .radial {
         padding: 0px;
         width: 150px;
         height: 150px;
         border: 2px solid black;
-        background-image: -webkit-gradient(radial, 45 45, 10, 52 50, 30, from(#A7D30C), to(rgba(1,159,98,0)), color-stop(90%, #019F62)),
-        -webkit-gradient(radial, 105 105, 20, 112 120, 50, from(#ff5f98), to(rgba(255,1,136,0)), color-stop(75%, #ff0188)),
-        -webkit-gradient(radial, 95 15, 15, 102 20, 40, from(#00c9ff), to(rgba(0,201,255,0)), color-stop(80%, #00b5e2)),
-            -webkit-gradient(radial, 0 150, 50, 0 140, 90, from(#f4f201), to(rgba(228, 199,0,0)), color-stop(80%, #e4c700));
+        background-image: -webkit-gradient(radial, 45 45, 10, 52 50, 30, from(#A7D30C),
+                                           to(rgba(1,159,98,0)), color-stop(90%, #019F62)),
+        -webkit-gradient(radial, 105 105, 20, 112 120, 50, from(#ff5f98), to(rgba(255,1,136,0)),
+                        color-stop(75%, #ff0188)),
+        -webkit-gradient(radial, 95 15, 15, 102 20, 40, from(#FFD800), to(rgba(0,201,255,0)),
+                        color-stop(80%, #FC6900)),
+        -webkit-gradient(radial, 0 150, 50, 0 140, 90, from(#f4f201), to(rgba(228, 199,0,0)),
+                        color-stop(80%, #e4c700)),
+        -webkit-gradient(linear, left bottom, left top, from(#00abeb), to(#fff));
         display: inline-block;
+    }
+
+    .reflect {
+        -webkit-box-reflect: below 3px
+        -webkit-gradient(linear, left top, left bottom,
+                         from(transparent), color-stop(0.5, transparent), to(white));
+    }
+
+    div {
+        -webkit-transition-property: opacity;
+        -webkit-transition-duration: 2s;
+    }
+
+    div.fadeAway {
+        opacity: 0;
+    }
+
+    .diagonalslide {
+        -webkit-animation-name: diagonal-slide;
+        -webkit-animation-duration: 5s;
+        -webkit-animation-iteration-count: 10;
+    }
+
+    @-webkit-keyframes diagonal-slide {
+        0% {
+            left: 100px;
+        }
+
+        40% {
+            left: 150px;
+        }
+
+        60% {
+            left: 75px;
+        }
+
+        100% {
+            left: 100px;
+        }
+    }
+
+    .bounce {
+        -webkit-animation-name: bounce;
+        -webkit-animation-duration: 2s;
+        -webkit-animation-iteration-count: 1;
+    }
+
+    @-webkit-keyframes bounce {
+        from {
+            -webkit-transform: translateY(100px);
+            -webkit-animation-timing-function: ease-out;
+        }
+
+        25% {
+            -webkit-transform: translateY(50px);
+            -webkit-animation-timing-function: ease-in;
+        }
+
+        50% {
+            -webkit-transform: translateY(100px);
+            -webkit-animation-timing-function: ease-out;
+        }
+
+        75% {
+            -webkit-transform: translateY(75px);
+            -webkit-animation-timing-function: ease-in;
+        }
+
+        to {
+            -webkit-transform: translateY(100px);
+        }
+    }
+
+    div#box {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        background-color: blue;
+        -webkit-transform: translateY(100px);
     }
     </style>
 </head>
 
 <body>
-    <a href=""><div class="box linear"></div></a>
-    <div class="box radial"></div>
+    <div class="box linear reflect"><a href=""></a></div>
+    <div class="box radial reflect" onclick="this.style.webkitAnimationName = 'diagonal-slide'"><a href=""></a></div>
+    <div style="width:100px; height:100px; background-color:blue; display: inline-block;" onclick="className='fadeAway'">
+        Tap to fade
+    </div>
+    <div id="box" class="diagonalslide">
+    </div>
 </body>
 </html>

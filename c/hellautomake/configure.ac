@@ -1,0 +1,7 @@
+AC_INIT([Hello Program], [1.0],
+        [hello])
+AM_INIT_AUTOMAKE
+AC_PROG_CC
+AC_PROG_INSTALL
+AC_CONFIG_FILES([Makefile])
+AC_OUTPUT
